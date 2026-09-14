@@ -1,15 +1,8 @@
-# Supplementary Appendix
+# SAPS: Shared Autonomy for Policy Steering by Blending Teleoperation with a Pretrained VLA
 
-Anonymous supplementary appendix for a paper currently under double-blind review.
+Project website: https://shared-autonomy-policy.github.io
 
-**Site:** https://shared-autonomy-policy.github.io
-
-Contents: evaluation-environment details, per-task specifications, additional
-quantitative metrics, and qualitative rollouts across LIBERO, LIBERO-PRO,
-CALVIN, and real-world hardware.
-
-- `index.html` — the appendix page
+- `index.html` — the project page
+- `static/css/index.css` — styles
 - `figures/` — web-sized figures (WebP)
 - `pdf/` — original vector figures
-
-This repository contains no author, institution, or affiliation information.

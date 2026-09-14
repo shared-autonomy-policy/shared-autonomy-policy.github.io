@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="Supplementary appendix for SAPS: Shared Autonomy for Policy Steering by Blending Teleoperation with a Pretrained VLA.">
-  <meta name="keywords" content="shared autonomy, policy steering, vision-language-action, teleoperation">
+        content="SAPS blends real-time human teleoperation with pretrained VLA policy actions at the action level, improving robustness under out-of-distribution perturbations without retraining, auxiliary models, or sampler modification.">
+  <meta name="keywords" content="shared autonomy, policy steering, vision-language-action, teleoperation, robot manipulation">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
   <meta name="googlebot" content="noindex, nofollow">
-  <title>SAPS: Shared Autonomy for Policy Steering &mdash; Supplementary Appendix</title>
+  <title>SAPS: Shared Autonomy for Policy Steering</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -19,14 +19,21 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦾</text></svg>">
+
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 </head>
 <body>
 
 <nav class="navbar is-white is-fixed-top" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="#top">
-      <strong>SAPS</strong>&nbsp;<span class="has-text-grey">Appendix</span>
-    </a>
+    <a class="navbar-item" href="#top"><strong>SAPS</strong></a>
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navmenu">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -35,12 +42,13 @@
   </div>
   <div id="navmenu" class="navbar-menu">
     <div class="navbar-end">
+      <a class="navbar-item" href="#abstract">Abstract</a>
+      <a class="navbar-item" href="#method">Method</a>
       <a class="navbar-item" href="#setup">Setup</a>
       <a class="navbar-item" href="#libero">LIBERO</a>
       <a class="navbar-item" href="#libero-pro">LIBERO-PRO</a>
       <a class="navbar-item" href="#calvin">CALVIN</a>
-      <a class="navbar-item" href="#real-world">Real World</a>
-      <a class="navbar-item" href="#faq">FAQ</a>
+      <a class="navbar-item" href="#real-world">Real Robot</a>
     </div>
   </div>
 </nav>
@@ -55,33 +63,6 @@
           <div class="is-size-5 publication-authors">
             <span class="author-block">Anonymous Authors</span>
           </div>
-
-          <div class="is-size-5 publication-authors" style="margin-top: 0.35rem;">
-            <span class="publication-venue">Paper under double-blind review</span>
-          </div>
-
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <span class="link-block">
-                <a href="#contents" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fas fa-list"></i></span>
-                  <span>Contents</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="#libero-pro" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fas fa-chart-column"></i></span>
-                  <span>Results</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="#real-world" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fas fa-robot"></i></span>
-                  <span>Hardware</span>
-                </a>
-              </span>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -92,48 +73,40 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <img src="./figures/high-level-teaser.webp" width="934" height="814"
-           alt="Overview of SAPS: the operator's teleoperation command and a pretrained VLA policy's action are arbitrated into a single executed action.">
+      <img src="./figures/blob.webp" width="1589" height="948"
+           alt="A VLA rollout drifting out of distribution, with a human perturbation guiding it back to complete the task.">
       <h2 class="subtitle has-text-centered">
-        <span class="has-text-weight-bold">SAPS</span> forms the executed action from the operator's command and the
-        pretrained policy's action, with the arbitration weight set by the agreement between the two.
+        During VLA rollout, the policy frequently executes actions that lead it out of distribution, or cause it to
+        perform the wrong task. Through <span class="has-text-weight-bold">SAPS</span>, the user introduces a guiding
+        perturbation that leads the VLA back within distribution to perform the task.
       </h2>
     </div>
   </div>
 </section>
 
 
-<section class="section" style="padding-top: 0;">
+<section class="section" id="abstract">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <div class="anon-banner">
-          <strong>Anonymous supplementary appendix.</strong> This page accompanies a paper currently under double-blind
-          review. It contains no author, institution, or affiliation information, and is excluded from search-engine
-          indexing.
-        </div>
-      </div>
-    </div>
-
-    <div class="columns is-centered" id="contents">
-      <div class="column is-four-fifths">
-        <div class="content">
-          <h2 class="title is-3 has-text-centered section-anchor">Contents</h2>
-          <p>This page reproduces the supplementary appendix in full: evaluation-environment details, per-task
-          specifications, additional quantitative metrics, and qualitative rollouts across LIBERO, LIBERO-PRO, CALVIN,
-          and real-world hardware. Every figure links to its original vector PDF.</p>
-          <ul class="toc-list">
-            <li><span class="secno">A1</span><a href="#setup">Evaluation Environment</a></li>
-            <li><span class="secno">A2</span><a href="#baselines">Discussion on Baseline Task Completion</a></li>
-            <li><span class="secno">A3</span><a href="#operators">Additional Details on Human-in-the-Loop</a></li>
-            <li><span class="secno">A4</span><a href="#libero">Distance-Based Perturbation Task Setup for LIBERO</a></li>
-            <li><span class="secno">A5</span><a href="#libero-pro">Perturbation Task Setup for LIBERO-PRO</a></li>
-            <li><span class="secno">A6</span><a href="#libero-pro-metrics">Additional Metrics for LIBERO-PRO</a></li>
-            <li><span class="secno">A7</span><a href="#calvin">Additional Details and Metrics for CALVIN</a></li>
-            <li><span class="secno">A8</span><a href="#real-world">Additional Metrics for Real World</a></li>
-            <li><span class="secno">A9</span><a href="#faq">Frequently Asked Questions</a></li>
-            <li><span class="secno">&nbsp;</span><a href="#references">References</a></li>
-          </ul>
+        <h2 class="title is-3 section-anchor">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>Recent advancements in Vision-Language-Action (VLA) models have demonstrated impressive generalist
+          capabilities in robot manipulation, yet these policies can be brittle under out-of-distribution spatial and
+          semantic perturbations. While human teleoperation offers reliable recovery, it can demand high cognitive load
+          and precise manual control, and existing policy steering methods often require auxiliary models or sampler
+          modifications. In this work, we introduce Shared Autonomy for Policy Steering (SAPS), a framework that blends
+          real-time human teleoperation commands with pretrained policy actions at the action level. SAPS requires no
+          policy retraining, auxiliary dynamics models, or architectural modifications. We propose and evaluate three
+          arbitration strategies to balance human and VLA policy control, including a dynamic Cosine-similarity
+          arbitration strategy that computes the geometric agreement between human and policy actions. Across
+          evaluations in simulation (LIBERO, LIBERO-PRO, CALVIN) and on real-world robot hardware, SAPS improves task
+          success rates over autonomous execution by up to 82% in both simulation and the real world. Furthermore, our
+          approach drastically reduces human intervention compared to pure teleoperation, while simultaneously achieving
+          faster task completion times than both autonomous execution and pure teleoperation. These results demonstrate
+          that action-level shared autonomy is a practical, model-agnostic approach for reliably deploying generalist
+          robot policies in real-world contexts involving a human operator, with promising applications in assistive
+          teleoperation and scalable data collection.</p>
         </div>
       </div>
     </div>
@@ -141,12 +114,92 @@
 </section>
 
 
-<section class="section" id="setup">
+<section class="section" id="method" style="padding-top: 0;">
   <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 section-anchor">Method</h2>
+      </div>
+    </div>
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
-          <h2 class="title is-3 has-text-centered section-anchor">A1. Evaluation Environment</h2>
+          <figure class="paper-figure">
+            <img src="./figures/pipeline.webp" width="1320" height="825" loading="lazy"
+                 alt="SAPS pipeline: the VLA proposes an action from camera frames, robot state, and a language prompt while the operator may supply a teleoperation action; an arbitrator produces the blending weight.">
+            <figcaption><span class="fignum">Figure 1:</span> At every control step, the VLA backbone
+            \(\pi_{\theta}\) takes in the camera frames, robot state, and language prompt to propose an autonomous
+            action. In parallel, the operator may supply a teleoperation action. We compare three VLA-operator
+            arbitration methods that produce \(\alpha\): a Takeover arbitrator, a Blending arbitrator outputting a 50/50
+            blend, and a Cosine-similarity-weighted sigmoid driven by the two actions.
+            <span class="figsrc">[<a href="./pdf/pipeline.pdf">PDF</a>]</span></figcaption>
+          </figure>
+
+          <h3 class="title is-5">Policies</h3>
+          <p>Experiments use pretrained <span class="pi">&pi;<sub>0.5</sub></span> Vision-Language-Action policies
+          finetuned on the LIBERO, CALVIN, and DROID datasets. For CALVIN, to compare with previous baselines in
+          DynaGuide [<a href="#r3">3</a>] and ITPS [<a href="#r4">4</a>], we also evaluate a diffusion policy (DP)
+          released with open-source weights in DynaGuide [<a href="#r3">3</a>]. The policies receive RGB observations
+          from both a third-person camera and a wrist-mounted camera along with proprioceptive robot state information.
+          At each replan step, <span class="pi">&pi;<sub>0.5</sub></span> and DP predict an action chunk of future
+          actions, from which the first \(N\) actions are executed before replanning.</p>
+
+          <h3 class="title is-5">Shared Autonomy Arbitration</h3>
+          <p>Let \(\mathbf{a}_{\textit{expert}},\ \mathbf{a}_{\textit{VLA}} \in \mathbb{R}^7\) denote the expert and
+          policy actions, where the first 6 dimensions correspond to translational and rotational end-effector motion
+          and the final dimension controls the gripper state. The final blended action executed is computed as:</p>
+          <p>\[\mathbf{a}^{(1:6)}_{\textit{blended}} = \alpha\, \mathbf{a}^{(1:6)}_{\textit{VLA}} + (1 - \alpha)\, \mathbf{a}^{(1:6)}_{\textit{expert}},\]</p>
+          <p>where \(\alpha \in [0, 1]\) determines the degree of autonomy. When no human input is detected,
+          corresponding to the L2 norm of the expert action falling below a threshold \(\epsilon = 0.001\), the robot
+          policy retains full control with \(\alpha = 1\). The gripper state is handled separately:</p>
+          <p>\[a^{(7)}_{\textit{final}} = \max\left(a^{(7)}_{\textit{VLA}},\ a^{(7)}_{\textit{expert}}\right),\]</p>
+          <p>allowing either the operator or the policy to initiate grasping. This prevents interference between
+          opposing gripper commands during shared control, with an overriding bias toward closing the gripper.</p>
+
+          <h3 class="title is-5">Takeover arbitration</h3>
+          <p>Takeover arbitration allows the human operator to completely override the VLA policy whenever active
+          intervention is detected. Intervention is determined using the magnitude of the expert command:</p>
+          <p>\[\alpha = \begin{cases} 0.0, &amp; \left\lVert \mathbf{a}_{\textit{expert}}^{(1:6)} \right\rVert &gt; \epsilon, \\ 1.0, &amp; \left\lVert \mathbf{a}_{\textit{expert}}^{(1:6)} \right\rVert \leq \epsilon. \end{cases}\]</p>
+          <p>Unlike continuous blending approaches, Takeover uses hard switching between autonomous and human control,
+          allowing the operator to fully correct undesired policy behavior during execution.</p>
+
+          <h3 class="title is-5">Equal blending between policy and teleoperation</h3>
+          <p>Blending performs continuous arbitration between the VLA policy and expert teleoperation. During active
+          human intervention, a fixed arbitration coefficient of \(\alpha = 0.5\) is used, producing equal contribution
+          from both the VLA and expert. When no expert input is detected, the controller transitions to full autonomy
+          with \(\alpha = 1.0\):</p>
+          <p>\[\alpha = \begin{cases} 0.5, &amp; \left\lVert \mathbf{a}_{\textit{expert}}^{(1:6)} \right\rVert &gt; \epsilon, \\ 1.0, &amp; \left\lVert \mathbf{a}_{\textit{expert}}^{(1:6)} \right\rVert \leq \epsilon. \end{cases}\]</p>
+
+          <h3 class="title is-5">Cosine-similarity confidence-based blending</h3>
+          <p>This method uses a dynamic \(\alpha\), rather than a fixed blending coefficient, to adapt the autonomy
+          level based on policy confidence \(c\). Specifically, \(c\) depends on the directional agreement between the
+          expert and policy actions. At each step, we measure directional agreement via cosine similarity:</p>
+          <p>\[c = \cos(\theta) = \frac{\mathbf{a}_{\textit{human}}^{(1:6)} \cdot \mathbf{a}_{\textit{VLA}}^{(1:6)}}{\lVert \mathbf{a}_{\textit{human}}^{(1:6)} \rVert \, \lVert \mathbf{a}_{\textit{VLA}}^{(1:6)} \rVert}.\]</p>
+          <p>The cosine similarity is assigned an agreement score \(\gamma \in [0,1]\) through a logistic transformation
+          that increases sensitivity near regions of disagreement while saturating for highly aligned actions:</p>
+          <p>\[\gamma = \sigma(k \cos(\theta)) = \frac{1}{1 + e^{-k \cos(\theta)}}, \qquad k = 6.\]</p>
+          <p>The agreement score determines the arbitration coefficient, \(\alpha = \gamma\). This formulation enables
+          smooth, continuous transitions between human and autonomous control, allowing corrective intervention while
+          preserving stable behavior. It also allows for other confidence-based metrics \(c\) to replace
+          \(\cos(\theta)\) in future work for arbitration.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="setup" style="padding-top: 0;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 section-anchor">Experimental Setup</h2>
+      </div>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+          <h3 class="title is-5">Evaluation environment</h3>
           <p>Simulation experiments are conducted using the LIBERO benchmark in Robosuite and CALVIN with a Franka Panda
           manipulator controlled through an operational-space pose controller. Observations include RGB images from a
           third-person agent-view camera and an eye-in-hand wrist camera, together with end-effector pose and gripper
@@ -163,26 +216,32 @@
           CALVIN used a <span class="pi">&pi;<sub>0.5</sub></span> model checkpoint released by RLinf
           [<a href="#r2">2</a>] finetuned on CALVIN ABC. CALVIN also uses a DP model checkpoint released in DynaGuide
           [<a href="#r3">3</a>].</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
+          <h3 class="title is-5">Human in the loop</h3>
+          <p>Two operators performed the teleoperation evaluations, including one operator with no prior experience in
+          teleoperating robots. Neither operator required training before using the gamepad or keyboard interface,
+          suggesting that the human-in-the-loop setup can be used with little to no prior experience in robot control.
+          In practice, both gamepad and keyboard interfaces were intuitive enough for operators to provide corrective
+          input during task execution.</p>
+          <p>Across each benchmark, the same operator was used for all human-in-the-loop methods in that benchmark,
+          including Teleoperation and all SAPS variants, so comparisons within a benchmark are not confounded by
+          changing operators across methods. Results are therefore not averaged across multiple operators; each
+          benchmark reports repeated trials from the corresponding single operator. LIBERO, LIBERO-PRO, and real-world
+          evaluations used the same operator without prior robot control experience, while CALVIN used an operator with
+          prior robot arm control experience. We chose this protocol to keep human-input behavior consistent across
+          methods within each benchmark, but broader multi-operator evaluation remains an important direction for future
+          work.</p>
+          <p>For safety and consistency in all trials, the maximum teleoperation speed was limited to approximately
+          0.2 m/s. This speed limit helped prevent abrupt robot motions while still allowing the operator to make
+          meaningful corrections during shared-autonomy rollouts.</p>
 
-<section class="section" id="baselines" style="padding-top: 0;">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <div class="content has-text-justified">
-          <h2 class="title is-3 has-text-centered section-anchor">A2. Discussion on Baseline Task Completion</h2>
-          <p>In this work, <span class="pi">&pi;<sub>0.5</sub></span> and Teleoperation were used as baselines to
-          evaluate shared-autonomy methods for policy steering. The low task success of
-          <span class="pi">&pi;<sub>0.5</sub></span> under perturbations suggests that the policy was sensitive to
-          changes in the initial scene configuration. In simulation, this was likely caused by overfitting to the
-          training distribution, where the policy may rely on memorized object positions or narrow visual cues rather
-          than a generalizable task strategy. Therefore, large positional perturbations can move the scene outside the
-          training distribution, causing incorrect actions, poor recovery, or wrong task completion.</p>
+          <h3 class="title is-5">Why the baselines fail</h3>
+          <p>The low task success of <span class="pi">&pi;<sub>0.5</sub></span> under perturbations suggests that the
+          policy was sensitive to changes in the initial scene configuration. In simulation, this was likely caused by
+          overfitting to the training distribution, where the policy may rely on memorized object positions or narrow
+          visual cues rather than a generalizable task strategy. Therefore, large positional perturbations can move the
+          scene outside the training distribution, causing incorrect actions, poor recovery, or wrong task
+          completion.</p>
           <p>Similar issues can occur in hardware, where object appearance, scale, lighting, camera viewpoint, and
           contact dynamics may differ from the data used to train the policy. These real-world variations can cause
           <span class="pi">&pi;<sub>0.5</sub></span> to misinterpret the scene or produce actions that are only valid
@@ -202,66 +261,60 @@
 </section>
 
 
-<section class="section" id="operators" style="padding-top: 0;">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <div class="content has-text-justified">
-          <h2 class="title is-3 has-text-centered section-anchor">A3. Additional Details on Human-in-the-Loop</h2>
-          <p>Two operators performed the teleoperation evaluations, including one operator with no prior experience in
-          teleoperating robots. Neither operator required training before using the gamepad or keyboard interface,
-          suggesting that the human-in-the-loop setup can be used with little to no prior experience in robot control.
-          In practice, both gamepad and keyboard interfaces were intuitive enough for operators to provide corrective
-          input during task execution.</p>
-          <p>Across each benchmark, the same operator was used for all human-in-the-loop methods in that benchmark,
-          including Teleoperation and all SAPS variants, so comparisons within a benchmark are not confounded by
-          changing operators across methods. Results are therefore not averaged across multiple operators; each
-          benchmark reports repeated trials from the corresponding single operator. LIBERO, LIBERO-PRO, and real-world
-          evaluations used the same operator without prior robot control experience, while CALVIN used an operator with
-          prior robot arm control experience. We chose this protocol to keep human-input behavior consistent across
-          methods within each benchmark, but broader multi-operator evaluation remains an important direction for future
-          work.</p>
-          <p>For safety and consistency in all trials, the maximum teleoperation speed was limited to approximately
-          0.2 m/s. This speed limit helped prevent abrupt robot motions while still allowing the operator to make
-          meaningful corrections during shared-autonomy rollouts.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
 <section class="section" id="libero" style="padding-top: 0;">
   <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 section-anchor">LIBERO</h2>
+      </div>
+    </div>
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
-          <h2 class="title is-3 has-text-centered section-anchor">A4. Distance-Based Perturbation Task Setup for LIBERO</h2>
-          <p>We perturb the distance of the cream cheese object from the original location in the LIBERO-10 task, which
-          we illustrate in Figure A1. We find that while the base policy decreases in performance, our shared autonomy
-          method can retain performance across different distances for task perturbations. The exact changes in position
-          are listed in Table A1.</p>
-          <p>Figure A1 visualizes the controlled LIBERO object-displacement evaluation used in our distance-based
-          perturbation study. Starting from the original cream-cheese placement, we shift the target object to multiple
-          new positions while keeping the same task instruction and scene setup. These perturbations are designed to
-          isolate spatial generalization failures by changing object position without changing the manipulation
-          objective.</p>
+          <p>In the controlled LIBERO perturbation study, <span class="pi">&pi;<sub>0.5</sub></span> performs well when
+          the target object remains close to the original task layout, whereas its performance decreases as the
+          perturbation distance increases. This suggests that the policy retains useful manipulation behavior but is
+          sensitive to spatial shifts in object placement. In several perturbed configurations, the policy appears to
+          act as though the object remains near its original training-distribution location, causing incorrect reaching
+          behavior or inefficient recovery attempts.</p>
+          <p>Shared autonomy addresses these failure modes by using sparse human input as an online correction signal,
+          allowing the system to recover from perturbed object placements without retraining the policy or modifying its
+          inference procedure. As shown in Figure 2, <span class="pi">&pi;<sub>0.5</sub></span> success is strongly tied
+          to perturbation distance, decreasing as distance increases (Pearson: <em>r</em> = &minus;0.800; two-tailed:
+          <em>p</em> = 0.005). This trend is most visible at larger perturbations: for distances greater than or equal to
+          0.15, <span class="pi">&pi;<sub>0.5</sub></span> drops to 22.9% success, while Blending and Cosine remain at
+          87.9% and 90.0%, respectively. Overall, Blending and Cosine significantly outperform
+          <span class="pi">&pi;<sub>0.5</sub></span> (Pearson: <em>p</em> = 0.004; two-tailed: <em>p</em> = 0.003),
+          showing that shared autonomy recovers from spatial generalization failures more efficiently.</p>
+
+          <figure class="paper-figure fig-narrow">
+            <img src="./figures/perturb-success.webp" width="1000" height="800" loading="lazy"
+                 alt="Task success rate against perturbation distance for the base policy, Blending, and Cosine.">
+            <figcaption><span class="fignum">Figure 2:</span> <span class="pi">&pi;<sub>0.5</sub></span> task success
+            rate across 8 perturbed task setups (<em>n</em> = 20) in LIBERO. Dashed trendlines show the performance
+            trend across perturbation distance.
+            <span class="figsrc">[<a href="./pdf/perturb-success.pdf">PDF</a>]</span></figcaption>
+          </figure>
+
+          <h3 class="title is-5">Perturbation setup</h3>
+          <p>We perturb the distance of the cream cheese object from the original location in the LIBERO-10 task, shown
+          in Figure 3. Starting from the original cream-cheese placement, we shift the target object to multiple new
+          positions while keeping the same task instruction and scene setup. These perturbations isolate spatial
+          generalization failures by changing object position without changing the manipulation objective. The exact
+          displacement values are listed in Table 1; they span both axis-aligned and diagonal shifts, allowing us to
+          evaluate whether policy performance degrades smoothly as the object moves farther from the original
+          training-distribution location.</p>
 
           <figure class="paper-figure">
             <img src="./figures/self_perturb_a.webp" width="2000" height="1294" loading="lazy"
                  alt="LIBERO scenes showing the cream cheese object displaced to a range of positions away from its original placement.">
-            <figcaption><span class="fignum">Figure A1:</span> LIBERO task setups for positional perturbations of the
+            <figcaption><span class="fignum">Figure 3:</span> LIBERO task setups for positional perturbations of the
             cream cheese object with varying distances from the original position.
             <span class="figsrc">[<a href="./pdf/self_perturb_a.pdf">PDF</a>]</span></figcaption>
           </figure>
 
-          <p>Table A1 reports the exact displacement values used for each perturbation. The perturbations span both
-          axis-aligned and diagonal shifts, allowing us to evaluate whether policy performance degrades smoothly as the
-          object moves farther from the original training-distribution location. Together, Figure A1 and Table A1 define
-          the controlled spatial OOD setting used for the LIBERO results in the main paper.</p>
-
           <div class="table-block">
-            <p class="table-caption"><span class="tabnum">Table A1:</span> Distance (m) perturbations of LIBERO
+            <p class="table-caption"><span class="tabnum">Table 1:</span> Distance (m) perturbations of LIBERO
             evaluations of target object: cream cheese.</p>
             <div class="table-scroll">
               <table class="paper-table">
@@ -280,7 +333,7 @@
           <figure class="paper-figure">
             <img src="./figures/LIBERO.webp" width="1609" height="350" loading="lazy"
                  alt="Frame sequence showing successful LIBERO task completion under cream cheese perturbations.">
-            <figcaption><span class="fignum">Figure A2:</span> LIBERO task progress for successful task completion on
+            <figcaption><span class="fignum">Figure 4:</span> LIBERO task progress for successful task completion on
             cream cheese perturbations.
             <span class="figsrc">[<a href="./pdf/LIBERO.pdf">PDF</a>]</span></figcaption>
           </figure>
@@ -293,22 +346,36 @@
 
 <section class="section" id="libero-pro" style="padding-top: 0;">
   <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 section-anchor">LIBERO-PRO</h2>
+      </div>
+    </div>
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
-          <h2 class="title is-3 has-text-centered section-anchor">A5. Perturbation Task Setup for LIBERO-PRO</h2>
-          <p>Table A2 summarizes the 10 LIBERO-PRO [<a href="#r5">5</a>] perturbation tasks used in our evaluation. The
-          selected tasks include <em>task</em> perturbations, which change the language-conditioned goal or target
-          object, and <em>swap</em> perturbations, which alter the spatial arrangement of relevant objects in the scene.
-          These settings test whether the policy can maintain correct task grounding when object identity, target
-          placement, or task specification become OOD.</p>
-          <p>We select these tasks to cover a range of manipulation behaviors, including pick-and-place, mug
-          rearrangement, articulated-object interaction, and object substitution. This task set therefore evaluates
-          whether shared autonomy can recover failures that arise not only from spatial displacement, but also from
-          incorrect object binding and task-level confusion.</p>
+          <p>We use LIBERO-PRO [<a href="#r5">5</a>] to evaluate whether SAPS improves zero-shot robustness under
+          structured task and swap perturbations. Across the 10 selected tasks, autonomous
+          <span class="pi">&pi;<sub>0.5</sub></span> achieves only 15.0% mean success, indicating that the policy is
+          highly sensitive to out-of-distribution changes in object layout and task specification. In contrast, all
+          shared-autonomy methods recover high performance: Blending reaches 92.6%, Takeover reaches 93.2%, and Cosine
+          reaches 97.4%, approaching Teleoperation at 98.8%. All shared-autonomy methods significantly improve success
+          over <span class="pi">&pi;<sub>0.5</sub></span> using a one-sided Wilcoxon signed-rank test, with
+          <em>p</em> = 9.77 &times; 10<sup>&minus;4</sup> for each method. These results suggest that
+          <span class="pi">&pi;<sub>0.5</sub></span> maintains useful low-level manipulation behavior, but corrective
+          human guidance is needed to maintain correct task behavior under perturbations.</p>
+
+          <h3 class="title is-5">Task setup</h3>
+          <p>The selected tasks include <em>task</em> perturbations, which change the language-conditioned goal or
+          target object, and <em>swap</em> perturbations, which alter the spatial arrangement of relevant objects in the
+          scene. These settings test whether the policy can maintain correct task grounding when object identity, target
+          placement, or task specification become OOD. We select these tasks to cover a range of manipulation behaviors,
+          including pick-and-place, mug rearrangement, articulated-object interaction, and object substitution,
+          evaluating whether shared autonomy can recover failures that arise not only from spatial displacement, but
+          also from incorrect object binding and task-level confusion.</p>
 
           <div class="table-block">
-            <p class="table-caption"><span class="tabnum">Table A2:</span> LIBERO task specifications used for the
+            <p class="table-caption"><span class="tabnum">Table 2:</span> LIBERO task specifications used for the
             original and perturbed task variants.</p>
             <div class="table-scroll">
               <table class="paper-table wrap-table">
@@ -331,40 +398,10 @@
             </div>
           </div>
 
-          <figure class="paper-figure">
-            <img src="./figures/LIBERO-PRO.webp" width="2000" height="1396" loading="lazy"
-                 alt="Qualitative LIBERO-PRO rollouts for pick and place, mug manipulation, and drawer manipulation.">
-            <figcaption><span class="fignum">Figure A3:</span> Qualitative task progression for pick and place, mug
-            manipulation, and drawer manipulation in LIBERO-PRO.
-            <span class="figsrc">[<a href="./pdf/LIBERO-PRO.pdf">PDF</a>]</span></figcaption>
-          </figure>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section class="section" id="libero-pro-metrics" style="padding-top: 0;">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <div class="content has-text-justified">
-          <h2 class="title is-3 has-text-centered section-anchor">A6. Additional Metrics for LIBERO-PRO</h2>
-          <p>Figure A6 shows the tradeoff between human intervention rate and completion time across LIBERO-PRO tasks.
-          Pure Teleoperation requires 100% human intervention and often produces longer completion times, while
-          <span class="pi">&pi;<sub>0.5</sub></span> requires no human input but can still take longer due to incorrect
-          or inefficient autonomous behavior. In contrast, the shared-autonomy methods occupy the upper-left region of
-          the plot, indicating that they reduce completion time while requiring only partial human input. Blending and
-          Takeover generally require the least intervention, while Cosine uses more corrective input but remains far
-          below full teleoperation.</p>
-          <p>Figure A7 summarizes the same trend using method-level averages. All SAPS variants achieve substantially
-          lower completion times than Teleoperation while requiring much less human control. These results further
-          support that shared autonomy provides a practical balance between autonomous policy execution and human
-          correction, improving task efficiency without reverting to continuous manual operation.</p>
+          <h3 class="title is-5">Success rate</h3>
 
           <div class="table-block">
-            <p class="table-caption"><span class="tabnum">Table A3:</span> LIBERO-PRO task success rates (%)
+            <p class="table-caption"><span class="tabnum">Table 3:</span> LIBERO-PRO task success rates (%)
             (<em>n</em> = 25). Cosine arbitration achieves the highest shared-autonomy mean success rate across the 10
             out-of-distribution tasks. Across the 10 tasks, all shared-autonomy methods significantly improved success
             rate over <span class="pi">&pi;<sub>0.5</sub></span> using a one-sided Wilcoxon signed-rank test:
@@ -392,22 +429,57 @@
           </div>
 
           <figure class="paper-figure fig-narrow">
+            <img src="./figures/fig_4.webp" width="884" height="623" loading="lazy"
+                 alt="Human intervention rate plotted against success rate for each method on LIBERO-PRO.">
+            <figcaption><span class="fignum">Figure 5:</span> LIBERO-PRO human intervention vs. success rate. With SAPS
+            methods, similar success rates to pure Teleoperation are achieved for a fraction of the effort from an
+            operator. The dashed trendline summarizes that a small fraction of human intervention produces large gains
+            in performance over <span class="pi">&pi;<sub>0.5</sub></span>.
+            <span class="figsrc">[<a href="./pdf/fig_4.pdf">PDF</a>]</span></figcaption>
+          </figure>
+
+          <figure class="paper-figure fig-narrow">
             <img src="./figures/fig_4_means.webp" width="884" height="623" loading="lazy"
-                 alt="Scatter plot of mean human intervention rate against mean success rate for each method on LIBERO-PRO.">
-            <figcaption><span class="fignum">Figure A4:</span> Mean rate of human intervention compared to success rate
+                 alt="Mean human intervention rate against mean success rate for each method on LIBERO-PRO.">
+            <figcaption><span class="fignum">Figure 6:</span> Mean rate of human intervention compared to success rate
             across all tasks for each method in LIBERO-PRO evaluations.
             <span class="figsrc">[<a href="./pdf/fig_4_means.pdf">PDF</a>]</span></figcaption>
           </figure>
 
+          <h3 class="title is-5">Completion time</h3>
+          <p>Completion-time results show that this improvement does not come at the cost of slower execution.
+          <span class="pi">&pi;<sub>0.5</sub></span> often enters incorrect or inefficient recovery behaviors, while
+          human operators under Teleoperation must manually control the full manipulation sequence with limited depth
+          perception in simulation. SAPS avoids both failure modes: human input guides task direction, while the policy
+          continues supplying low-level manipulation behavior. Across the 10 tasks, Blending, Cosine, and Takeover
+          reduce mean completion time to 11.1 s, 13.0 s, and 13.2 s, respectively, compared to 30.7 s for
+          <span class="pi">&pi;<sub>0.5</sub></span> and 46.0 s for Teleoperation. All three shared-autonomy methods are
+          significantly faster than both baselines using a one-sided paired Wilcoxon signed-rank test, with
+          <em>p</em> &lt; 0.001 for each comparison.</p>
+
+          <figure class="paper-figure">
+            <img src="./figures/completion_time.webp" width="2000" height="719" loading="lazy"
+                 alt="Completion time across LIBERO-PRO tasks for each method.">
+            <figcaption><span class="fignum">Figure 7:</span> Completion time across LIBERO-PRO simulation tasks for
+            <span class="pi">&pi;<sub>0.5</sub></span>, Teleoperation, Takeover, Blending, and Cosine. Shared-autonomy
+            methods reduce completion time relative to <span class="pi">&pi;<sub>0.5</sub></span> and Teleoperation
+            across all tasks with <em>p</em> &lt; 0.0001.
+            <span class="figsrc">[<a href="./pdf/completion_time.pdf">PDF</a>]</span></figcaption>
+          </figure>
+
+          <h3 class="title is-5">Human intervention</h3>
+          <p>Intervention rates show that SAPS improves performance without reverting to continuous manual control.
+          Across LIBERO-PRO tasks, Blending, Takeover, and Cosine only require low intervention rates (10.8%, 11.7%, and
+          30.0% mean), which remain far below Teleoperation (100%, <em>p</em> &lt; 0.0001). Intervention rates show no
+          significant correlation with task order (<em>p</em> &gt; 0.09), suggesting that SAPS relies on targeted
+          corrections rather than continuous operator control.</p>
+
           <div class="table-block">
-            <p class="table-caption"><span class="tabnum">Table A4:</span> Human intervention rate across LIBERO-PRO
+            <p class="table-caption"><span class="tabnum">Table 4:</span> Human intervention rate across LIBERO-PRO
             tasks for each shared-autonomy method. Values report mean &plusmn; standard error across evaluation episodes
-            (<em>n</em> = 25). All shared-autonomy methods require substantially less human intervention than pure
-            Teleoperation, which corresponds to 100% intervention for every task. Intervention rate is reported as the
-            percentage of control timesteps with active human input. Cosine: cosine-similarity arbitration; Blending:
-            fixed blending arbitration; Takeover: full human control during intervention. Teleoperation is omitted from
-            the table because it requires human input throughout the rollout, corresponding to 100% intervention for all
-            tasks.</p>
+            (<em>n</em> = 25). Intervention rate is reported as the percentage of control timesteps with active human
+            input. Teleoperation is omitted from the table because it requires human input throughout the rollout,
+            corresponding to 100% intervention for all tasks.</p>
             <div class="table-scroll">
               <table class="paper-table">
                 <thead>
@@ -433,7 +505,7 @@
           <figure class="paper-figure">
             <img src="./figures/trajectory_length.webp" width="2000" height="816" loading="lazy"
                  alt="Bar chart of end-effector path length across all methods and LIBERO-PRO tasks.">
-            <figcaption><span class="fignum">Figure A5:</span> End-effector path length across all methods and tasks
+            <figcaption><span class="fignum">Figure 8:</span> End-effector path length across all methods and tasks
             tested in LIBERO-PRO.
             <span class="figsrc">[<a href="./pdf/trajectory_length.pdf">PDF</a>]</span></figcaption>
           </figure>
@@ -441,17 +513,26 @@
           <figure class="paper-figure fig-narrow">
             <img src="./figures/completion_time_vs_intervention.webp" width="1342" height="942" loading="lazy"
                  alt="Completion time plotted against human intervention rate for all methods and LIBERO-PRO tasks.">
-            <figcaption><span class="fignum">Figure A6:</span> Completion time vs. human intervention rates across all
-            methods and tasks in LIBERO-PRO.
+            <figcaption><span class="fignum">Figure 9:</span> Completion time vs. human intervention rates across all
+            methods and tasks in LIBERO-PRO. The shared-autonomy methods occupy the upper-left region, reducing
+            completion time while requiring only partial human input.
             <span class="figsrc">[<a href="./pdf/completion_time_vs_intervention.pdf">PDF</a>]</span></figcaption>
           </figure>
 
           <figure class="paper-figure fig-narrow">
             <img src="./figures/mean_completion_time_vs_intervention.webp" width="1342" height="939" loading="lazy"
                  alt="Mean completion time plotted against mean human intervention rate for all methods in LIBERO-PRO.">
-            <figcaption><span class="fignum">Figure A7:</span> Completion time vs. human intervention rate means across
+            <figcaption><span class="fignum">Figure 10:</span> Completion time vs. human intervention rate means across
             all methods and tasks in LIBERO-PRO.
             <span class="figsrc">[<a href="./pdf/mean_completion_time_vs_intervention.pdf">PDF</a>]</span></figcaption>
+          </figure>
+
+          <figure class="paper-figure">
+            <img src="./figures/LIBERO-PRO.webp" width="2000" height="1396" loading="lazy"
+                 alt="Qualitative LIBERO-PRO rollouts for pick and place, mug manipulation, and drawer manipulation.">
+            <figcaption><span class="fignum">Figure 11:</span> Qualitative task progression for pick and place, mug
+            manipulation, and drawer manipulation in LIBERO-PRO.
+            <span class="figsrc">[<a href="./pdf/LIBERO-PRO.pdf">PDF</a>]</span></figcaption>
           </figure>
         </div>
       </div>
@@ -462,10 +543,14 @@
 
 <section class="section" id="calvin" style="padding-top: 0;">
   <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 section-anchor">CALVIN</h2>
+      </div>
+    </div>
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
-          <h2 class="title is-3 has-text-centered section-anchor">A7. Additional Details and Metrics for CALVIN</h2>
           <p>The unguided DP base policy executes autonomously with no human input. ITPS [<a href="#r4">4</a>] performs
           shared autonomy by injecting a human-specified position-target gradient into the policy's diffusion sampling
           at every denoising step. DynaGuide [<a href="#r3">3</a>] steers the policy autonomously, using a separately
@@ -475,42 +560,31 @@
           blending weight set by the cosine similarity between the two, deferring to the policy when human and policy
           agree, and to the human when they diverge.</p>
           <p>Despite this simplicity, cosine-similarity shared autonomy outperforms both more complex methods on every
-          one of the 11 CALVIN subtasks. The figure below reports per-task success rate. Cosine arbitration succeeds on
-          100% of episodes for all eight articulated subtasks and 70&ndash;90% for the three block-lift subtasks,
-          averaging 93% across the suite. The two prior methods trail substantially, DynaGuide at 80% and ITPS at 66%,
-          and the autonomous base policy reaches only 45%. The gap is widest on the block-lift subtasks, where the base
-          policy and ITPS both fall below 50% while Cosine arbitration still completes a clear majority of episodes.
-          Notably, ITPS and our method involve human intervention at comparable rates (roughly 75&ndash;85% of
-          timesteps), so the advantage of Cosine arbitration over ITPS isolates the arbitration mechanism itself rather
-          than the mere presence of a human operator.</p>
+          one of the 11 CALVIN subtasks. Cosine arbitration succeeds on 100% of episodes for all eight articulated
+          subtasks and 70&ndash;90% for the three block-lift subtasks, averaging 93% across the suite. The two prior
+          methods trail substantially, DynaGuide at 80% and ITPS at 66%, and the autonomous base policy reaches only
+          45%. The gap is widest on the block-lift subtasks, where the base policy and ITPS both fall below 50% while
+          Cosine arbitration still completes a clear majority of episodes. Notably, ITPS and our method involve human
+          intervention at comparable rates (roughly 75&ndash;85% of timesteps), so the advantage of Cosine arbitration
+          over ITPS isolates the arbitration mechanism itself rather than the mere presence of a human operator.</p>
 
           <figure class="paper-figure">
             <img src="./figures/plot_success_rate.webp" width="2000" height="547" loading="lazy"
                  alt="Per-task success rate for DP, ITPS, DynaGuide, and Cosine arbitration across 11 CALVIN subtasks.">
-            <figcaption><span class="fignum">Main paper figure:</span> Per-task success rate across the four methods on
-            11 CALVIN subtasks. Reproduced here for reference, as the appendix text refers to it.
+            <figcaption><span class="fignum">Figure 12:</span> Per-task success rate across the four methods on 11
+            CALVIN subtasks.
             <span class="figsrc">[<a href="./pdf/plot_success_rate.pdf">PDF</a>]</span></figcaption>
           </figure>
 
-          <p>Figure A8 reports the end-effector path length per episode. Cosine arbitration produces the most direct
+          <p>Figure 13 reports the end-effector path length per episode. Cosine arbitration produces the most direct
           motions on nearly every subtask, while the autonomous base policy travels 2&ndash;3&times; farther for the
           same subtask, showing undirected exploratory motion that the human's coarse directional input efficiently
           suppresses under Cosine arbitration.</p>
-          <p>Figure A9 reports the mean time to complete each subtask, counting a failed episode as the full 400-step
-          horizon so that the metric reflects an expected time-to-finish rather than rewarding methods for discarding
-          their failures. Cosine arbitration and DynaGuide finish the articulated task fastest, typically well under 200
-          steps, whereas the base policy and ITPS are repeatedly dragged toward the 400-step cap by their failures.</p>
-          <p>Figure A10 shows a lower intervention rate for ITPS compared to Cosine; however, ITPS has a much lower
-          success rate, higher completion time (Figure A9), and higher end-effector path length (Figure A8).</p>
-          <p>Figure A11 illustrates these differences qualitatively on <code>button_off</code>. From an identical
-          initial state, the base policy and ITPS fail to press the button and run out the full 400-step horizon,
-          whereas DynaGuide and Cosine arbitration reach and press the button in well under 100 steps. Figure A12 and
-          Figure A13 show examples of successes and failures for CALVIN subtasks.</p>
 
           <figure class="paper-figure">
             <img src="./figures/plot_ee_path.webp" width="2000" height="732" loading="lazy"
                  alt="Mean end-effector path length per episode across four methods on 11 CALVIN subtasks.">
-            <figcaption><span class="fignum">Figure A8:</span> Mean end-effector path length (3-D arc length travelled
+            <figcaption><span class="fignum">Figure 13:</span> Mean end-effector path length (3-D arc length travelled
             per episode, in meters) across the four methods on 11 CALVIN subtasks (<em>n</em> = 10 episodes per task;
             error bars: standard error of the mean). Cosine-similarity shared autonomy produces the most direct motions,
             consistently the shortest EE paths, while the autonomous baseline (DP) wanders most, often travelling
@@ -518,23 +592,30 @@
             <span class="figsrc">[<a href="./pdf/plot_ee_path.pdf">PDF</a>]</span></figcaption>
           </figure>
 
+          <p>Figure 14 reports the mean time to complete each subtask, counting a failed episode as the full 400-step
+          horizon so that the metric reflects an expected time-to-finish rather than rewarding methods for discarding
+          their failures. Cosine arbitration and DynaGuide finish the articulated task fastest, typically well under 200
+          steps, whereas the base policy and ITPS are repeatedly dragged toward the 400-step cap by their failures.</p>
+
           <figure class="paper-figure">
             <img src="./figures/plot_completion_time.webp" width="2000" height="731" loading="lazy"
                  alt="Mean subtask completion time in environment timesteps across four methods on 11 CALVIN subtasks.">
-            <figcaption><span class="fignum">Figure A9:</span> Mean subtask-completion time, in environment timesteps,
+            <figcaption><span class="fignum">Figure 14:</span> Mean subtask-completion time, in environment timesteps,
             across the four methods on 11 CALVIN tasks (<em>n</em> = 10 episodes per subtask; error bars: standard error
             of the mean). Each episode contributes the timestep at which the subtask's success criterion is first met,
             or the full 400-step horizon if the episode failed &mdash; an expected time-to-finish that penalises
-            low-success methods rather than discarding their failures. Cosine-similarity shared autonomy and DynaGuide
-            complete the articulated subtasks fastest, while the autonomous baseline (DP), failing far more often, is
-            dragged toward the 400-step cap.
+            low-success methods rather than discarding their failures.
             <span class="figsrc">[<a href="./pdf/plot_completion_time.pdf">PDF</a>]</span></figcaption>
           </figure>
+
+          <p>Figure 15 shows a lower intervention rate for ITPS compared to Cosine; however, ITPS has a much lower
+          success rate (Figure 12), higher completion time (Figure 14), and higher end-effector path length
+          (Figure 13).</p>
 
           <figure class="paper-figure">
             <img src="./figures/plot_intervention.webp" width="2000" height="730" loading="lazy"
                  alt="Mean human intervention rate for ITPS and Cosine across 11 CALVIN subtasks.">
-            <figcaption><span class="fignum">Figure A10:</span> Mean human intervention rate across the two
+            <figcaption><span class="fignum">Figure 15:</span> Mean human intervention rate across the two
             shared-autonomy methods on 11 CALVIN tasks (<em>n</em> = 10 episodes per subtask), measured as the fraction
             of control timesteps with active human input. DP and DynaGuide are omitted (0%, because there is no human in
             the loop). ITPS and Cosine differ by only 4.3 percentage points on average (75.5% vs. 79.8%), so the
@@ -543,15 +624,19 @@
             <span class="figsrc">[<a href="./pdf/plot_intervention.pdf">PDF</a>]</span></figcaption>
           </figure>
 
+          <p>Figure 16 illustrates these differences qualitatively on <code>button_off</code>. From an identical initial
+          state, the base policy and ITPS fail to press the button and run out the full 400-step horizon, whereas
+          DynaGuide and Cosine arbitration reach and press the button in well under 100 steps. Figure 17 and Figure 18
+          show examples of successes and failures for CALVIN subtasks.</p>
+
           <figure class="paper-figure">
             <img src="./figures/figure_button_off.webp" width="2000" height="1634" loading="lazy"
                  alt="Qualitative rollout frames for DP, ITPS, DynaGuide, and Cosine on the button_off CALVIN subtask.">
-            <figcaption><span class="fignum">Figure A11:</span> Qualitative rollout comparison on the
+            <figcaption><span class="fignum">Figure 16:</span> Qualitative rollout comparison on the
             <code>button_off</code> subtask for CALVIN with DP. Each row is one method (DP, ITPS, DynaGuide, Cosine);
             the four columns are evenly-spaced frames from rollout 5, viewed from a fixed camera. All four rollouts
-            begin from the same initial state (<em>t</em> = 0). Because each episode ends at success or at the 400-step
-            timeout, the rollouts span very different durations, so every frame is labeled with the environment timestep
-            at which it is taken: DP and ITPS fail and run the full 400 steps without pressing the button, whereas
+            begin from the same initial state (<em>t</em> = 0). Every frame is labeled with the environment timestep at
+            which it is taken: DP and ITPS fail and run the full 400 steps without pressing the button, whereas
             DynaGuide and Cosine reach the button and complete the task in well under 200 steps.
             <span class="figsrc">[<a href="./pdf/figure_button_off.pdf">PDF</a>]</span></figcaption>
           </figure>
@@ -559,7 +644,7 @@
           <figure class="paper-figure">
             <img src="./figures/calvin_task_successes.webp" width="2000" height="1631" loading="lazy"
                  alt="Successful CALVIN rollouts across subtasks with Cosine arbitration guiding the diffusion policy.">
-            <figcaption><span class="fignum">Figure A12:</span> Qualitative rollout comparison for different subtasks in
+            <figcaption><span class="fignum">Figure 17:</span> Qualitative rollout comparison for different subtasks in
             CALVIN. Shown with just Cosine guiding the DP policy.
             <span class="figsrc">[<a href="./pdf/calvin_task_successes.pdf">PDF</a>]</span></figcaption>
           </figure>
@@ -567,7 +652,7 @@
           <figure class="paper-figure">
             <img src="./figures/calvin_task_failures.webp" width="2000" height="1631" loading="lazy"
                  alt="Failed CALVIN rollouts across subtasks with the unguided diffusion policy.">
-            <figcaption><span class="fignum">Figure A13:</span> Qualitative rollout comparison for different subtasks in
+            <figcaption><span class="fignum">Figure 18:</span> Qualitative rollout comparison for different subtasks in
             CALVIN. Shown with only the DP policy. Failures occur due to performing the wrong subtask (seen when
             performing the Door Right task), or due to stalling when out-of-distribution.
             <span class="figsrc">[<a href="./pdf/calvin_task_failures.pdf">PDF</a>]</span></figcaption>
@@ -581,33 +666,25 @@
 
 <section class="section" id="real-world" style="padding-top: 0;">
   <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 section-anchor">Real Robot</h2>
+      </div>
+    </div>
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
-          <h2 class="title is-3 has-text-centered section-anchor">A8. Additional Metrics for Real World</h2>
-          <p>During each real-world hardware rollout, we track the human activation rate to evaluate whether the
-          shared-autonomy behaviors observed in simulation transfer to physical robot execution. Human activation is
-          defined as the percentage of control timesteps in which the operator provides input above the activity
-          threshold. Pure Teleoperation requires human input throughout the entire rollout, corresponding to 100%
-          intervention. In contrast, Cosine arbitration uses 63.9% intervention on Marker Plate, 54.6% on Close Drawer,
-          and 68.7% on Open Cabinet, while Blending uses 53.9%, 48.5%, and 66.7% intervention on the same tasks. Both
-          shared-autonomy methods significantly reduce human intervention relative to Teleoperation across all three
-          hardware tasks using pairwise Mann&ndash;Whitney <em>U</em> tests, with <em>p</em> &lt; 10<sup>&minus;15</sup>
-          for all comparisons. These results show that SAPS transfers to real-world manipulation without reverting to
-          continuous manual control. Instead, shared autonomy enables the operator to provide partial corrective input
-          while <span class="pi">&pi;<sub>0.5</sub></span> continues to contribute learned manipulation behavior during
-          physical robot execution.</p>
-          <p>Table A5 reports real-world task success rates across the three hardware tasks. Table A6 reports the
-          corresponding human intervention rates and shows that the operator provides partial corrections while
-          <span class="pi">&pi;<sub>0.5</sub></span> continues to contribute learned manipulation behavior.</p>
-          <p>Figure A14 reports completion time across the hardware tasks. Both Cosine and Blending reduce completion
-          time relative to autonomous <span class="pi">&pi;<sub>0.5</sub></span>, indicating that shared autonomy helps
-          avoid inefficient autonomous recovery behavior. Figure A15 qualitatively shows successful executions of the
-          three real-world tasks.</p>
+          <p>We perform real-world evaluations to test whether SAPS transfers from simulation to hardware. As seen in
+          Table 5, <span class="pi">&pi;<sub>0.5</sub></span> struggles across real-world tasks, achieving 50% success
+          on Pick and Place, 25% success on Close Drawer, and 5% success on Open Cabinet. Shared autonomy substantially
+          improves real-world reliability, with Cosine achieving an average success rate of 98.3% across all three
+          tasks, and Blending achieving 93.3%. This supports that <span class="pi">&pi;<sub>0.5</sub></span> has learned
+          useful real-world manipulation behavior from DROID, but remains brittle under the specific task layouts and
+          object configurations, while corrective human input helps recover from these failures.</p>
 
           <div class="table-block">
-            <p class="table-caption"><span class="tabnum">Table A5:</span> Hardware evaluation
-            (<em>n</em> = 20 episodes/task) by task success rate.</p>
+            <p class="table-caption"><span class="tabnum">Table 5:</span> Hardware evaluation (<em>n</em> = 20) by task
+            success rate.</p>
             <div class="table-scroll">
               <table class="paper-table">
                 <thead>
@@ -622,13 +699,49 @@
             </div>
           </div>
 
+          <h3 class="title is-5">Completion time</h3>
+          <p>Completion-time results further show that shared autonomy improves task efficiency relative to
+          <span class="pi">&pi;<sub>0.5</sub></span>. Using pairwise Mann&ndash;Whitney <em>U</em> tests, both Cosine and
+          Blending significantly reduce completion time relative to <span class="pi">&pi;<sub>0.5</sub></span> across
+          all three tasks (<em>p</em> &le; 0.0212), indicating that shared autonomy not only improves success but also
+          reduces inefficient autonomous recovery behavior. However, completion-time results compared to Teleoperation
+          are task-dependent: both Cosine and Blending are significantly faster on the Marker Plate (Cosine:
+          <em>p</em> = 0.0002; Blending: <em>p</em> = 0.0005), but neither method is significantly different from
+          Teleoperation on Close Drawer or Open Cabinet. This differs from the simulation setting, where Teleoperation
+          is slower, and likely reflects that real-world operators have direct depth perception and can execute some
+          tasks quickly under full manual control, although continuous human input is required.</p>
+
+          <figure class="paper-figure fig-narrow">
+            <img src="./figures/completion_time_both_tasks.webp" width="2000" height="1600" loading="lazy"
+                 alt="Mean completion time per hardware task across shared autonomy methods.">
+            <figcaption><span class="fignum">Figure 19:</span> Mean completion time (&plusmn; std. err.) per task across
+            shared-autonomy methods (<em>n</em> = 20 episodes/task). Cosine and Blending significantly reduce completion
+            time relative to <span class="pi">&pi;<sub>0.5</sub></span> execution on all tasks (<em>p</em> &le; 0.0212).
+            Relative to Teleoperation, both methods are significantly different only on Marker Plate (Cosine:
+            <em>p</em> = 0.0002; Blending: <em>p</em> = 0.0005), with no significant differences on Close Drawer or Open
+            Cabinet.
+            <span class="figsrc">[<a href="./pdf/completion_time_both_tasks.pdf">PDF</a>]</span></figcaption>
+          </figure>
+
+          <h3 class="title is-5">Human intervention</h3>
+          <p>During each real-world hardware rollout, we track the human activation rate to evaluate whether the
+          shared-autonomy behaviors observed in simulation transfer to physical robot execution. Human activation is
+          defined as the percentage of control timesteps in which the operator provides input above the activity
+          threshold. Pure Teleoperation requires human input throughout the entire rollout, corresponding to 100%
+          intervention. In contrast, Cosine arbitration uses 63.9% intervention on Marker Plate, 54.6% on Close Drawer,
+          and 68.7% on Open Cabinet, while Blending uses 53.9%, 48.5%, and 66.7% intervention on the same tasks. Both
+          shared-autonomy methods significantly reduce human intervention relative to Teleoperation across all three
+          hardware tasks using pairwise Mann&ndash;Whitney <em>U</em> tests, with <em>p</em> &lt; 10<sup>&minus;15</sup>
+          for all comparisons. These results show that SAPS transfers to real-world manipulation without reverting to
+          continuous manual control. Instead, shared autonomy enables the operator to provide partial corrective input
+          while <span class="pi">&pi;<sub>0.5</sub></span> continues to contribute learned manipulation behavior during
+          physical robot execution.</p>
+
           <div class="table-block">
-            <p class="table-caption"><span class="tabnum">Table A6:</span> Hardware evaluation of mean human
-            intervention (&plusmn; std. err.) across shared-autonomy methods (<em>n</em> = 20), with pairwise
-            <em>p</em>-values comparing human intervention rates for Cosine and Blending shared autonomy against
-            Teleoperation. Across Marker Plate, Close Drawer, and Open Cabinet, both shared-autonomy methods
-            significantly reduce intervention relative to Teleoperation (<em>p</em> &lt; 10<sup>&minus;15</sup> for all
-            comparisons).</p>
+            <p class="table-caption"><span class="tabnum">Table 6:</span> Hardware evaluation of mean human intervention
+            (&plusmn; std. err.) across shared-autonomy methods (<em>n</em> = 20). Across Marker Plate, Close Drawer, and
+            Open Cabinet, both shared-autonomy methods significantly reduce intervention relative to Teleoperation
+            (<em>p</em> &lt; 10<sup>&minus;15</sup> for all comparisons).</p>
             <div class="table-scroll">
               <table class="paper-table">
                 <thead>
@@ -643,23 +756,10 @@
             </div>
           </div>
 
-          <figure class="paper-figure fig-narrow">
-            <img src="./figures/completion_time_both_tasks.webp" width="2000" height="1600" loading="lazy"
-                 alt="Mean completion time per hardware task across shared autonomy methods.">
-            <figcaption><span class="fignum">Figure A14:</span> Mean completion time (&plusmn; std. err.) per task
-            across shared-autonomy methods (<em>n</em> = 20 episodes/task), with pairwise <em>p</em>-values for hardware
-            completion-time comparisons. Cosine and Blending significantly reduce completion time relative to
-            <span class="pi">&pi;<sub>0.5</sub></span> execution on all tasks (<em>p</em> &le; 0.0212). Relative to
-            Teleoperation, both methods are significantly different only on Marker Plate (Cosine:
-            <em>p</em> = 0.0002; Blending: <em>p</em> = 0.0005), with no significant differences on Close Drawer or Open
-            Cabinet.
-            <span class="figsrc">[<a href="./pdf/completion_time_both_tasks.pdf">PDF</a>]</span></figcaption>
-          </figure>
-
           <figure class="paper-figure">
             <img src="./figures/hardware_success_photos.webp" width="1500" height="1200" loading="lazy"
                  alt="Photographs of the real robot successfully completing the marker plate, drawer, and cabinet tasks.">
-            <figcaption><span class="fignum">Figure A15:</span> Real-world task progression for successful completion.
+            <figcaption><span class="fignum">Figure 20:</span> Real-world task progression for successful completion.
             <span class="figsrc">[<a href="./pdf/hardware_success_photos.pdf">PDF</a>]</span></figcaption>
           </figure>
         </div>
@@ -669,23 +769,23 @@
 </section>
 
 
-<section class="section" id="faq" style="padding-top: 0;">
+<section class="section" id="limitations" style="padding-top: 0;">
   <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 section-anchor">Limitations</h2>
+      </div>
+    </div>
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
-          <h2 class="title is-3 has-text-centered section-anchor">A9. Frequently Asked Questions</h2>
-          <h3 class="title is-5">Were other confidence-based methods tested for dynamically changing the &alpha; term?</h3>
-          <p>We also ran preliminary tests basing uncertainty on token entropy [<a href="#r6">6</a>], but found the
-          <span class="pi">&pi;<sub>0.5</sub></span> policy to be generally overfit and thus too confident while
-          generating trajectories for the wrong task, not allowing the user to take over to push the end effector in the
-          correct direction to fix the performance of the task. Furthermore, unlike
-          <span class="pi">&pi;<sub>0</sub></span>-FAST, where action uncertainty can be estimated directly from the
-          entropy of autoregressively predicted FAST action tokens, <span class="pi">&pi;<sub>0.5</sub></span> uses a
-          hybrid architecture in which the final low-level action chunk is generated by a continuous flow-matching
-          action expert. Thus, token entropy is naturally available for textual or subtask predictions, and potentially
-          for FAST-tokenized auxiliary outputs, but it is not a direct uncertainty measure for the deployed continuous
-          action distribution.</p>
+          <p>SAPS requires a human operator at test time, so performance depends on operator timing, skill, and the
+          teleoperation interface. Because SAPS uses blending with the policy rather than explicit task progress,
+          intent, uncertainty, contact, or safety estimates, it can fail when the policy is confidently wrong. We
+          alleviate this effect with Cosine similarity and Takeover, because the user can take over when the policy
+          action differs from the user's intended action. Our evaluation is limited to a finite set of simulated and
+          real manipulation tasks; broader LIBERO coverage, more operators, additional embodiments, additional policy
+          backbones, and more real-world tasks would better characterize improvement using SAPS.</p>
         </div>
       </div>
     </div>
@@ -695,14 +795,18 @@
 
 <section class="section" id="references" style="padding-top: 0;">
   <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 section-anchor">References</h2>
+      </div>
+    </div>
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <div class="content">
-          <h2 class="title is-3 has-text-centered section-anchor">References</h2>
           <ol class="is-size-7">
             <li id="r1">K. Black, N. Brown, J. Darpinian, et al. &pi;<sub>0.5</sub>: A Vision-Language-Action Model with
-              Open-World Generalization. <em>Proceedings of the 9th Conference on Robot Learning</em>, PMLR 305:17&ndash;40,
-              2025. <a href="https://proceedings.mlr.press/v305/black25a.html">[link]</a></li>
+              Open-World Generalization. <em>Proceedings of the 9th Conference on Robot Learning</em>,
+              PMLR 305:17&ndash;40, 2025. <a href="https://proceedings.mlr.press/v305/black25a.html">[link]</a></li>
             <li id="r2">C. Yu, Y. Wang, Z. Guo, et al. RLinf: Flexible and Efficient Large-scale Reinforcement Learning
               via Macro-to-Micro Flow Transformation. arXiv:2509.15965, 2025.
               <a href="https://arxiv.org/abs/2509.15965">[link]</a></li>
@@ -714,9 +818,6 @@
             <li id="r5">X. Zhou, Y. Xu, G. Tie, et al. LIBERO-PRO: Towards Robust and Fair Evaluation of
               Vision-Language-Action Models Beyond Memorization. arXiv:2510.03827, 2025.
               <a href="https://arxiv.org/abs/2510.03827">[link]</a></li>
-            <li id="r6">U. B. Karli, Z. Shangguan, and T. Fitzgerald. INSIGHT: INference-time Sequence Introspection for
-              Generating Help Triggers in Vision-Language-Action Models. arXiv:2510.01389, 2025.
-              <a href="https://arxiv.org/abs/2510.01389">[link]</a></li>
           </ol>
         </div>
       </div>
