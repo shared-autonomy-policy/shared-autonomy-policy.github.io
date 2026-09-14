@@ -568,30 +568,37 @@
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
-          <p>The unguided DP base policy executes autonomously with no human input. ITPS [<a href="#r4">4</a>] performs
-          shared autonomy by injecting a human-specified position-target gradient into the policy's diffusion sampling
-          at every denoising step. DynaGuide [<a href="#r3">3</a>] steers the policy autonomously, using a separately
-          trained dynamics model and a classifier to bias diffusion sampling toward desired future states. Our method
-          requires neither a modification to the diffusion sampler nor an auxiliary model: at each timestep it forms the
-          executed action as a convex combination of the human's commanded action and the policy's action, with the
-          blending weight set by the cosine similarity between the two, deferring to the policy when human and policy
-          agree, and to the human when they diverge.</p>
-          <p>Despite this simplicity, cosine-similarity shared autonomy outperforms both more complex methods on every
-          one of the 11 CALVIN subtasks. Cosine arbitration succeeds on 100% of episodes for all eight articulated
-          subtasks and 70&ndash;90% for the three block-lift subtasks, averaging 93% across the suite. The two prior
-          methods trail substantially, DynaGuide at 80% and ITPS at 66%, and the autonomous base policy reaches only
-          45%. The gap is widest on the block-lift subtasks, where the base policy and ITPS both fall below 50% while
-          Cosine arbitration still completes a clear majority of episodes. Notably, ITPS and our method involve human
-          intervention at comparable rates (roughly 75&ndash;85% of timesteps), so the advantage of Cosine arbitration
-          over ITPS isolates the arbitration mechanism itself rather than the mere presence of a human operator.</p>
+          <p>Steering a baseline diffusion policy on 11 CALVIN subtasks, Cosine arbitration averages
+          <strong>93%</strong> success, against <strong>80%</strong> for DynaGuide, <strong>66%</strong> for ITPS, and
+          <strong>45%</strong> for the unguided policy. It is the only method that stays high on every subtask: 100% on
+          all eight articulated subtasks, and 70&ndash;90% on the three harder block-lift subtasks.</p>
 
           <figure class="paper-figure">
             <img src="./figures/plot_success_rate.webp" width="2000" height="547" loading="lazy"
                  alt="Per-task success rate for DP, ITPS, DynaGuide, and Cosine arbitration across 11 CALVIN subtasks.">
-            <figcaption><span class="fignum">Figure 12:</span> Per-task success rate across the four methods on 11
-            CALVIN subtasks.
+            <figcaption><span class="fignum">Figure 12:</span> Subtask success rate across four autonomy /
+            shared-autonomy methods on 11 single CALVIN subtasks (3 block-lift, 8 articulated; <em>n</em> = 10 episodes
+            per task) for policy steering of the baseline DP policy. SAPS, represented by the Cosine configuration,
+            maintains high success on every subtask, reaching 100% on all eight articulated tasks and 70&ndash;90% on
+            the harder block-lift subtasks.
             <span class="figsrc">[<a href="./pdf/plot_success_rate.pdf">PDF</a>]</span></figcaption>
           </figure>
+
+          <p>The three comparisons differ in how much machinery they need. The unguided DP base policy executes
+          autonomously with no human input. ITPS [<a href="#r4">4</a>] performs shared autonomy by injecting a
+          human-specified position-target gradient into the policy's diffusion sampling at every denoising step.
+          DynaGuide [<a href="#r3">3</a>] steers the policy autonomously, using a separately trained dynamics model and
+          a classifier to bias diffusion sampling toward desired future states. Our method requires neither a
+          modification to the diffusion sampler nor an auxiliary model: at each timestep it forms the executed action as
+          a convex combination of the human's commanded action and the policy's action, with the blending weight set by
+          the cosine similarity between the two, deferring to the policy when human and policy agree, and to the human
+          when they diverge.</p>
+          <p>Despite this simplicity, Cosine arbitration outperforms both more complex methods on every one of the 11
+          subtasks. The gap is widest on the block-lift subtasks, where the base policy and ITPS both fall below 50%
+          while Cosine arbitration still completes a clear majority of episodes. Notably, ITPS and our method involve
+          human intervention at comparable rates (roughly 75&ndash;85% of timesteps), so the advantage of Cosine
+          arbitration over ITPS isolates the arbitration mechanism itself rather than the mere presence of a human
+          operator.</p>
 
           <p>Figure 13 reports the end-effector path length per episode. Cosine arbitration produces the most direct
           motions on nearly every subtask, while the autonomous base policy travels 2&ndash;3&times; farther for the
