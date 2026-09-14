@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow">
+<title>SAPS — Supplementary Appendix</title>
+<meta name="description" content="Supplementary appendix for an anonymous submission under double-blind review: SAPS, shared autonomy for policy steering by blending teleoperation with a pretrained VLA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#fdfdfc; --raise:#f5f4f1; --card:#ffffff;
+  --ink:#16150f; --ink2:#4c4a43; --ink3:#8b8880;
+  --rule:#e6e4de; --rule2:#d4d1c8;
+  --accent:#c96a17; --accent-soft:#ffb464;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Inter","Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono","SF Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#131312; --raise:#1c1c1a; --card:#f7f6f3;
+    --ink:#f0efe8; --ink2:#bdbbb2; --ink3:#8b887f;
+    --rule:#302f2c; --rule2:#42403c;
+    --accent:#ffb464; --accent-soft:#ffb464;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#131312; --raise:#1c1c1a; --card:#f7f6f3;
+  --ink:#f0efe8; --ink2:#bdbbb2; --ink3:#8b887f;
+  --rule:#302f2c; --rule2:#42403c;
+  --accent:#ffb464; --accent-soft:#ffb464;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:80px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:16.5px;line-height:1.7;-webkit-font-smoothing:antialiased}
+p{color:var(--ink2);margin:0 0 1.05em}
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent}
+a:hover{border-bottom-color:var(--accent)}
+
+/* ---------- top bar ---------- */
+.topbar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.topbar .inner{max-width:1420px;margin:0 auto;padding:11px 26px;display:flex;align-items:center;gap:16px}
+.brand{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.brand b{color:var(--accent);font-weight:600}
+.topbar .spacer{flex:1}
+.tbtn{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink3);background:none;border:1px solid var(--rule2);border-radius:999px;
+  padding:5px 13px;cursor:pointer}
+.tbtn:hover{color:var(--ink);border-color:var(--ink3)}
+
+/* ---------- layout ---------- */
+.shell{max-width:1420px;margin:0 auto;padding:0 26px 120px;display:grid;
+  grid-template-columns:minmax(0,1fr);gap:0}
+@media(min-width:1180px){
+  .shell{grid-template-columns:246px minmax(0,1fr);gap:56px;padding-left:34px}
+}
+.main{max-width:860px;min-width:0}
+
+/* ---------- sidebar toc ---------- */
+.toc{display:none}
+@media(min-width:1180px){
+  .toc{display:block;position:sticky;top:64px;align-self:start;max-height:calc(100vh - 90px);
+    overflow-y:auto;padding:44px 0 40px;font-size:13.2px;line-height:1.45}
+  .toc .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink3);margin:0 0 14px}
+  .toc ol{list-style:none;margin:0;padding:0}
+  .toc li{margin:0 0 2px}
+  .toc a{display:block;color:var(--ink2);padding:5px 10px 5px 12px;border-left:2px solid var(--rule);
+    border-bottom:none;border-radius:0 3px 3px 0}
+  .toc a:hover{color:var(--ink);background:var(--raise)}
+  .toc a.on{color:var(--accent);border-left-color:var(--accent);background:var(--raise);font-weight:500}
+  .toc a .n{font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:7px}
+  .toc a.on .n{color:var(--accent)}
+}
+
+/* ---------- header ---------- */
+header.head{padding:62px 0 0}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink3);margin:0 0 16px}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(2.05rem,4.4vw,2.95rem);line-height:1.12;
+  letter-spacing:-.02em;margin:0 0 .45em;text-wrap:balance;color:var(--ink)}
+h1 .saps{color:var(--accent)}
+.deck{font-size:1.1rem;line-height:1.62;max-width:63ch;color:var(--ink2);margin:0 0 8px}
+.blind{margin-top:26px;padding:14px 18px;background:var(--raise);border-left:3px solid var(--accent);
+  border-radius:0 4px 4px 0;font-size:14.2px;color:var(--ink2)}
+.blind b{color:var(--ink);font-weight:600}
+.meta{display:flex;flex-wrap:wrap;gap:0 40px;margin-top:30px;padding-top:20px;border-top:1px solid var(--rule);
+  font-family:var(--mono);font-size:12px;color:var(--ink3)}
+.meta div{margin-bottom:12px}
+.meta b{display:block;color:var(--ink);font-weight:500;font-size:13.5px;margin-top:2px}
+
+/* ---------- inline toc (small screens) ---------- */
+.toc-inline{margin:42px 0 0;padding:22px 24px;background:var(--raise);border-radius:6px}
+@media(min-width:1180px){.toc-inline{display:none}}
+.toc-inline .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink3);margin:0 0 12px}
+.toc-inline ol{list-style:none;margin:0;padding:0;font-size:14.5px}
+.toc-inline li{margin:0 0 7px}
+.toc-inline .n{font-family:var(--mono);font-size:12px;color:var(--ink3);margin-right:8px}
+
+/* ---------- sections ---------- */
+section{margin-top:72px;scroll-margin-top:78px}
+.sec-head{border-top:1px solid var(--rule2);padding-top:20px;margin-bottom:24px}
+.sec-num{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--accent);
+  text-transform:uppercase;margin:0 0 8px}
+h2{font-family:var(--serif);font-weight:600;font-size:1.72rem;line-height:1.22;letter-spacing:-.012em;
+  margin:0;text-wrap:balance;color:var(--ink)}
+h3{font-family:var(--sans);font-weight:600;font-size:1.02rem;margin:2.2em 0 .5em;color:var(--ink)}
+
+/* ---------- figures ---------- */
+figure{margin:38px 0;padding:0}
+.fig-frame{background:var(--card);border:1px solid var(--rule);border-radius:7px;padding:16px;
+  display:block;line-height:0;border-bottom:1px solid var(--rule)}
+.fig-frame:hover{border-color:var(--rule2)}
+.fig-frame img{width:100%;height:auto;display:block;border-radius:2px}
+figcaption{font-size:13.8px;line-height:1.6;color:var(--ink2);margin-top:13px;padding-left:2px}
+figcaption .lbl{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--accent);
+  letter-spacing:.02em;margin-right:7px;text-transform:uppercase}
+figcaption .src{display:block;margin-top:7px;font-family:var(--mono);font-size:11.5px;color:var(--ink3)}
+figcaption .src a{color:var(--ink3)}
+figcaption .src a:hover{color:var(--accent)}
+.fig-narrow{max-width:660px}
+
+/* ---------- tables ---------- */
+.tbl{margin:38px 0}
+.tbl-cap{font-size:13.8px;line-height:1.6;color:var(--ink2);margin-bottom:13px}
+.tbl-cap .lbl{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--accent);
+  letter-spacing:.02em;margin-right:7px;text-transform:uppercase}
+.scroll{overflow-x:auto;border:1px solid var(--rule);border-radius:7px;background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:13.6px;font-variant-numeric:tabular-nums}
+th,td{padding:9px 14px;text-align:right;border-bottom:1px solid var(--rule);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+thead th{font-family:var(--sans);font-weight:600;font-size:12.2px;color:var(--ink);
+  background:var(--raise);border-bottom:1px solid var(--rule2);position:sticky;top:0}
+tbody td{color:var(--ink2)}
+tbody tr:last-child td{border-bottom:none}
+tr.mean td{border-top:1px solid var(--rule2);font-weight:600;color:var(--ink);background:var(--raise)}
+td.best,td b{font-weight:600;color:var(--ink)}
+td.task,th.task{font-family:var(--mono);font-size:12.4px}
+table.wrap-tbl td{white-space:normal;min-width:190px;line-height:1.5}
+table.wrap-tbl td:first-child,table.wrap-tbl td:nth-child(2){white-space:nowrap;min-width:0}
+
+/* ---------- bits ---------- */
+.pi{font-family:var(--serif);font-style:italic}
+.pi sub{font-style:normal;font-family:var(--sans);font-size:.72em}
+code{font-family:var(--mono);font-size:.86em;background:var(--raise);padding:1.5px 5px;border-radius:3px;
+  color:var(--ink)}
+.saps{font-weight:600;color:var(--accent)}
+.cite{font-family:var(--sans);font-size:.88em;color:var(--accent);white-space:nowrap}
+.note{margin:34px 0;padding:16px 20px;background:var(--raise);border-radius:6px;font-size:14.3px;
+  color:var(--ink2);border-left:3px solid var(--rule2)}
+.note b{color:var(--ink)}
+ol.refs{font-size:14px;color:var(--ink2);padding-left:22px;line-height:1.6}
+ol.refs li{margin-bottom:11px}
+ol.refs b{color:var(--ink);font-weight:600}
+footer{margin-top:90px;padding-top:24px;border-top:1px solid var(--rule);
+  font-family:var(--mono);font-size:11.8px;color:var(--ink3)}
+.top-link{float:right}
+</style>
+</head>
+<body id="top">
+
+<div class="topbar"><div class="inner">
+  <span class="brand"><b>SAPS</b> · Supplementary Appendix</span>
+  <span class="spacer"></span>
+  <button class="tbtn" id="theme">Theme</button>
+</div></div>
+
+<div class="shell">
+
+<nav class="toc" aria-label="Contents">
+  <p class="lab">Contents</p>
+  <ol id="toclist">
+    <li><a href="#a1"><span class="n">A1</span>Evaluation Environment</a></li>
+    <li><a href="#a2"><span class="n">A2</span>Baseline Task Completion</a></li>
+    <li><a href="#a3"><span class="n">A3</span>Human-in-the-Loop Details</a></li>
+    <li><a href="#a4"><span class="n">A4</span>LIBERO Distance Perturbations</a></li>
+    <li><a href="#a5"><span class="n">A5</span>LIBERO-PRO Task Setup</a></li>
+    <li><a href="#a6"><span class="n">A6</span>LIBERO-PRO Metrics</a></li>
+    <li><a href="#a7"><span class="n">A7</span>CALVIN Details &amp; Metrics</a></li>
+    <li><a href="#a8"><span class="n">A8</span>Real-World Metrics</a></li>
+    <li><a href="#a9"><span class="n">A9</span>Frequently Asked Questions</a></li>
+    <li><a href="#refs"><span class="n">—</span>References</a></li>
+  </ol>
+</nav>
+
+<div class="main">
+
+<header class="head">
+  <p class="eyebrow">Supplementary Material · Anonymous Submission</p>
+  <h1><span class="saps">SAPS</span>: Shared Autonomy for Policy Steering by Blending Teleoperation with a Pretrained VLA</h1>
+  <p class="deck">This page reproduces the supplementary appendix in full: evaluation-environment details, per-task
+  specifications, additional quantitative metrics, and qualitative rollouts across LIBERO, LIBERO-PRO, CALVIN, and
+  real-world hardware.</p>
+
+  <div class="blind"><b>Anonymous appendix.</b> This page accompanies a paper currently under double-blind review.
+  It contains no author, institution, or affiliation information, and is excluded from search-engine indexing.</div>
+
+  <figure>
+    <a class="fig-frame" href="figures/high-level-teaser.webp" target="_blank" rel="noopener">
+      <img src="figures/high-level-teaser.webp" width="934" height="814" alt="Overview of SAPS: a human operator's teleoperation command and a pretrained VLA policy's action are arbitrated into a single executed action.">
+    </a>
+    <figcaption><span class="lbl">Overview</span>Shared autonomy for policy steering. The executed action is formed
+    from the operator's command and the pretrained policy's action, with the arbitration weight set by the agreement
+    between the two.
+    <span class="src"><a href="pdf/high-level-teaser.pdf">Vector PDF ↓</a></span></figcaption>
+  </figure>
+
+  <div class="meta">
+    <div>Benchmarks<b>LIBERO · LIBERO-PRO · CALVIN · Hardware</b></div>
+    <div>Arbitration methods<b>Cosine · Blending · Takeover</b></div>
+    <div>Base policies<b><span class="pi">π<sub>0.5</sub></span> · Diffusion Policy</b></div>
+  </div>
+
+  <div class="toc-inline">
+    <p class="lab">Contents</p>
+    <ol>
+      <li><span class="n">A1</span><a href="#a1">Evaluation Environment</a></li>
+      <li><span class="n">A2</span><a href="#a2">Discussion on Baseline Task Completion</a></li>
+      <li><span class="n">A3</span><a href="#a3">Additional Details on Human-in-the-Loop</a></li>
+      <li><span class="n">A4</span><a href="#a4">Distance-Based Perturbation Task Setup for LIBERO</a></li>
+      <li><span class="n">A5</span><a href="#a5">Perturbation Task Setup for LIBERO-PRO</a></li>
+      <li><span class="n">A6</span><a href="#a6">Additional Metrics for LIBERO-PRO</a></li>
+      <li><span class="n">A7</span><a href="#a7">Additional Details and Metrics for CALVIN</a></li>
+      <li><span class="n">A8</span><a href="#a8">Additional Metrics for Real World</a></li>
+      <li><span class="n">A9</span><a href="#a9">Frequently Asked Questions</a></li>
+      <li><span class="n">—</span><a href="#refs">References</a></li>
+    </ol>
+  </div>
+</header>
+
+<section id="a1">
+  <div class="sec-head"><p class="sec-num">Appendix A1</p><h2>Evaluation Environment</h2></div>
+  <p>Simulation experiments are conducted using the LIBERO benchmark in Robosuite and CALVIN with a Franka Panda
+  manipulator controlled through an operational-space pose controller. Observations include RGB images from a
+  third-person agent-view camera and an eye-in-hand wrist camera, together with end-effector pose and gripper state.
+  Actions are represented as 7-DOF commands consisting of 3D translation, 3D orientation, and gripper actuation. The
+  environment operates at 20&nbsp;Hz. Human teleoperation was provided through either keyboard or gamepad input,
+  depending on the arbitration method and evaluation setting. Cosine used a gamepad controller for all simulation and
+  hardware evaluations, as the continuous joystick input provided smoother directional commands for agreement-based
+  arbitration. In simulation, Blending and Takeover were evaluated with keyboard input, where operator commands were
+  used as corrective interventions. For the real-world hardware experiments, the Blending interface was transferred to
+  the gamepad to provide smoother control during physical robot execution.</p>
+  <p>The LIBERO, LIBERO-PRO and real-world evaluations used the <span class="pi">π<sub>0.5</sub></span> model
+  checkpoints released by Black et&nbsp;al. <a class="cite" href="#r1">[1]</a>, trained on either the LIBERO or DROID
+  dataset. CALVIN used a <span class="pi">π<sub>0.5</sub></span> model checkpoint released by RLinf
+  <a class="cite" href="#r2">[2]</a> finetuned on CALVIN ABC. CALVIN also uses a DP model checkpoint released in
+  DynaGuide <a class="cite" href="#r3">[3]</a>.</p>
+</section>
+
+<section id="a2">
+  <div class="sec-head"><p class="sec-num">Appendix A2</p><h2>Discussion on Baseline Task Completion</h2></div>
+  <p>In this work, <span class="pi">π<sub>0.5</sub></span> and Teleoperation were used as baselines to evaluate
+  shared-autonomy methods for policy steering. The low task success of <span class="pi">π<sub>0.5</sub></span> under
+  perturbations suggests that the policy was sensitive to changes in the initial scene configuration. In simulation,
+  this was likely caused by overfitting to the training distribution, where the policy may rely on memorized object
+  positions or narrow visual cues rather than a generalizable task strategy. Therefore, large positional perturbations
+  can move the scene outside the training distribution, causing incorrect actions, poor recovery, or wrong task
+  completion.</p>
+  <p>Similar issues can occur in hardware, where object appearance, scale, lighting, camera viewpoint, and contact
+  dynamics may differ from the data used to train the policy. These real-world variations can cause
+  <span class="pi">π<sub>0.5</sub></span> to misinterpret the scene or produce actions that are only valid for familiar
+  object placements and appearances. This highlights a key limitation of using the pretrained VLA policy alone: strong
+  nominal behavior does not necessarily imply robustness to perturbations or real-world variation.</p>
+  <p>Teleoperation exhibited a different limitation. In simulation, teleoperation was difficult because the operator had
+  limited depth perception from camera observations, making it harder to judge object distance, gripper alignment, and
+  contact timing. In real-world evaluations, the operator had direct depth perception of the workspace, which made task
+  execution faster. These baseline limitations motivate shared autonomy, where the policy handles nominal behavior while
+  limited human corrections help recover from out-of-distribution states or difficult portions of the task.</p>
+</section>
+
+<section id="a3">
+  <div class="sec-head"><p class="sec-num">Appendix A3</p><h2>Additional Details on Human-in-the-Loop</h2></div>
+  <p>Two operators performed the teleoperation evaluations, including one operator with no prior experience in
+  teleoperating robots. Neither operator required training before using the gamepad or keyboard interface, suggesting
+  that the human-in-the-loop setup can be used with little to no prior experience in robot control. In practice, both
+  gamepad and keyboard interfaces were intuitive enough for operators to provide corrective input during task
+  execution.</p>
+  <p>Across each benchmark, the same operator was used for all human-in-the-loop methods in that benchmark, including
+  Teleoperation and all <span class="saps">SAPS</span> variants, so comparisons within a benchmark are not confounded by
+  changing operators across methods. Results are therefore not averaged across multiple operators; each benchmark
+  reports repeated trials from the corresponding single operator. LIBERO, LIBERO-PRO, and real-world evaluations used
+  the same operator without prior robot control experience, while CALVIN used an operator with prior robot arm control
+  experience. We chose this protocol to keep human-input behavior consistent across methods within each benchmark, but
+  broader multi-operator evaluation remains an important direction for future work.</p>
+  <p>For safety and consistency in all trials, the maximum teleoperation speed was limited to approximately
+  0.2&nbsp;m/s. This speed limit helped prevent abrupt robot motions while still allowing the operator to make
+  meaningful corrections during shared-autonomy rollouts.</p>
+</section>
+
+<section id="a4">
+  <div class="sec-head"><p class="sec-num">Appendix A4</p><h2>Distance-Based Perturbation Task Setup for LIBERO</h2></div>
+  <p>We perturb the distance of the cream cheese object from the original location in the LIBERO-10 task, which we
+  illustrate in Figure&nbsp;A1. We find that while the base policy decreases in performance, our shared autonomy method
+  can retain performance across different distances for task perturbations. The exact changes in position are listed in
+  Table&nbsp;A1.</p>
+  <p>Figure&nbsp;A1 visualizes the controlled LIBERO object-displacement evaluation used in our distance-based
+  perturbation study. Starting from the original cream-cheese placement, we shift the target object to multiple new
+  positions while keeping the same task instruction and scene setup. These perturbations are designed to isolate spatial
+  generalization failures by changing object position without changing the manipulation objective.</p>
+
+  <figure>
+    <a class="fig-frame" href="figures/self_perturb_a.webp" target="_blank" rel="noopener">
+      <img src="figures/self_perturb_a.webp" width="2000" height="1294" loading="lazy" alt="LIBERO scenes showing the cream cheese object displaced to a range of positions away from its original placement.">
+    </a>
+    <figcaption><span class="lbl">Figure A1</span>LIBERO task setups for positional perturbations of the cream cheese
+    object with varying distances from the original position.
+    <span class="src"><a href="pdf/self_perturb_a.pdf">Vector PDF ↓</a></span></figcaption>
+  </figure>
+
+  <p>Table&nbsp;A1 reports the exact displacement values used for each perturbation. The perturbations span both
+  axis-aligned and diagonal shifts, allowing us to evaluate whether policy performance degrades smoothly as the object
+  moves farther from the original training-distribution location. Together, Figure&nbsp;A1 and Table&nbsp;A1 define the
+  controlled spatial OOD setting used for the LIBERO results in the main paper.</p>
+
+  <div class="tbl">
+    <p class="tbl-cap"><span class="lbl">Table A1</span>Distance (m) perturbations of LIBERO evaluations of target
+    object: cream cheese.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Quantity</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th></tr></thead>
+      <tbody>
+        <tr><td>|Distance|</td><td>0.08</td><td>0.13</td><td>0.18</td><td>0.18</td><td>0.20</td><td>0.20</td><td>0.23</td><td>0.26</td><td>0.29</td></tr>
+        <tr><td>|dX|</td><td>0.00</td><td>0.10</td><td>0.00</td><td>0.18</td><td>0.13</td><td>0.05</td><td>0.06</td><td>0.20</td><td>0.08</td></tr>
+        <tr><td>|dY|</td><td>0.08</td><td>0.08</td><td>0.18</td><td>0.05</td><td>0.15</td><td>0.23</td><td>0.23</td><td>0.16</td><td>0.28</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <figure>
+    <a class="fig-frame" href="figures/LIBERO.webp" target="_blank" rel="noopener">
+      <img src="figures/LIBERO.webp" width="1609" height="350" loading="lazy" alt="Frame sequence showing successful LIBERO task completion under cream cheese perturbations.">
+    </a>
+    <figcaption><span class="lbl">Figure A2</span>LIBERO task progress for successful task completion on cream cheese
+    perturbations.
+    <span class="src"><a href="pdf/LIBERO.pdf">Vector PDF ↓</a></span></figcaption>
+  </figure>
+</section>
+
+<section id="a5">
+  <div class="sec-head"><p class="sec-num">Appendix A5</p><h2>Perturbation Task Setup for LIBERO-PRO</h2></div>
+  <p>Table&nbsp;A2 summarizes the 10 LIBERO-PRO <a class="cite" href="#r5">[5]</a> perturbation tasks used in our evaluation. The selected tasks include
+  <i>task</i> perturbations, which change the language-conditioned goal or target object, and <i>swap</i> perturbations,
+  which alter the spatial arrangement of relevant objects in the scene. These settings test whether the policy can
+  maintain correct task grounding when object identity, target placement, or task specification become OOD.</p>
+  <p>We select these tasks to cover a range of manipulation behaviors, including pick-and-place, mug rearrangement,
+  articulated-object interaction, and object substitution. This task set therefore evaluates whether shared autonomy can
+  recover failures that arise not only from spatial displacement, but also from incorrect object binding and task-level
+  confusion.</p>
+
+  <div class="tbl">
+    <p class="tbl-cap"><span class="lbl">Table A2</span>LIBERO task specifications used for the original and perturbed
+    task variants.</p>
+    <div class="scroll"><table class="wrap-tbl">
+      <thead><tr><th class="task">Task Name</th><th class="task">Task Specification</th><th>Original Task</th><th>Perturbed Task</th></tr></thead>
+      <tbody>
+        <tr><td class="task">task_soup_butter</td><td class="task">libero_10_task_6</td><td>Place the cream cheese and butter on plate</td><td>Replace the cream cheese with soup</td></tr>
+        <tr><td class="task">swap_soup_cheese</td><td class="task">libero_10_swap_4</td><td>Place the soup and cream cheese on plate</td><td>Swap the target locations of the soup and cream cheese</td></tr>
+        <tr><td class="task">swap_cheese_butter</td><td class="task">libero_10_task_6</td><td>Place the cream cheese and butter on plate</td><td>Replace the cream cheese with soup</td></tr>
+        <tr><td class="task">task_mugs</td><td class="task">libero_10_task_7</td><td>Place the white mug on the left plate and the yellow mug on the right plate</td><td>Put the white mug on the right plate and the yellow mug on the left plate</td></tr>
+        <tr><td class="task">swap_mugs</td><td class="task">libero_10_swap_7</td><td>Place the white mug on the left plate and the yellow mug on the right plate</td><td>Swap the position of the yellow mug</td></tr>
+        <tr><td class="task">task_choc</td><td class="task">libero_object_task_7</td><td>Place the orange juice in the basket</td><td>Replace the orange juice with chocolate</td></tr>
+        <tr><td class="task">swap_juice</td><td class="task">libero_object_swap_7</td><td>Place the orange juice in the basket</td><td>Swap the orange juice target placement</td></tr>
+        <tr><td class="task">task_bowl</td><td class="task">libero_spatial_task_6</td><td>Place the bowl on the box on the plate</td><td>Place the bowl on the cabinet on the plate</td></tr>
+        <tr><td class="task">swap_bowl</td><td class="task">libero_spatial_swap_6</td><td>Place the bowl on the box on the plate</td><td>Swap the bowl target placement</td></tr>
+        <tr><td class="task">task_drwr_cheese</td><td class="task">libero_goal_task_1</td><td>Open the drawer and place the bowl in the drawer</td><td>Open the drawer and place the cream cheese in the drawer</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <figure>
+    <a class="fig-frame" href="figures/LIBERO-PRO.webp" target="_blank" rel="noopener">
+      <img src="figures/LIBERO-PRO.webp" width="2000" height="1396" loading="lazy" alt="Qualitative LIBERO-PRO rollouts for pick and place, mug manipulation, and drawer manipulation.">
+    </a>
+    <figcaption><span class="lbl">Figure A3</span>Qualitative task progression for pick and place, mug manipulation, and
+    drawer manipulation in LIBERO-PRO.
+    <span class="src"><a href="pdf/LIBERO-PRO.pdf">Vector PDF ↓</a></span></figcaption>
+  </figure>
+</section>
+
+<section id="a6">
+  <div class="sec-head"><p class="sec-num">Appendix A6</p><h2>Additional Metrics for LIBERO-PRO</h2></div>
+  <p>Figure&nbsp;A6 shows the tradeoff between human intervention rate and completion time across LIBERO-PRO tasks. Pure
+  Teleoperation requires 100% human intervention and often produces longer completion times, while
+  <span class="pi">π<sub>0.5</sub></span> requires no human input but can still take longer due to incorrect or
+  inefficient autonomous behavior. In contrast, the shared-autonomy methods occupy the upper-left region of the plot,
+  indicating that they reduce completion time while requiring only partial human input. Blending and Takeover generally
+  require the least intervention, while Cosine uses more corrective input but remains far below full teleoperation.</p>
+  <p>Figure&nbsp;A7 summarizes the same trend using method-level averages. All <span class="saps">SAPS</span> variants
+  achieve substantially lower completion times than Teleoperation while requiring much less human control. These results
+  further support that shared autonomy provides a practical balance between autonomous policy execution and human
+  correction, improving task efficiency without reverting to continuous manual operation.</p>
+
+  <div class="tbl">
+    <p class="tbl-cap"><span class="lbl">Table A3</span>LIBERO-PRO task success rates (%) (<i>n</i> = 25). Cosine
+    arbitration achieves the highest shared-autonomy mean success rate across the 10 out-of-distribution tasks. Across
+    the 10 tasks, all shared-autonomy methods significantly improved success rate over
+    <span class="pi">π<sub>0.5</sub></span> using a one-sided Wilcoxon signed-rank test:
+    <i>p</i> = 9.77 × 10<sup>−4</sup>.</p>
+    <div class="scroll"><table>
+      <thead><tr><th class="task">Task</th><th><span class="pi">π<sub>0.5</sub></span></th><th>Blending</th><th>Cosine</th><th>Takeover</th><th>Teleoperation</th></tr></thead>
+      <tbody>
+        <tr><td class="task">task_soup_butter</td><td>34</td><td>96</td><td>96</td><td class="best">100</td><td class="best">100</td></tr>
+        <tr><td class="task">swap_soup_cheese</td><td>0</td><td>90</td><td class="best">98</td><td>84</td><td>94</td></tr>
+        <tr><td class="task">swap_cheese_butter</td><td>32</td><td>88</td><td class="best">96</td><td>94</td><td>94</td></tr>
+        <tr><td class="task">task_mugs</td><td>0</td><td>90</td><td class="best">100</td><td>88</td><td class="best">100</td></tr>
+        <tr><td class="task">swap_mugs</td><td>10</td><td>88</td><td>94</td><td>92</td><td class="best">100</td></tr>
+        <tr><td class="task">task_choco</td><td>26</td><td class="best">100</td><td>94</td><td>94</td><td class="best">100</td></tr>
+        <tr><td class="task">swap_juice</td><td>16</td><td>94</td><td class="best">100</td><td>92</td><td class="best">100</td></tr>
+        <tr><td class="task">task_bowl</td><td>6</td><td>96</td><td class="best">100</td><td>96</td><td class="best">100</td></tr>
+        <tr><td class="task">swap_bowl</td><td>4</td><td>92</td><td>98</td><td class="best">100</td><td class="best">100</td></tr>
+        <tr><td class="task">task_drwr_cheese</td><td>22</td><td>92</td><td>98</td><td>92</td><td class="best">100</td></tr>
+        <tr class="mean"><td>Mean</td><td>15.0</td><td>92.6</td><td>97.4</td><td>93.2</td><td>98.8</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <figure class="fig-narrow">
+    <a class="fig-frame" href="figures/fig_4_means.webp" target="_blank" rel="noopener">
+      <img src="figures/fig_4_means.webp" width="884" height="623" loading="lazy" alt="Scatter plot of mean human intervention rate against mean success rate for each method on LIBERO-PRO.">
+    </a>
+    <figcaption><span class="lbl">Figure A4</span>Mean rate of human intervention compared to success rate across all
+    tasks for each method in LIBERO-PRO evaluations.
+    <span class="src"><a href="pdf/fig_4_means.pdf">Vector PDF ↓</a></span></figcaption>
+  </figure>
+
+  <div class="tbl">
+    <p class="tbl-cap"><span class="lbl">Table A4</span>Human intervention rate across LIBERO-PRO tasks for each
+    shared-autonomy method. Values report mean ± standard error across evaluation episodes (<i>n</i> = 25). All
+    shared-autonomy methods require substantially less human intervention than pure Teleoperation, which corresponds to
+    100% intervention for every task. Intervention rate is reported as the percentage of control timesteps with active
+    human input. Cosine: cosine-similarity arbitration; Blending: fixed blending arbitration; Takeover: full human
+    control during intervention. Teleoperation is omitted from the table because it requires human input throughout the
+    rollout, corresponding to 100% intervention for all tasks.</p>
+    <div class="scroll"><table>
+      <thead><tr><th class="task">Task</th><th>Cosine</th><th>Blending</th><th>Takeover</th></tr></thead>
+      <tbody>
+        <tr><td class="task">task_soup_butter</td><td>28.1 ± 8.8</td><td>6.0 ± 2.9</td><td>7.6 ± 2.7</td></tr>
+        <tr><td class="task">swap_soup_cheese</td><td>19.7 ± 5.4</td><td>9.3 ± 1.9</td><td>10.7 ± 3.7</td></tr>
+        <tr><td class="task">swap_cheese_butter</td><td>28.3 ± 8.5</td><td>4.8 ± 1.3</td><td>4.7 ± 2.0</td></tr>
+        <tr><td class="task">task_mugs</td><td>32.1 ± 5.8</td><td>19.2 ± 4.1</td><td>19.0 ± 4.1</td></tr>
+        <tr><td class="task">swap_mugs</td><td>28.8 ± 9.8</td><td>7.3 ± 3.0</td><td>10.7 ± 3.6</td></tr>
+        <tr><td class="task">task_choco</td><td>26.6 ± 9.7</td><td>16.0 ± 3.4</td><td>15.7 ± 4.5</td></tr>
+        <tr><td class="task">swap_juice</td><td>26.7 ± 12.7</td><td>10.5 ± 3.0</td><td>15.7 ± 3.6</td></tr>
+        <tr><td class="task">task_bowl</td><td>35.4 ± 9.8</td><td>17.1 ± 7.1</td><td>16.4 ± 10.1</td></tr>
+        <tr><td class="task">swap_bowl</td><td>44.7 ± 12.6</td><td>14.1 ± 4.8</td><td>11.5 ± 5.5</td></tr>
+        <tr><td class="task">task_drwr_cheese</td><td>29.7 ± 11.4</td><td>4.1 ± 1.6</td><td>5.3 ± 4.6</td></tr>
+        <tr class="mean"><td>Mean</td><td>30.0</td><td>10.8</td><td>11.7</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <figure>
+    <a class="fig-frame" href="figures/trajectory_length.webp" target="_blank" rel="noopener">
+      <img src="figures/trajectory_length.webp" width="2000" height="816" loading="lazy" alt="Bar chart of end-effector path length across all methods and LIBERO-PRO tasks.">
+    </a>
+    <figcaption><span class="lbl">Figure A5</span>End-effector path length across all methods and tasks tested in
+    LIBERO-PRO.
+    <span class="src"><a href="pdf/trajectory_length.pdf">Vector PDF ↓</a></span></figcaption>
+  </figure>
+
+  <figure class="fig-narrow">
+    <a class="fig-frame" href="figures/completion_time_vs_intervention.webp" target="_blank" rel="noopener">
+      <img src="figures/completion_time_vs_intervention.webp" width="1342" height="942" loading="lazy" alt="Completion time plotted against human intervention rate for all methods and LIBERO-PRO tasks.">
+    </a>
+    <figcaption><span class="lbl">Figure A6</span>Completion time vs. human intervention rates across all methods and
+    tasks in LIBERO-PRO.
+    <span class="src"><a href="pdf/completion_time_vs_intervention.pdf">Vector PDF ↓</a></span></figcaption>
+  </figure>
+
+  <figure class="fig-narrow">
+    <a class="fig-frame" href="figures/mean_completion_time_vs_intervention.webp" target="_blank" rel="noopener">
+      <img src="figures/mean_completion_time_vs_intervention.webp" width="1342" height="939" loading="lazy" alt="Mean completion time plotted against mean human intervention rate for all methods in LIBERO-PRO.">
+    </a>
+    <figcaption><span class="lbl">Figure A7</span>Completion time vs. human intervention rate means across all methods
+    and tasks in LIBERO-PRO.
+    <span class="src"><a href="pdf/mean_completion_time_vs_intervention.pdf">Vector PDF ↓</a></span></figcaption>
+  </figure>
+</section>
+
+<section id="a7">
+  <div class="sec-head"><p class="sec-num">Appendix A7</p><h2>Additional Details and Metrics for CALVIN</h2></div>
+  <p>The unguided DP base policy executes autonomously with no human input. ITPS <a class="cite" href="#r4">[4]</a>
+  performs shared autonomy by injecting a human-specified position-target gradient into the policy's diffusion sampling
+  at every denoising step. DynaGuide <a class="cite" href="#r3">[3]</a> steers the policy autonomously, using a
+  separately trained dynamics model and a classifier to bias diffusion sampling toward desired future states. Our method
+  requires neither a modification to the diffusion sampler nor an auxiliary model: at each timestep it forms the
+  executed action as a convex combination of the human's commanded action and the policy's action, with the blending
+  weight set by the cosine similarity between the two, deferring to the policy when human and policy agree, and to the
+  human when they diverge.</p>
+  <p>Despite this simplicity, cosine-similarity shared autonomy outperforms both more complex methods on every one of
+  the 11 CALVIN subtasks. The figure below reports per-task success rate. Cosine arbitration succeeds on 100% of
+  episodes for all eight articulated subtasks and 70–90% for the three block-lift subtasks, averaging 93% across the
+  suite. The two prior methods trail substantially, DynaGuide at 80% and ITPS at 66%, and the autonomous base policy
+  reaches only 45%. The gap is widest on the block-lift subtasks, where the base policy and ITPS both fall below 50%
+  while Cosine arbitration still completes a clear majority of episodes. Notably, ITPS and our method involve human
+  intervention at comparable rates (roughly 75–85% of timesteps), so the advantage of Cosine arbitration over ITPS
+  isolates the arbitration mechanism itself rather than the mere presence of a human operator.</p>
+
+  <figure>
+    <a class="fig-frame" href="figures/plot_success_rate.webp" target="_blank" rel="noopener">
+      <img src="figures/plot_success_rate.webp" width="2000" height="547" loading="lazy" alt="Per-task success rate for DP, ITPS, DynaGuide, and Cosine arbitration across 11 CALVIN subtasks.">
+    </a>
+    <figcaption><span class="lbl">Main paper</span>Per-task success rate across the four methods on 11 CALVIN subtasks.
+    Reproduced here from the main paper for reference, as the appendix text below refers to it.
+    <span class="src"><a href="pdf/plot_success_rate.pdf">Vector PDF ↓</a></span></figcaption>
+  </figure>
+
+  <p>Figure&nbsp;A8 reports the end-effector path length per episode. Cosine arbitration produces the most direct
+  motions on nearly every subtask, while the autonomous base policy travels 2–3× farther for the same subtask, showing
+  undirected exploratory motion that the human's coarse directional input efficiently suppresses under Cosine
+  arbitration.</p>
+  <p>Figure&nbsp;A9 reports the mean time to complete each subtask, counting a failed episode as the full 400-step
+  horizon so that the metric reflects an expected time-to-finish rather than rewarding methods for discarding their
+  failures. Cosine arbitration and DynaGuide finish the articulated task fastest, typically well under 200 steps,
+  whereas the base policy and ITPS are repeatedly dragged toward the 400-step cap by their failures.</p>
+  <p>Figure&nbsp;A10 shows a lower intervention rate for ITPS compared to Cosine; however, ITPS has a much lower success
+  rate, higher completion time (Figure&nbsp;A9), and higher end-effector path length (Figure&nbsp;A8).</p>
+  <p>Figure&nbsp;A11 illustrates these differences qualitatively on <code>button_off</code>. From an identical initial
+  state, the base policy and ITPS fail to press the button and run out the full 400-step horizon, whereas DynaGuide and
+  Cosine arbitration reach and press the button in well under 100 steps. Figure&nbsp;A12 and Figure&nbsp;A13 show
+  examples of successes and failures for CALVIN subtasks.</p>
+
+  <figure>
+    <a class="fig-frame" href="figures/plot_ee_path.webp" target="_blank" rel="noopener">
+      <img src="figures/plot_ee_path.webp" width="2000" height="732" loading="lazy" alt="Mean end-effector path length per episode across four methods on 11 CALVIN subtasks.">
+    </a>
+    <figcaption><span class="lbl">Figure A8</span>Mean end-effector path length (3-D arc length travelled per episode,
+    in meters) across the four methods on 11 CALVIN subtasks (<i>n</i> = 10 episodes per task; error bars: standard
+    error of the mean). Cosine-similarity shared autonomy produces the most direct motions, consistently the shortest EE
+    paths, while the autonomous baseline (DP) wanders most, often travelling 2–3× farther for the same task.
+    <span class="src"><a href="pdf/plot_ee_path.pdf">Vector PDF ↓</a></span></figcaption>
+  </figure>
+
+  <figure>
+    <a class="fig-frame" href="figures/plot_completion_time.webp" target="_blank" rel="noopener">
+      <img src="figures/plot_completion_time.webp" width="2000" height="731" loading="lazy" alt="Mean subtask completion time in environment timesteps across four methods on 11 CALVIN subtasks.">
+    </a>
+    <figcaption><span class="lbl">Figure A9</span>Mean subtask-completion time, in environment timesteps, across the
+    four methods on 11 CALVIN tasks (<i>n</i> = 10 episodes per subtask; error bars: standard error of the mean). Each
+    episode contributes the timestep at which the subtask's success criterion is first met, or the full 400-step horizon
+    if the episode failed — an expected time-to-finish that penalises low-success methods rather than discarding their
+    failures. Cosine-similarity shared autonomy and DynaGuide complete the articulated subtasks fastest, while the
+    autonomous baseline (DP), failing far more often, is dragged toward the 400-step cap.
+    <span class="src"><a href="pdf/plot_completion_time.pdf">Vector PDF ↓</a></span></figcaption>
+  </figure>
+
+  <figure>
+    <a class="fig-frame" href="figures/plot_intervention.webp" target="_blank" rel="noopener">
+      <img src="figures/plot_intervention.webp" width="2000" height="730" loading="lazy" alt="Mean human intervention rate for ITPS and Cosine across 11 CALVIN subtasks.">
+    </a>
+    <figcaption><span class="lbl">Figure A10</span>Mean human intervention rate across the two shared-autonomy methods
+    on 11 CALVIN tasks (<i>n</i> = 10 episodes per subtask), measured as the fraction of control timesteps with active
+    human input. DP and DynaGuide are omitted (0%, because there is no human in the loop). ITPS and Cosine differ by
+    only 4.3 percentage points on average (75.5% vs. 79.8%), so the success-rate advantage of Cosine over ITPS isolates
+    the arbitration mechanism rather than the presence of a human operator.
+    <span class="src"><a href="pdf/plot_intervention.pdf">Vector PDF ↓</a></span></figcaption>
+  </figure>
+
+  <figure>
+    <a class="fig-frame" href="figures/figure_button_off.webp" target="_blank" rel="noopener">
+      <img src="figures/figure_button_off.webp" width="2000" height="1634" loading="lazy" alt="Qualitative rollout frames for DP, ITPS, DynaGuide, and Cosine on the button_off CALVIN subtask.">
+    </a>
+    <figcaption><span class="lbl">Figure A11</span>Qualitative rollout comparison on the <code>button_off</code> subtask
+    for CALVIN with DP. Each row is one method (DP, ITPS, DynaGuide, Cosine); the four columns are evenly-spaced frames
+    from rollout 5, viewed from a fixed camera. All four rollouts begin from the same initial state (<i>t</i> = 0).
+    Because each episode ends at success or at the 400-step timeout, the rollouts span very different durations, so
+    every frame is labeled with the environment timestep at which it is taken: DP and ITPS fail and run the full 400
+    steps without pressing the button, whereas DynaGuide and Cosine reach the button and complete the task in well under
+    200 steps.
+    <span class="src"><a href="pdf/figure_button_off.pdf">Vector PDF ↓</a></span></figcaption>
+  </figure>
+
+  <figure>
+    <a class="fig-frame" href="figures/calvin_task_successes.webp" target="_blank" rel="noopener">
+      <img src="figures/calvin_task_successes.webp" width="2000" height="1631" loading="lazy" alt="Successful CALVIN rollouts across subtasks with Cosine arbitration guiding the diffusion policy.">
+    </a>
+    <figcaption><span class="lbl">Figure A12</span>Qualitative rollout comparison for different subtasks in CALVIN.
+    Shown with just Cosine guiding the DP policy.
+    <span class="src"><a href="pdf/calvin_task_successes.pdf">Vector PDF ↓</a></span></figcaption>
+  </figure>
+
+  <figure>
+    <a class="fig-frame" href="figures/calvin_task_failures.webp" target="_blank" rel="noopener">
+      <img src="figures/calvin_task_failures.webp" width="2000" height="1631" loading="lazy" alt="Failed CALVIN rollouts across subtasks with the unguided diffusion policy.">
+    </a>
+    <figcaption><span class="lbl">Figure A13</span>Qualitative rollout comparison for different subtasks in CALVIN.
+    Shown with only the DP policy. Failures occur due to performing the wrong subtask (seen when performing the Door
+    Right task), or due to stalling when out-of-distribution.
+    <span class="src"><a href="pdf/calvin_task_failures.pdf">Vector PDF ↓</a></span></figcaption>
+  </figure>
+</section>
+
+<section id="a8">
+  <div class="sec-head"><p class="sec-num">Appendix A8</p><h2>Additional Metrics for Real World</h2></div>
+  <p>During each real-world hardware rollout, we track the human activation rate to evaluate whether the shared-autonomy
+  behaviors observed in simulation transfer to physical robot execution. Human activation is defined as the percentage
+  of control timesteps in which the operator provides input above the activity threshold. Pure Teleoperation requires
+  human input throughout the entire rollout, corresponding to 100% intervention. In contrast, Cosine arbitration uses
+  63.9% intervention on Marker Plate, 54.6% on Close Drawer, and 68.7% on Open Cabinet, while Blending uses 53.9%,
+  48.5%, and 66.7% intervention on the same tasks. Both shared-autonomy methods significantly reduce human intervention
+  relative to Teleoperation across all three hardware tasks using pairwise Mann–Whitney <i>U</i> tests, with
+  <i>p</i> &lt; 10<sup>−15</sup> for all comparisons. These results show that <span class="saps">SAPS</span> transfers
+  to real-world manipulation without reverting to continuous manual control. Instead, shared autonomy enables the
+  operator to provide partial corrective input while <span class="pi">π<sub>0.5</sub></span> continues to contribute
+  learned manipulation behavior during physical robot execution.</p>
+  <p>The success-rate table below reports real-world task success rates across the three hardware tasks. Table&nbsp;A5
+  reports the corresponding human intervention rates and shows that the operator provides partial corrections while
+  <span class="pi">π<sub>0.5</sub></span> continues to contribute learned manipulation behavior.</p>
+  <p>Figure&nbsp;A14 reports completion time across the hardware tasks. Both Cosine and Blending reduce completion time
+  relative to autonomous <span class="pi">π<sub>0.5</sub></span>, indicating that shared autonomy helps avoid
+  inefficient autonomous recovery behavior. Figure&nbsp;A15 qualitatively shows successful executions of the three
+  real-world tasks.</p>
+
+  <div class="tbl">
+    <p class="tbl-cap"><span class="lbl">Table</span>Hardware evaluation (<i>n</i> = 20 episodes/task) by task success
+    rate.</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Task</th><th><span class="pi">π<sub>0.5</sub></span></th><th>Teleoperation</th><th>Blending</th><th>Cosine</th></tr></thead>
+      <tbody>
+        <tr><td>Pick and Place</td><td>50%</td><td class="best">100%</td><td class="best">100%</td><td class="best">100%</td></tr>
+        <tr><td>Close the Drawer</td><td>25%</td><td class="best">100%</td><td>80%</td><td class="best">100%</td></tr>
+        <tr><td>Open the Left Cabinet</td><td>5%</td><td class="best">100%</td><td class="best">100%</td><td>95%</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="tbl">
+    <p class="tbl-cap"><span class="lbl">Table A5</span>Hardware evaluation of mean human intervention (± std. err.)
+    across shared-autonomy methods (<i>n</i> = 20), with pairwise <i>p</i>-values comparing human intervention rates for
+    Cosine and Blending shared autonomy against Teleoperation. Across Marker Plate, Close Drawer, and Open Cabinet, both
+    shared-autonomy methods significantly reduce intervention relative to Teleoperation
+    (<i>p</i> &lt; 10<sup>−15</sup> for all comparisons).</p>
+    <div class="scroll"><table>
+      <thead><tr><th>Task</th><th>Teleoperation</th><th>Blending</th><th>Cosine</th></tr></thead>
+      <tbody>
+        <tr><td>Marker Plate</td><td>100 ± 0</td><td>53.9 ± 19.7</td><td>63.9 ± 16.6</td></tr>
+        <tr><td>Close Drawer</td><td>100 ± 0</td><td>48.5 ± 12.7</td><td>54.6 ± 24.0</td></tr>
+        <tr><td>Open Cabinet</td><td>100 ± 0</td><td>66.7 ± 13.6</td><td>68.7 ± 14.5</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <figure class="fig-narrow">
+    <a class="fig-frame" href="figures/completion_time_both_tasks.webp" target="_blank" rel="noopener">
+      <img src="figures/completion_time_both_tasks.webp" width="2000" height="1600" loading="lazy" alt="Mean completion time per hardware task across shared autonomy methods.">
+    </a>
+    <figcaption><span class="lbl">Figure A14</span>Mean completion time (± std. err.) per task across shared-autonomy
+    methods (<i>n</i> = 20 episodes/task), with pairwise <i>p</i>-values for hardware completion-time comparisons.
+    Cosine and Blending significantly reduce completion time relative to <span class="pi">π<sub>0.5</sub></span>
+    execution on all tasks (<i>p</i> ≤ 0.0212). Relative to Teleoperation, both methods are significantly different only
+    on Marker Plate (Cosine: <i>p</i> = 0.0002; Blending: <i>p</i> = 0.0005), with no significant differences on Close
+    Drawer or Open Cabinet.
+    <span class="src"><a href="pdf/completion_time_both_tasks.pdf">Vector PDF ↓</a></span></figcaption>
+  </figure>
+
+  <figure>
+    <a class="fig-frame" href="figures/hardware_success_photos.webp" target="_blank" rel="noopener">
+      <img src="figures/hardware_success_photos.webp" width="1500" height="1200" loading="lazy" alt="Photographs of the real robot successfully completing the marker plate, drawer, and cabinet tasks.">
+    </a>
+    <figcaption><span class="lbl">Figure A15</span>Real-world task progression for successful completion.
+    <span class="src"><a href="pdf/hardware_success_photos.pdf">Vector PDF ↓</a></span></figcaption>
+  </figure>
+</section>
+
+<section id="a9">
+  <div class="sec-head"><p class="sec-num">Appendix A9</p><h2>Frequently Asked Questions</h2></div>
+  <h3>Were other confidence-based methods tested for dynamically changing the <i>α</i> term?</h3>
+  <p>We also ran preliminary tests basing uncertainty on token entropy <a class="cite" href="#r6">[6]</a>, but found the
+  <span class="pi">π<sub>0.5</sub></span> policy to be generally overfit and thus too confident while generating
+  trajectories for the wrong task, not allowing the user to take over to push the end effector in the correct direction
+  to fix the performance of the task. Furthermore, unlike <span class="pi">π<sub>0</sub></span>-FAST, where action
+  uncertainty can be estimated directly from the entropy of autoregressively predicted FAST action tokens,
+  <span class="pi">π<sub>0.5</sub></span> uses a hybrid architecture in which the final low-level action chunk is
+  generated by a continuous flow-matching action expert. Thus, token entropy is naturally available for textual or
+  subtask predictions, and potentially for FAST-tokenized auxiliary outputs, but it is not a direct uncertainty measure
+  for the deployed continuous action distribution.</p>
+</section>
+
+<section id="refs">
+  <div class="sec-head"><p class="sec-num">References</p><h2>Works Cited in This Appendix</h2></div>
+  <ol class="refs">
+    <li id="r1">K. Black, N. Brown, J. Darpinian, et al. <b>π<sub>0.5</sub>: A Vision-Language-Action Model with
+      Open-World Generalization.</b> <i>Proceedings of the 9th Conference on Robot Learning</i>, PMLR 305:17–40, 2025.
+      <a href="https://proceedings.mlr.press/v305/black25a.html" target="_blank" rel="noopener">Link</a></li>
+    <li id="r2">C. Yu, Y. Wang, Z. Guo, et al. <b>RLinf: Flexible and Efficient Large-scale Reinforcement Learning via
+      Macro-to-Micro Flow Transformation.</b> arXiv:2509.15965, 2025.
+      <a href="https://arxiv.org/abs/2509.15965" target="_blank" rel="noopener">Link</a></li>
+    <li id="r3">M. Du and S. Song. <b>DynaGuide: Steering Diffusion Policies with Active Dynamic Guidance.</b>
+      <i>Proceedings of the 39th Conference on Neural Information Processing Systems (NeurIPS)</i>, 2025.</li>
+    <li id="r4">Y. Wang, L. Wang, Y. Du, et al. <b>Inference-Time Policy Steering through Human Interactions.</b>
+      <i>IEEE International Conference on Robotics and Automation</i>, 2025.
+      <a href="https://arxiv.org/abs/2411.16627" target="_blank" rel="noopener">Link</a></li>
+    <li id="r5">X. Zhou, Y. Xu, G. Tie, et al. <b>LIBERO-PRO: Towards Robust and Fair Evaluation of Vision-Language-Action
+      Models Beyond Memorization.</b> arXiv:2510.03827, 2025.
+      <a href="https://arxiv.org/abs/2510.03827" target="_blank" rel="noopener">Link</a></li>
+    <li id="r6">U. B. Karli, Z. Shangguan, and T. Fitzgerald. <b>INSIGHT: INference-time Sequence Introspection for
+      Generating Help Triggers in Vision-Language-Action Models.</b> arXiv:2510.01389, 2025.
+      <a href="https://arxiv.org/abs/2510.01389" target="_blank" rel="noopener">Link</a></li>
+  </ol>
+</section>
+
+<footer>
+  Anonymous supplementary appendix · prepared for double-blind review · not indexed
+  <a class="top-link" href="#top">↑ Top</a>
+</footer>
+
+</div><!-- /main -->
+</div><!-- /shell -->
+
+<script>
+(function(){
+  var btn = document.getElementById('theme');
+  var stored = null;
+  try { stored = localStorage.getItem('saps-theme'); } catch(e){}
+  if (stored) document.documentElement.setAttribute('data-theme', stored);
+  btn.addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme');
+    if (!cur) cur = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var next = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('saps-theme', next); } catch(e){}
+  });
+
+  var links = Array.prototype.slice.call(document.querySelectorAll('#toclist a'));
+  var secs = links.map(function(a){ return document.getElementById(a.getAttribute('href').slice(1)); })
+                  .filter(Boolean);
+  if ('IntersectionObserver' in window && secs.length) {
+    var seen = {};
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ seen[e.target.id] = e.isIntersecting; });
+      var activeId = null;
+      for (var i = 0; i < secs.length; i++) {
+        if (seen[secs[i].id]) { activeId = secs[i].id; break; }
+      }
+      links.forEach(function(a){
+        a.classList.toggle('on', activeId && a.getAttribute('href') === '#' + activeId);
+      });
+    }, { rootMargin: '-78px 0px -65% 0px', threshold: 0 });
+    secs.forEach(function(s){ io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
