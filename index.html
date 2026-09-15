@@ -221,13 +221,9 @@
           manipulator controlled through an operational-space pose controller. Observations include RGB images from a
           third-person agent-view camera and an eye-in-hand wrist camera, together with end-effector pose and gripper
           state. Actions are represented as 7-DOF commands consisting of 3D translation, 3D orientation, and gripper
-          actuation. The environment operates at 20 Hz. Human teleoperation was provided through either keyboard or
-          gamepad input, depending on the arbitration method and evaluation setting. Cosine used a gamepad controller
-          for all simulation and hardware evaluations, as the continuous joystick input provided smoother directional
-          commands for agreement-based arbitration. In simulation, Blending and Takeover were evaluated with keyboard
-          input, where operator commands were used as corrective interventions. For the real-world hardware experiments,
-          the Blending interface was transferred to the gamepad to provide smoother control during physical robot
-          execution.</p>
+          actuation. The environment operates at 20 Hz. Human teleoperation was provided through gamepad input for all
+          arbitration methods across both simulation and hardware evaluations, as the continuous joystick input
+          provides smooth directional commands for corrective intervention.</p>
           <p>The LIBERO, LIBERO-PRO and real-world evaluations used the <span class="pi">&pi;<sub>0.5</sub></span> model
           checkpoints released by Black et al. [<a href="#r1">1</a>], trained on either the LIBERO or DROID dataset.
           CALVIN used a <span class="pi">&pi;<sub>0.5</sub></span> model checkpoint released by RLinf
@@ -235,17 +231,14 @@
           [<a href="#r3">3</a>].</p>
 
           <h3 class="title is-5">Human in the loop</h3>
-          <p>Two operators performed the teleoperation evaluations, including one operator with no prior experience in
-          teleoperating robots. Neither operator required training before using the gamepad or keyboard interface,
-          suggesting that the human-in-the-loop setup can be used with little to no prior experience in robot control.
-          In practice, both gamepad and keyboard interfaces were intuitive enough for operators to provide corrective
-          input during task execution.</p>
+          <p>Two experienced operators performed the teleoperation evaluations, both familiar with gamepad-based robot
+          teleoperation prior to the study. The gamepad interface allowed operators to provide responsive corrective
+          input throughout task execution.</p>
           <p>Across each benchmark, the same operator was used for all human-in-the-loop methods in that benchmark,
           including Teleoperation and all SAPS variants, so comparisons within a benchmark are not confounded by
           changing operators across methods. Results are therefore not averaged across multiple operators; each
           benchmark reports repeated trials from the corresponding single operator. LIBERO, LIBERO-PRO, and real-world
-          evaluations used the same operator without prior robot control experience, while CALVIN used an operator with
-          prior robot arm control experience. We chose this protocol to keep human-input behavior consistent across
+          evaluations used one operator, while CALVIN used the other. We chose this protocol to keep human-input behavior consistent across
           methods within each benchmark, but broader multi-operator evaluation remains an important direction for future
           work.</p>
           <p>For safety and consistency in all trials, the maximum teleoperation speed was limited to approximately
