@@ -316,6 +316,58 @@
             consistent with targeted correction rather than an operator progressively assuming control.
           </p>
 
+          <p>
+            Those three measures combine into one. Multiplying completion time by intervention rate gives the
+            seconds the operator was actually driving; dividing by success rate charges the failures too. What
+            comes out is the operator input a completed task actually costs.
+          </p>
+
+          <figure class="paper-figure">
+            <svg viewBox="0 0 720 212" width="100%" role="img" aria-labelledby="ocT ocD" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans',system-ui,sans-serif">
+            <title id="ocT">Operator input per completed task on LIBERO-PRO</title>
+            <desc id="ocD">A completed task costs 46.6 seconds of operator input under teleoperation and 4.0 seconds under Cosine arbitration. The autonomous policy takes no operator time but succeeds 6.5 times less often.</desc>
+            <line x1="170.0" y1="44" x2="170.0" y2="162" stroke="#ececec" stroke-width="1"/>
+            <text x="170.0" y="178" font-size="11" text-anchor="middle" fill="#6a6a6a">0</text>
+            <line x1="262.8" y1="44" x2="262.8" y2="162" stroke="#ececec" stroke-width="1"/>
+            <text x="262.8" y="178" font-size="11" text-anchor="middle" fill="#6a6a6a">10</text>
+            <line x1="355.6" y1="44" x2="355.6" y2="162" stroke="#ececec" stroke-width="1"/>
+            <text x="355.6" y="178" font-size="11" text-anchor="middle" fill="#6a6a6a">20</text>
+            <line x1="448.4" y1="44" x2="448.4" y2="162" stroke="#ececec" stroke-width="1"/>
+            <text x="448.4" y="178" font-size="11" text-anchor="middle" fill="#6a6a6a">30</text>
+            <line x1="541.2" y1="44" x2="541.2" y2="162" stroke="#ececec" stroke-width="1"/>
+            <text x="541.2" y="178" font-size="11" text-anchor="middle" fill="#6a6a6a">40</text>
+            <line x1="634.0" y1="44" x2="634.0" y2="162" stroke="#ececec" stroke-width="1"/>
+            <text x="634.0" y="178" font-size="11" text-anchor="middle" fill="#6a6a6a">50</text>
+            <line x1="170" y1="162" x2="634" y2="162" stroke="#cfcfcf" stroke-width="1.1"/>
+            <text x="402" y="198" font-size="12" text-anchor="middle" fill="#6a6a6a">Seconds of operator input per completed task (lower is better)</text>
+            <text x="158" y="57" font-size="12.5" text-anchor="end" fill="#363636">Autonomous policy</text>
+            <line x1="170" y1="44" x2="170" y2="60" stroke="#1f7ab5" stroke-width="3"/>
+            <text x="180" y="57" font-size="12.5" fill="#6a6a6a" font-style="italic">No operator time, but 6.5&#215; lower success</text>
+            <text x="158" y="95" font-size="12.5" text-anchor="end" fill="#363636">Cosine arbitration</text>
+            <path d="M170,80 L203.2,80 Q207.2,80 207.2,84 L207.2,96 Q207.2,100 203.2,100 L170,100 Z" fill="#f8765c"><title>Cosine arbitration: 4.0 operator-seconds per completed task</title></path>
+            <text x="215.2" y="95" font-size="13" font-weight="600" fill="#363636">4.0 s</text>
+            <text x="158" y="133" font-size="12.5" text-anchor="end" fill="#363636">Teleoperation</text>
+            <path d="M170,118 L598.1,118 Q602.1,118 602.1,122 L602.1,134 Q602.1,138 598.1,138 L170,138 Z" fill="#7a2288"><title>Teleoperation: 46.6 operator-seconds per completed task</title></path>
+            <text x="610.1" y="133" font-size="13" font-weight="600" fill="#363636">46.6 s</text>
+            </svg>
+            <figcaption>
+              <span class="fignum">Figure 2.</span> Seconds of operator input per completed LIBERO-PRO task,
+              computed as completion time &times; intervention rate &divide; success rate. The measure is
+              defined only where there is an operator to charge, so the autonomous policy is annotated rather
+              than plotted.
+            </figcaption>
+          </figure>
+
+          <table class="table is-narrow is-size-7 is-sr-only">
+            <caption>Operator input per completed LIBERO-PRO task</caption>
+            <thead><tr><th>Method</th><th>Operator-seconds per completed task</th></tr></thead>
+            <tbody>
+              <tr><td>Autonomous policy</td><td>No operator input, and 6.5 times lower success</td></tr>
+              <tr><td>Cosine arbitration</td><td>4.0</td></tr>
+              <tr><td>Teleoperation</td><td>46.6</td></tr>
+            </tbody>
+          </table>
+
           <h3>CALVIN: comparison with learned steering methods</h3>
 
           <p>
@@ -430,7 +482,7 @@
             <line x1="168" y1="272" x2="600" y2="272" stroke="#cfcfcf" stroke-width="1.2"/>
             </svg>
             <figcaption>
-              <span class="fignum">Figure 2.</span> Raw NASA-TLX workload under teleoperation and under
+              <span class="fignum">Figure 3.</span> Raw NASA-TLX workload under teleoperation and under
               Cosine arbitration. Bars are means, error bars are 95% confidence intervals, and
               <em>p</em>-values are Wilcoxon signed-rank, Holm-corrected within each benchmark.
               Per-method results for all four conditions are in the
@@ -496,7 +548,7 @@
             <line x1="168" y1="236" x2="600" y2="236" stroke="#cfcfcf" stroke-width="1.2"/>
             </svg>
             <figcaption>
-              <span class="fignum">Figure 3.</span> Operators ranking each method first, out of 14 in
+              <span class="fignum">Figure 4.</span> Operators ranking each method first, out of 14 in
               simulation and 13 on the real robot. <em>p</em>-values are Wilcoxon signed-rank on the full
               rankings, Holm-corrected within each benchmark. Takeover, not shown here, drew the most
               first-place votes on the real robot; the full four-method result is in the
