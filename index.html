@@ -363,11 +363,17 @@
           <p>
             Separately from the 14-operator pool, one expert robot-arm user with quadriplegia, who uses an
             adaptive controller daily, completed the study. They are reported as a case study rather than
-            pooled, on a stated population criterion rather than anything about their results: they saw
-            improved success rates and reduced task times. It is a single participant and we treat it as such.
-            Assistive teleoperation is nonetheless the setting in which the policy supplying the manipulation
-            and the operator supplying the intent has the clearest value, and we wanted at least one
-            observation from it.
+            pooled, on a population criterion fixed in advance rather than on anything about their results.
+            Their task metrics improved under SAPS, with higher success rates and shorter completion times.
+            Their preferences did not follow. They ranked teleoperation first and Blending last on both
+            benchmarks, and on the physical robot teleoperation was also their lowest-workload condition, at
+            27.5 against a pooled median of 54.2. No operator in the pool ranked teleoperation first on
+            hardware.
+          </p>
+
+          <p>
+            An interface already matched to its user may leave less for arbitration to contribute, though one
+            participant cannot establish that.
           </p>
 
           <h2 id="limits" class="section-anchor">Limitations</h2>
@@ -391,25 +397,6 @@
             behind the benchmark numbers, one embodiment and two policy backbones. Broader LIBERO coverage,
             more operators contributing to the quantitative results, additional embodiments and further
             real-world tasks would each sharpen the picture.
-          </p>
-
-          <h2 id="takeaway" class="section-anchor">Discussion</h2>
-
-          <p>
-            The result we would defend most confidently is the CALVIN comparison, because it is the cleanest. A
-            convex combination weighted by cosine similarity, requiring no training, no auxiliary model and no
-            sampler modification, outperforms two methods that each require substantially more machinery, at
-            matched human intervention. This is not a claim about how much a human contributes. It is a claim
-            about where the difficulty in policy steering resides, and about how much of the arbitration needs
-            to be learned.
-          </p>
-
-          <p>
-            Set against that is the preference reversal. The same arbitrator moved from last place to second
-            depending on whether the operator could see the workspace, and no task metric would have revealed
-            it. If shared autonomy is to be deployed with people in the loop, and assistive teleoperation is
-            the case we have most in mind, the arbitrator has to be evaluated as an interface and not only as a
-            controller.
           </p>
 
           <div class="post-nextsteps">
