@@ -50,6 +50,7 @@
       <a class="navbar-item" href="#libero-pro">LIBERO-PRO</a>
       <a class="navbar-item" href="#calvin">CALVIN</a>
       <a class="navbar-item" href="#real-world">Real Robot</a>
+      <a class="navbar-item" href="#user-study">User Study</a>
     </div>
   </div>
 </nav>
@@ -784,6 +785,82 @@
                  alt="Photographs of the real robot successfully completing the marker plate, drawer, and cabinet tasks.">
             <figcaption><span class="fignum">Figure 20:</span> Real-world task progression for successful completion.
             <span class="figsrc">[<a href="./pdf/hardware_success_photos.pdf">PDF</a>]</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="user-study" style="padding-top: 0;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3 section-anchor">User Study</h2>
+      </div>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+          <p>Fourteen able-bodied operators (mean age 24.0, SD 5.8) each completed a LIBERO block and a
+          hardware block under all four conditions, rating workload on the raw NASA-TLX and force-ranking the
+          methods at the end of each block. One hardware block was discarded following a joint-torque sensor
+          fault, leaving <em>n</em> = 14 in simulation and <em>n</em> = 13 on hardware. Workload and preference
+          were analyzed with Friedman's test over the four methods, followed by Wilcoxon signed-rank contrasts
+          of teleoperation against each arbitration method, Holm-corrected across the three comparisons within
+          each benchmark. All contrasts are two-sided.</p>
+
+          <div class="table-block">
+            <p class="table-caption"><span class="tabnum">Table 7:</span> Raw NASA-TLX, <em>M</em>
+            (<em>SD</em>), by arbitration method.</p>
+            <div class="table-scroll">
+              <table class="paper-table">
+                <thead>
+                  <tr><th>Method</th><th>LIBERO (<em>n</em> = 14)</th><th>Hardware (<em>n</em> = 13)</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Teleoperation</td><td>49.0 (18.6)</td><td>53.8 (18.7)</td></tr>
+                  <tr><td>Takeover</td><td>32.2 (13.6)</td><td>36.2 (18.6)</td></tr>
+                  <tr><td>Blending</td><td>53.1 (18.0)</td><td>38.5 (18.4)</td></tr>
+                  <tr><td>Cosine</td><td>31.1 (18.2)</td><td>41.2 (11.7)</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <p>Arbitration method affected workload on both benchmarks (Friedman; LIBERO
+          &chi;<sup>2</sup>(3) = 28.26, <em>p</em> &lt; .001; hardware &chi;<sup>2</sup>(3) = 12.02,
+          <em>p</em> = .007). On LIBERO, teleoperation was more demanding than Cosine and Takeover but did not
+          differ from Blending, which at <em>M</em> = 53.1 was numerically higher than teleoperation itself. On
+          hardware all three arbitration methods fell below teleoperation.</p>
+
+          <figure class="paper-figure">
+            <img src="./figures/fig1_nasatlx.webp" width="1400" height="1180" loading="lazy"
+                 alt="Grouped bar chart of raw NASA-TLX workload by arbitration method on LIBERO and hardware.">
+            <figcaption><span class="fignum">Figure 21:</span> Raw NASA-TLX (0&ndash;100, lower is better) by
+            arbitration method. Bars are means with 95% confidence intervals. Brackets compare teleoperation
+            against each arbitration method (Wilcoxon signed-rank, Holm-corrected across the three contrasts
+            within each benchmark).
+            <span class="figsrc">[<a href="./pdf/fig1_nasatlx.pdf">PDF</a>]</span></figcaption>
+          </figure>
+
+          <p>Forced rankings also differed among methods on both benchmarks (Friedman; LIBERO
+          &chi;<sup>2</sup>(3) = 23.23, <em>p</em> &lt; .001; hardware &chi;<sup>2</sup>(3) = 8.54,
+          <em>p</em> = .036). In simulation, Cosine took 7 of 14 first-place votes and Takeover 6; no operator
+          ranked Blending first, and 10 of 14 placed it below raw teleoperation. Only Cosine was ranked above
+          teleoperation (<em>p</em> = .013), with Takeover at <em>p</em> = .054. On hardware, Takeover took 6
+          of 13 first-place votes, Blending 4 and Cosine 3, while teleoperation received none and finished with
+          the worst median rank; teleoperation was ranked below Takeover (<em>p</em> = .037) but not below
+          Blending or Cosine (both <em>p</em> = .180).</p>
+
+          <figure class="paper-figure">
+            <img src="./figures/fig2_preference.webp" width="1400" height="820" loading="lazy"
+                 alt="Two pie charts of first-place votes on LIBERO and hardware.">
+            <figcaption><span class="fignum">Figure 22:</span> First-place votes from the end-of-block forced
+            ranking. Methods receiving no first-place vote are absent from the chart: Blending on LIBERO,
+            teleoperation on hardware.
+            <span class="figsrc">[<a href="./pdf/fig2_preference.pdf">PDF</a>]</span></figcaption>
           </figure>
         </div>
       </div>

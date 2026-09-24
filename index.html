@@ -295,64 +295,87 @@
           </p>
 
           <figure class="paper-figure">
-            <img src="./figures/fig1_nasatlx.webp" width="1400" height="1180"
-                 alt="Grouped bar chart of raw NASA-TLX workload by arbitration method on LIBERO and hardware. Teleoperation is highest on both; Takeover and Cosine are lowest on LIBERO, while all three arbitration methods sit below teleoperation on hardware.">
+            <svg viewBox="0 0 720 214" width="100%" role="img" aria-labelledby="tlxTitle tlxDesc" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans',system-ui,sans-serif">
+            <title id="tlxTitle">Raw NASA-TLX workload, teleoperation versus Cosine arbitration</title>
+            <desc id="tlxDesc">On LIBERO, mean workload falls from 49.0 under teleoperation to 31.1 under Cosine arbitration. On the real robot it falls from 53.8 to 41.2. Horizontal lines below each pair show 95% confidence intervals.</desc>
+            <g font-size="13" fill="#363636">
+            <circle cx="174" cy="18" r="6" fill="#7a2288"/><text x="188" y="23">Teleoperation</text>
+            <circle cx="304" cy="18" r="6" fill="#f8765c"/><text x="318" y="23">Cosine arbitration</text>
+            </g>
+            <text x="24" y="64" font-size="14" font-weight="600" fill="#363636">LIBERO</text>
+            <text x="24" y="81" font-size="11.5" fill="#6a6a6a">n = 14</text>
+            <line x1="439.6" y1="60" x2="340.4" y2="60" stroke="#363636" stroke-width="1.5" opacity="0.22"/>
+            <line x1="282.1" y1="72" x2="398.6" y2="72" stroke="#f8765c" stroke-width="1.6" opacity="0.6"/>
+            <line x1="282.1" y1="69" x2="282.1" y2="75" stroke="#f8765c" stroke-width="1.6" opacity="0.6"/>
+            <line x1="398.6" y1="69" x2="398.6" y2="75" stroke="#f8765c" stroke-width="1.6" opacity="0.6"/>
+            <line x1="380.1" y1="84" x2="499.1" y2="84" stroke="#7a2288" stroke-width="1.6" opacity="0.6"/>
+            <line x1="380.1" y1="81" x2="380.1" y2="87" stroke="#7a2288" stroke-width="1.6" opacity="0.6"/>
+            <line x1="499.1" y1="81" x2="499.1" y2="87" stroke="#7a2288" stroke-width="1.6" opacity="0.6"/>
+            <circle cx="439.6" cy="60" r="6" fill="#7a2288" stroke="#ffffff" stroke-width="2"><title>Teleoperation, LIBERO: mean 49.0</title></circle>
+            <text x="439.6" y="47" font-size="12.5" font-weight="600" text-anchor="middle" fill="#363636">49.0</text>
+            <circle cx="340.4" cy="60" r="6" fill="#f8765c" stroke="#ffffff" stroke-width="2"><title>Cosine arbitration, LIBERO: mean 31.1</title></circle>
+            <text x="340.4" y="47" font-size="12.5" font-weight="600" text-anchor="middle" fill="#363636">31.1</text>
+            <text x="588" y="59" font-size="13" font-weight="600" fill="#363636">&#8722;17.9</text>
+            <text x="588" y="75" font-size="11.5" fill="#6a6a6a">p = .003</text>
+            <text x="24" y="126" font-size="14" font-weight="600" fill="#363636">Real robot</text>
+            <text x="24" y="143" font-size="11.5" fill="#6a6a6a">n = 13</text>
+            <line x1="466.2" y1="122" x2="396.4" y2="122" stroke="#363636" stroke-width="1.5" opacity="0.22"/>
+            <line x1="357.2" y1="134" x2="435.6" y2="134" stroke="#f8765c" stroke-width="1.6" opacity="0.6"/>
+            <line x1="357.2" y1="131" x2="357.2" y2="137" stroke="#f8765c" stroke-width="1.6" opacity="0.6"/>
+            <line x1="435.6" y1="131" x2="435.6" y2="137" stroke="#f8765c" stroke-width="1.6" opacity="0.6"/>
+            <line x1="403.6" y1="146" x2="528.8" y2="146" stroke="#7a2288" stroke-width="1.6" opacity="0.6"/>
+            <line x1="403.6" y1="143" x2="403.6" y2="149" stroke="#7a2288" stroke-width="1.6" opacity="0.6"/>
+            <line x1="528.8" y1="143" x2="528.8" y2="149" stroke="#7a2288" stroke-width="1.6" opacity="0.6"/>
+            <circle cx="466.2" cy="122" r="6" fill="#7a2288" stroke="#ffffff" stroke-width="2"><title>Teleoperation, Real robot: mean 53.8</title></circle>
+            <text x="466.2" y="109" font-size="12.5" font-weight="600" text-anchor="middle" fill="#363636">53.8</text>
+            <circle cx="396.4" cy="122" r="6" fill="#f8765c" stroke="#ffffff" stroke-width="2"><title>Cosine arbitration, Real robot: mean 41.2</title></circle>
+            <text x="396.4" y="109" font-size="12.5" font-weight="600" text-anchor="middle" fill="#363636">41.2</text>
+            <text x="588" y="121" font-size="13" font-weight="600" fill="#363636">&#8722;12.6</text>
+            <text x="588" y="137" font-size="11.5" fill="#6a6a6a">p = .033</text>
+            <line x1="168" y1="170" x2="556" y2="170" stroke="#dcdcdc" stroke-width="1"/>
+            <line x1="168.0" y1="170" x2="168.0" y2="174" stroke="#dcdcdc" stroke-width="1"/>
+            <text x="168.0" y="188" font-size="11.5" text-anchor="middle" fill="#6a6a6a">0</text>
+            <line x1="223.4" y1="170" x2="223.4" y2="174" stroke="#dcdcdc" stroke-width="1"/>
+            <text x="223.4" y="188" font-size="11.5" text-anchor="middle" fill="#6a6a6a">10</text>
+            <line x1="278.9" y1="170" x2="278.9" y2="174" stroke="#dcdcdc" stroke-width="1"/>
+            <text x="278.9" y="188" font-size="11.5" text-anchor="middle" fill="#6a6a6a">20</text>
+            <line x1="334.3" y1="170" x2="334.3" y2="174" stroke="#dcdcdc" stroke-width="1"/>
+            <text x="334.3" y="188" font-size="11.5" text-anchor="middle" fill="#6a6a6a">30</text>
+            <line x1="389.7" y1="170" x2="389.7" y2="174" stroke="#dcdcdc" stroke-width="1"/>
+            <text x="389.7" y="188" font-size="11.5" text-anchor="middle" fill="#6a6a6a">40</text>
+            <line x1="445.1" y1="170" x2="445.1" y2="174" stroke="#dcdcdc" stroke-width="1"/>
+            <text x="445.1" y="188" font-size="11.5" text-anchor="middle" fill="#6a6a6a">50</text>
+            <line x1="500.6" y1="170" x2="500.6" y2="174" stroke="#dcdcdc" stroke-width="1"/>
+            <text x="500.6" y="188" font-size="11.5" text-anchor="middle" fill="#6a6a6a">60</text>
+            <line x1="556.0" y1="170" x2="556.0" y2="174" stroke="#dcdcdc" stroke-width="1"/>
+            <text x="556.0" y="188" font-size="11.5" text-anchor="middle" fill="#6a6a6a">70</text>
+            <text x="362" y="207" font-size="12" text-anchor="middle" fill="#6a6a6a">Raw NASA-TLX (0&#8211;100, lower is better)</text>
+            </svg>
             <figcaption>
-              <span class="fignum">Figure 1.</span> Raw NASA-TLX (0&ndash;100, lower is better) by arbitration
-              method. Bars are means with 95% confidence intervals. Brackets compare teleoperation against each
-              arbitration method (Wilcoxon signed-rank, Holm-corrected across the three contrasts within each
-              benchmark). <span class="figsrc"><a href="./pdf/fig1_nasatlx.pdf">[PDF]</a></span>
+              <span class="fignum">Figure 1.</span> Raw NASA-TLX workload under teleoperation and under
+              Cosine arbitration. Points are means, horizontal lines below each pair are 95% confidence
+              intervals, and <em>p</em>-values are Wilcoxon signed-rank, Holm-corrected within each benchmark.
+              Per-method results for all four conditions are in the
+              <a href="./appendix.html#user-study">appendix</a>.
             </figcaption>
           </figure>
 
-          <p>
-            Arbitration method affected workload on both benchmarks (Friedman; LIBERO <em>p</em> &lt; .001,
-            hardware <em>p</em> = .007). In simulation, teleoperation (M = 49.0, SD = 18.6) was more demanding
-            than Cosine (M = 31.1) and Takeover (M = 32.2), but did not differ from Blending, which at M = 53.1
-            was numerically higher than driving the robot directly. On hardware all three arbitrators fell below
-            teleoperation (M = 53.8), at 36.2 for Takeover, 38.5 for Blending and 41.2 for Cosine.
-          </p>
-
-          <h3>A reversal between benchmarks</h3>
-
-          <p>
-            Preference, measured by the end-of-block forced ranking, did not agree across the two benchmarks.
-          </p>
-
-          <figure class="paper-figure">
-            <img src="./figures/fig2_preference.webp" width="1400" height="820"
-                 alt="Two pie charts of first-place votes. On LIBERO: Cosine 7, Takeover 6, teleoperation 1, Blending none. On hardware: Takeover 6, Blending 4, Cosine 3, teleoperation none.">
-            <figcaption>
-              <span class="fignum">Figure 2.</span> First-place votes from the end-of-block forced ranking.
-              Methods receiving no first-place vote are absent from the chart: Blending on LIBERO,
-              teleoperation on hardware. <span class="figsrc"><a href="./pdf/fig2_preference.pdf">[PDF]</a></span>
-            </figcaption>
-          </figure>
+          <table class="table is-narrow is-size-7 is-sr-only">
+            <caption>Raw NASA-TLX, mean and 95% confidence interval</caption>
+            <thead><tr><th>Benchmark</th><th>Teleoperation</th><th>Cosine arbitration</th><th>Difference</th></tr></thead>
+            <tbody>
+              <tr><td>LIBERO (n = 14)</td><td>49.0 (38.3 to 59.7)</td><td>31.1 (20.6 to 41.6)</td><td>17.9 lower, p = .003</td></tr>
+              <tr><td>Real robot (n = 13)</td><td>53.8 (42.5 to 65.1)</td><td>41.2 (34.1 to 48.3)</td><td>12.6 lower, p = .033</td></tr>
+            </tbody>
+          </table>
 
           <p>
-            In simulation no operator ranked Blending first, and 10 of 14 placed it below raw teleoperation.
-            Cosine took 7 first-place votes and Takeover 6. On the physical robot the same arbitrator took 31%
-            of first-place votes, and teleoperation was the method that received none and finished with the
-            worst median rank. The three arbitrators became statistically indistinguishable from one another on
-            hardware (all pairwise <em>p</em><sub>Holm</sub> &ge; .65), with the omnibus effect carried by
-            teleoperation sitting below Takeover.
-          </p>
-
-          <p>
-            Our interpretation is that a fixed 50/50 mix is costly precisely when the operator cannot see well.
-            In simulation the operator is already resolving depth ambiguity through a camera feed, and halving
-            their authority means each correction must be made twice as large while still arriving diluted by a
-            policy that is confidently heading elsewhere. In front of the physical arm, with direct depth
-            perception and a policy whose low-level behaviour is genuinely useful, the same 50/50 mix reads as
-            smoothing rather than resistance. The workload figures are consistent with this, with Blending
-            falling from 53.1 in simulation to 38.5 on hardware.
-          </p>
-
-          <p>
-            We take from this that the arbitrator is not a parameter to be fixed once. Takeover was the only
-            method operators favoured in both settings, and Cosine was strongest on task metrics almost
-            everywhere, but which one an operator prefers depends on how well they can observe what the robot
-            is doing.
+            Workload differed across the four methods on both benchmarks (Friedman; LIBERO <em>p</em> &lt; .001,
+            real robot <em>p</em> = .007). Cosine arbitration was the clearer case on both: operators rated it
+            17.9 points below teleoperation in simulation and 12.6 points below on the physical robot, on a
+            0&ndash;100 scale. Preference followed the same direction in simulation, where Cosine took 7 of 14
+            first-place votes against teleoperation's 1. On the physical robot the arbitrators were again
+            preferred, with teleoperation receiving no first-place vote at all.
           </p>
 
           <h3>A single expert user</h3>
