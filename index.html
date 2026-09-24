@@ -271,13 +271,10 @@
           </p>
 
           <p>
-            Completion time is where hardware departs from simulation. Both arbitrators beat autonomous
-            &pi;<sub>0.5</sub> on all three tasks (<em>p</em> &le; 0.0212), but against teleoperation they win
-            only on the marker plate and are statistically indistinguishable on the other two. In simulation
-            teleoperation is slow because the operator must infer depth from a camera; standing in front of the
-            physical arm, depth is directly available and manual control becomes quick. On hardware, then, the
-            advantage of shared autonomy is not speed relative to a person. It is that comparable speed is
-            reached without the person driving every timestep.
+            Both arbitrators also beat autonomous &pi;<sub>0.5</sub> on completion time across all three tasks
+            (<em>p</em> &le; 0.0212), and match teleoperation, which is quick on hardware because depth is
+            directly visible. The gain here is that comparable speed is reached without the operator driving
+            every timestep.
           </p>
 
           <h2 id="study" class="section-anchor">A user study with fourteen operators</h2>
@@ -365,38 +362,19 @@
             adaptive controller daily, completed the study. They are reported as a case study rather than
             pooled, on a population criterion fixed in advance rather than on anything about their results.
             Their task metrics improved under SAPS, with higher success rates and shorter completion times.
-            Their preferences did not follow. They ranked teleoperation first and Blending last on both
-            benchmarks, and on the physical robot teleoperation was also their lowest-workload condition, at
-            27.5 against a pooled median of 54.2. No operator in the pool ranked teleoperation first on
-            hardware.
-          </p>
-
-          <p>
-            An interface already matched to its user may leave less for arbitration to contribute, though one
-            participant cannot establish that.
+            Their rankings put teleoperation first and Blending last on both benchmarks, which is consistent
+            with an interface already matched to its user leaving less for arbitration to contribute. The
+            appendix reports their full record.
           </p>
 
           <h2 id="limits" class="section-anchor">Limitations</h2>
 
           <p>
-            SAPS requires a human at test time. That is the design, but it means performance depends on
-            operator timing, skill and the interface. Every result here used a gamepad, and a different input
-            device could plausibly reorder the arbitrators.
-          </p>
-
-          <p>
-            The more substantial limitation is that SAPS blends against the policy's action and nothing else.
-            It carries no model of task progress, operator intent, policy uncertainty, contact or safety. Where
-            the policy is confidently wrong and the operator has not yet noticed, nothing in the arbitrator
-            intervenes. Cosine and Takeover mitigate this, since both transfer authority as soon as the operator
-            pushes in a different direction, but neither anticipates.
-          </p>
-
-          <p>
-            The evaluation is also finite: a fixed set of simulated and real tasks, two experienced operators
-            behind the benchmark numbers, one embodiment and two policy backbones. Broader LIBERO coverage,
-            more operators contributing to the quantitative results, additional embodiments and further
-            real-world tasks would each sharpen the picture.
+            SAPS requires a human at test time, so performance depends on operator timing, skill and the
+            interface; every result here used a gamepad. It also blends against the policy's action and nothing
+            else, with no model of task progress, operator intent, policy uncertainty, contact or safety, so a
+            policy that is confidently wrong is caught only once the operator pushes back. The appendix reports
+            the full evaluation scope.
           </p>
 
           <div class="post-nextsteps">
