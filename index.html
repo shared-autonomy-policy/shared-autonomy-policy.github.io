@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="A pretrained VLA is a strong manipulator and a brittle one. SAPS mixes an operator's joystick into the policy's action stream at the action level, with no retraining, no auxiliary model and no sampler surgery.">
+        content="SAPS combines an operator's teleoperation command with a pretrained policy's action at each control step, without retraining, an auxiliary model, or changes to the sampler.">
   <meta name="keywords" content="shared autonomy, policy steering, vision-language-action, teleoperation, robot manipulation">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
@@ -42,11 +42,11 @@
   </div>
   <div id="navmenu" class="navbar-menu">
     <div class="navbar-end">
-      <a class="navbar-item" href="#failure">The failure mode</a>
-      <a class="navbar-item" href="#idea">The idea</a>
+      <a class="navbar-item" href="#failure">Brittleness</a>
+      <a class="navbar-item" href="#idea">Method</a>
       <a class="navbar-item" href="#benchmarks">Benchmarks</a>
       <a class="navbar-item" href="#study">User study</a>
-      <a class="navbar-item" href="#limits">Limits</a>
+      <a class="navbar-item" href="#limits">Limitations</a>
       <a class="navbar-item" href="./appendix.html"><strong>Appendix&nbsp;&rarr;</strong></a>
     </div>
   </div>
@@ -58,12 +58,12 @@
     <div class="columns is-centered">
       <div class="column is-four-fifths">
         <p class="post-eyebrow">Shared autonomy &middot; Policy steering</p>
-        <h1 class="post-title">A joystick is enough to steer a VLA</h1>
+        <h1 class="post-title">Steering a pretrained VLA at the action level</h1>
         <p class="post-dek">
-          Pretrained vision-language-action policies are strong manipulators and brittle ones: move a target
-          object 20&nbsp;cm and success collapses. SAPS mixes a human operator's joystick directly into the
-          policy's action stream &mdash; no retraining, no auxiliary dynamics model, no changes to the sampler
-          &mdash; and recovers most of what the perturbation took away.
+          Pretrained vision-language-action policies manipulate competently and generalize poorly. Displacing a
+          target object by 20&nbsp;cm is enough to collapse success. We find that combining an operator's
+          teleoperation command with the policy's own action, at each control step and with no other machinery,
+          recovers most of what the perturbation removes.
         </p>
         <p class="post-byline">
           Anonymous Authors &middot; Full method, per-task tables and every figure are in the
@@ -81,9 +81,9 @@
       <img src="./figures/blob.webp" width="1589" height="948"
            alt="A VLA rollout drifting out of distribution, with a human perturbation guiding it back to complete the task.">
       <h2 class="subtitle has-text-centered">
-        A VLA rollout drifts out of distribution and heads for the wrong outcome. Under
-        <span class="has-text-weight-bold">SAPS</span>, a brief operator nudge pushes it back into
-        distribution and the policy finishes the task.
+        A rollout drifts out of distribution and heads toward the wrong outcome. Under
+        <span class="has-text-weight-bold">SAPS</span>, a brief operator correction returns it to a region the
+        policy handles, and the policy completes the task.
       </h2>
     </div>
   </div>
@@ -98,62 +98,64 @@
 
           <div class="statrow">
             <div class="stat">
-              <div class="stat-value">15 &rarr; 97%</div>
-              <div class="stat-label">Mean success on 10 out-of-distribution LIBERO-PRO tasks, autonomous
-                &pi;<sub>0.5</sub> vs. Cosine arbitration</div>
+              <div class="stat-value">97.4%</div>
+              <div class="stat-label">Mean success on 10 out-of-distribution LIBERO-PRO tasks under Cosine
+                arbitration, against 15.0% for autonomous &pi;<sub>0.5</sub></div>
             </div>
             <div class="stat">
-              <div class="stat-value">30%</div>
-              <div class="stat-label">Of control timesteps with active human input, against 100% for
+              <div class="stat-value">30.0%</div>
+              <div class="stat-label">Share of control timesteps with active human input, against 100% under
                 teleoperation</div>
             </div>
             <div class="stat">
               <div class="stat-value">93%</div>
-              <div class="stat-label">CALVIN subtask success, against 80% for DynaGuide and 66% for ITPS</div>
+              <div class="stat-label">CALVIN subtask success, against 80% for DynaGuide and 66% for ITPS at
+                comparable intervention</div>
             </div>
             <div class="stat">
-              <div class="stat-value">28%</div>
-              <div class="stat-label">Lower NASA-TLX workload than teleoperation on the physical robot, across
-                14 operators</div>
+              <div class="stat-value">28.2%</div>
+              <div class="stat-label">Reduction in NASA-TLX workload against teleoperation on the physical
+                robot, across 14 operators</div>
             </div>
           </div>
 
-          <h2 id="failure" class="section-anchor">The failure mode nobody trains away</h2>
+          <h2 id="failure" class="section-anchor">Brittleness under perturbation</h2>
 
           <p class="lede">
-            Take &pi;<sub>0.5</sub>, a capable pretrained VLA, and ask it to put the cream cheese on the plate
-            in LIBERO. It does it. Now slide the cream cheese 20&nbsp;cm from where the demonstrations put it,
-            leave everything else identical, and ask again. Success rate falls to 22.9%.
+            Given the instruction to place the cream cheese on the plate in LIBERO, &pi;<sub>0.5</sub> performs
+            the task reliably. Displacing the cream cheese by 20&nbsp;cm, with the instruction and the rest of
+            the scene unchanged, reduces success to 22.9%.
           </p>
 
           <p>
-            The policy has not forgotten how to manipulate. Watch the rollouts and you see something more
-            specific: it reaches confidently for where the object used to be. Across eight perturbed setups,
-            success tracks displacement almost linearly (Pearson <em>r</em> = &minus;0.800,
-            <em>p</em> = 0.005). The low-level skill survives the perturbation; the grounding does not.
+            The policy has not lost the underlying skill. In the rollouts it reaches confidently for the
+            location the object occupied during training, and across eight perturbed configurations success
+            declines with displacement (Pearson <em>r</em> = &minus;0.800, <em>p</em> = 0.005). What degrades is
+            the grounding of the instruction in the current scene, not the manipulation itself.
           </p>
 
           <p>
-            LIBERO-PRO makes the point sharper, because it perturbs the task rather than the geometry &mdash;
-            swapping which mug goes on which plate, or substituting soup for cream cheese in the instruction.
-            Autonomous &pi;<sub>0.5</sub> averages <strong>15.0%</strong> across ten such tasks. On three
-            real-world tasks with a DROID-finetuned checkpoint the story repeats: 50% on pick-and-place, 25%
-            on closing a drawer, 5% on opening a cabinet.
+            LIBERO-PRO isolates this more directly, since it perturbs the task specification rather than the
+            geometry: swapping which mug belongs on which plate, or substituting soup for cream cheese in the
+            instruction. Autonomous &pi;<sub>0.5</sub> averages 15.0% across ten such tasks. Three real-world
+            tasks with a DROID-finetuned checkpoint show the same pattern, at 50% on pick-and-place, 25% on
+            closing a drawer, and 5% on opening a cabinet.
           </p>
 
           <p>
-            The obvious fallback is to take the robot back by hand. That works &mdash; a practiced operator on
-            a gamepad completes essentially everything &mdash; but it throws away the policy entirely and puts
-            the whole manipulation sequence on a person, which is slow in simulation (limited depth perception
-            from camera views) and tiring everywhere. What we wanted was the cheap thing in between: leave the
-            policy doing the manipulation, and let a person supply only the part it gets wrong.
+            Returning the robot to manual control resolves the failure. A practiced operator on a gamepad
+            completes very nearly every episode. It also discards the policy and places the full manipulation
+            sequence on the operator, which is slow in simulation, where depth must be judged from camera
+            views, and effortful in both settings. The question we were interested in is whether a person needs
+            to supply that much: whether the policy can continue to do the manipulation while the operator
+            contributes only the part it gets wrong.
           </p>
 
-          <h2 id="idea" class="section-anchor">One line of arithmetic</h2>
+          <h2 id="idea" class="section-anchor">Arbitration at the action level</h2>
 
           <p>
-            SAPS does not touch the policy. At each of the 20 control steps per second, the VLA proposes an
-            action and the operator may or may not be pushing the stick. The executed action is a convex
+            SAPS leaves the policy untouched. At each of the 20 control steps per second the VLA proposes an
+            action, and the operator may or may not be supplying input. The executed action is a convex
             combination of the two:
           </p>
 
@@ -162,133 +164,134 @@
             <p class="is-size-7" style="margin-top: 0.9rem; color:#6a6a6a;">
               The first six dimensions are translational and rotational end-effector motion. The gripper is
               handled separately as \(a^{(7)} = \max(a^{(7)}_{\textit{VLA}}, a^{(7)}_{\textit{expert}})\), so
-              either party can initiate a grasp without the two fighting. When the operator is idle &mdash;
-              expert action norm below \(\epsilon = 0.001\) &mdash; \(\alpha = 1\) and the policy simply runs.
+              that either party can initiate a grasp without the two opposing each other. When the operator is
+              idle, meaning the expert action norm falls below \(\epsilon = 0.001\), \(\alpha = 1\) and the
+              policy runs on its own.
             </p>
           </div>
 
           <p>
-            Everything interesting lives in how you pick \(\alpha\). We compared three arbitrators, chosen to
-            span the range from "the human is a switch" to "the human is a vote":
+            The substantive question is how \(\alpha\) is chosen. We compared three arbitrators, selected to
+            span a range from treating the operator as a switch to treating the operator as one vote among
+            two:
           </p>
 
           <dl class="method-list">
             <dt>Takeover</dt>
-            <dd>Hard switching. Any detected operator input sets \(\alpha = 0\) and the human has the arm
-              outright; release the stick and the policy resumes.</dd>
+            <dd>Hard switching. Any detected operator input sets \(\alpha = 0\) and gives the operator the arm
+              outright; releasing the stick returns control to the policy.</dd>
             <dt>Blending</dt>
             <dd>A fixed 50/50 mix whenever the operator is active. The simplest continuous arbitrator, and the
-              one we expected people to like.</dd>
+              one we expected operators to prefer.</dd>
             <dt>Cosine</dt>
-            <dd>Let the two actions decide. Measure the cosine similarity between the human's commanded
-              direction and the policy's, push it through a logistic
-              (\(\alpha = \sigma(6\cos\theta)\)), and use that as the weight. When the human and the policy
-              agree the arbitrator defers to the policy; when they diverge, authority slides to the
-              human.</dd>
+            <dd>The two actions determine the weight. We measure the cosine similarity between the operator's
+              commanded direction and the policy's, pass it through a logistic
+              (\(\alpha = \sigma(6\cos\theta)\)), and use the result as the weight. Where the two agree the
+              arbitrator defers to the policy; where they diverge, authority shifts toward the operator.</dd>
           </dl>
 
           <p>
-            Cosine is worth dwelling on, because it gets a useful behaviour for free. It never needs to know
-            what the task is, what the human intends, or how confident the policy is. Disagreement between the
-            two action vectors is itself the signal &mdash; if the operator is pushing against the policy,
-            that <em>is</em> the evidence the policy is wrong, and the weight moves accordingly. The
-            formulation also leaves a slot open: any other confidence measure can replace \(\cos\theta\).
+            Cosine arbitration is worth examining, because the behaviour it produces requires no additional
+            information. It does not need to know the task, the operator's intent, or the policy's confidence.
+            Disagreement between the two action vectors serves as the signal: if the operator is pushing
+            against the policy, that opposition is itself evidence that the policy is wrong, and the weight
+            adjusts accordingly. The formulation also leaves room for substitution, since any other confidence
+            measure could replace \(\cos\theta\).
           </p>
 
           <p>
-            Compare that to what the alternatives require. ITPS injects a human-specified position-target
-            gradient into every denoising step of the diffusion sampler. DynaGuide trains a separate dynamics
-            model and a classifier to bias sampling toward desired futures. SAPS needs neither &mdash; it sits
-            entirely outside the policy, reading its output and nothing else, which is also why it runs
-            unchanged over both a &pi;<sub>0.5</sub> VLA and a diffusion policy.
+            The alternatives require more. ITPS injects a human-specified position-target gradient into every
+            denoising step of the diffusion sampler. DynaGuide trains a separate dynamics model together with a
+            classifier to bias sampling toward desired futures. SAPS sits entirely outside the policy and reads
+            only its output, which is also why it runs unchanged over both a &pi;<sub>0.5</sub> VLA and a
+            diffusion policy.
           </p>
 
-          <h2 id="benchmarks" class="section-anchor">What the mixing buys</h2>
+          <h2 id="benchmarks" class="section-anchor">Benchmark results</h2>
 
-          <h3>Simulation: most of the gap closes on a fraction of the effort</h3>
-
-          <p>
-            On the ten out-of-distribution LIBERO-PRO tasks, all three arbitrators recover nearly everything
-            teleoperation gets. Against 15.0% for autonomous &pi;<sub>0.5</sub>: Blending 92.6%, Takeover
-            93.2%, Cosine 97.4%, with full teleoperation at 98.8%. Every arbitrator beats the policy alone at
-            <em>p</em> = 9.77&times;10<sup>&minus;4</sup> (one-sided Wilcoxon signed-rank).
-          </p>
+          <h3>LIBERO-PRO: recovery under task perturbation</h3>
 
           <p>
-            The number we care about more is how much human it took. Blending and Takeover needed operator
-            input on <strong>10.8%</strong> and <strong>11.7%</strong> of control timesteps, Cosine on
-            <strong>30.0%</strong> &mdash; against 100% for teleoperation, by definition. Intervention rate did
-            not correlate with task order (<em>p</em> &gt; 0.09), so this is targeted correction rather than an
-            operator gradually taking over.
+            On the ten out-of-distribution LIBERO-PRO tasks, all three arbitrators recover close to what
+            teleoperation achieves. Against 15.0% for autonomous &pi;<sub>0.5</sub>, Blending reaches 92.6%,
+            Takeover 93.2% and Cosine 97.4%, with full teleoperation at 98.8%. Each arbitrator improves on the
+            policy alone at <em>p</em> = 9.77&times;10<sup>&minus;4</sup> (one-sided Wilcoxon signed-rank).
           </p>
 
           <p>
-            Nor is the recovery slow. Blending, Cosine and Takeover finish in 11.1&nbsp;s, 13.0&nbsp;s and
-            13.2&nbsp;s on average, against 30.7&nbsp;s for autonomous &pi;<sub>0.5</sub> &mdash; which burns
-            time in failed recovery attempts &mdash; and 46.0&nbsp;s for teleoperation, where a person is
-            flying the whole trajectory through a camera feed. All three are faster than both baselines at
+            The quantity of more interest is how much operator input this required. Blending and Takeover drew
+            input on 10.8% and 11.7% of control timesteps, Cosine on 30.0%, against 100% for teleoperation by
+            construction. Intervention rate did not correlate with task order (<em>p</em> &gt; 0.09), which is
+            consistent with targeted correction rather than an operator progressively assuming control.
+          </p>
+
+          <p>
+            Recovery is also not slow. Blending, Cosine and Takeover complete in 11.1&nbsp;s, 13.0&nbsp;s and
+            13.2&nbsp;s on average, against 30.7&nbsp;s for autonomous &pi;<sub>0.5</sub>, which spends time in
+            unsuccessful recovery attempts, and 46.0&nbsp;s for teleoperation, where the operator flies the
+            entire trajectory through a camera feed. All three are faster than both baselines at
             <em>p</em> &lt; 0.001.
           </p>
 
-          <h3>CALVIN: the simple thing beats the complicated ones</h3>
+          <h3>CALVIN: comparison with learned steering methods</h3>
 
           <p>
-            The comparison we find most telling is on CALVIN, steering a baseline diffusion policy across 11
-            subtasks. Cosine arbitration averages <strong>93%</strong> success, against 80% for DynaGuide, 66%
-            for ITPS and 45% for the unguided policy &mdash; and it is the only method that stays high
-            everywhere, hitting 100% on all eight articulated subtasks and 70&ndash;90% on the three harder
-            block-lift ones.
+            The comparison we find most informative is on CALVIN, steering a baseline diffusion policy across
+            11 subtasks. Cosine arbitration averages 93% success, against 80% for DynaGuide, 66% for ITPS and
+            45% for the unguided policy. It is also the only method that remains high throughout, reaching 100%
+            on all eight articulated subtasks and 70&ndash;90% on the three harder block-lift subtasks.
           </p>
 
           <p>
-            That could just be "the method with a human in the loop wins." It isn't. ITPS also has a human in
-            the loop, at a comparable rate: 75.5% of timesteps against Cosine's 79.8%, a gap of 4.3 percentage
-            points. Same operator effort, same base policy, 27 points of success between them. What separates
-            them is the arbitration mechanism itself.
+            One reading of that result is simply that methods with a human in the loop outperform those
+            without. The intervention rates do not support it. ITPS places a human in the loop at a comparable
+            rate, 75.5% of timesteps against Cosine's 79.8%, a difference of 4.3 percentage points. With
+            comparable operator effort and an identical base policy, 27 points of success separate the two
+            methods, which locates the difference in the arbitration mechanism rather than in the presence of
+            an operator.
           </p>
 
           <p>
-            The end-effector paths say the same thing from another angle. The unguided policy travels
-            2&ndash;3&times; farther per episode than Cosine does for the same subtask &mdash; undirected
-            exploratory motion that a little coarse directional input suppresses almost entirely.
+            End-effector path length is consistent with this. The unguided policy travels 2&ndash;3&times;
+            farther per episode than Cosine does on the same subtask, an undirected exploratory motion that
+            coarse directional input largely suppresses.
           </p>
 
-          <h3>Hardware: it transfers</h3>
+          <h3>Transfer to a physical robot</h3>
 
           <p>
-            On a physical Franka with a DROID-finetuned &pi;<sub>0.5</sub>, Cosine averages
-            <strong>98.3%</strong> across pick-and-place, closing a drawer and opening a cabinet, and Blending
-            93.3% &mdash; against the policy's own 50%, 25% and 5%. Intervention stays partial: roughly
-            55&ndash;69% of timesteps for Cosine and 49&ndash;67% for Blending, every one of them a significant
-            reduction against teleoperation's 100% (<em>p</em> &lt; 10<sup>&minus;15</sup>).
-          </p>
-
-          <p>
-            Completion time is the one place the real world diverges from simulation. Both arbitrators beat
-            autonomous &pi;<sub>0.5</sub> on all three tasks (<em>p</em> &le; 0.0212), but against
-            teleoperation they win only on the marker plate and tie on the other two. In simulation
-            teleoperation is slow because the operator is judging depth from a camera; standing in front of
-            the real robot, they simply can see, and manual control gets quick. Shared autonomy's advantage on
-            hardware is not that it is faster than a person &mdash; it is that it gets there without the
-            person driving every timestep.
-          </p>
-
-          <h2 id="study" class="section-anchor">Fourteen people and a gamepad</h2>
-
-          <p>
-            All of the above was run by two experienced operators, which tells you what the method can do and
-            nothing about what it feels like. So we ran a separate study: 14 able-bodied operators
-            (mean age 24.0, SD 5.8), each completing a LIBERO block and a hardware block under all four
-            conditions, then rating workload on the raw NASA-TLX and force-ranking the methods. One hardware
-            block was dropped for a joint-torque sensor fault, leaving <em>n</em> = 14 in simulation and
-            <em>n</em> = 13 on hardware.
+            On a physical Franka with a DROID-finetuned &pi;<sub>0.5</sub>, Cosine averages 98.3% across
+            pick-and-place, closing a drawer and opening a cabinet, and Blending 93.3%, against the policy's own
+            50%, 25% and 5%. Intervention remains partial, at roughly 55&ndash;69% of timesteps for Cosine and
+            49&ndash;67% for Blending, each a significant reduction against teleoperation's 100%
+            (<em>p</em> &lt; 10<sup>&minus;15</sup>).
           </p>
 
           <p>
-            Across that study SAPS reached <strong>8.1&times;</strong> the success rate of fully autonomous
-            execution and <strong>1.8&times;</strong> that of full teleoperation, with active human control on
-            45% of timesteps, 16% faster completion than teleoperation, and workload down 20.8% in simulation
-            and 28.2% on hardware.
+            Completion time is where hardware departs from simulation. Both arbitrators beat autonomous
+            &pi;<sub>0.5</sub> on all three tasks (<em>p</em> &le; 0.0212), but against teleoperation they win
+            only on the marker plate and are statistically indistinguishable on the other two. In simulation
+            teleoperation is slow because the operator must infer depth from a camera; standing in front of the
+            physical arm, depth is directly available and manual control becomes quick. On hardware, then, the
+            advantage of shared autonomy is not speed relative to a person. It is that comparable speed is
+            reached without the person driving every timestep.
+          </p>
+
+          <h2 id="study" class="section-anchor">A user study with fourteen operators</h2>
+
+          <p>
+            The results above were produced by two experienced operators, which establishes what the method can
+            do and says nothing about how it is experienced. We therefore ran a separate study: 14 able-bodied
+            operators (mean age 24.0, SD 5.8), each completing a LIBERO block and a hardware block under all
+            four conditions, then rating workload on the raw NASA-TLX and force-ranking the methods. One
+            hardware block was discarded following a joint-torque sensor fault, leaving <em>n</em> = 14 in
+            simulation and <em>n</em> = 13 on hardware.
+          </p>
+
+          <p>
+            Across the study, SAPS reached 8.1&times; the success rate of fully autonomous execution and
+            1.8&times; that of full teleoperation, with active human control on 45% of timesteps, 16% faster
+            completion than teleoperation, and workload reduced by 20.8% in simulation and 28.2% on hardware.
           </p>
 
           <figure class="paper-figure">
@@ -303,17 +306,17 @@
           </figure>
 
           <p>
-            Arbitration method moved workload on both benchmarks (Friedman; LIBERO <em>p</em> &lt; .001,
+            Arbitration method affected workload on both benchmarks (Friedman; LIBERO <em>p</em> &lt; .001,
             hardware <em>p</em> = .007). In simulation, teleoperation (M = 49.0, SD = 18.6) was more demanding
-            than Cosine (M = 31.1) and Takeover (M = 32.2) &mdash; but not than Blending, which at M = 53.1 was
-            numerically <em>worse</em> than driving the robot yourself. On hardware all three arbitrators came
-            in below teleoperation (M = 53.8): Takeover 36.2, Blending 38.5, Cosine 41.2.
+            than Cosine (M = 31.1) and Takeover (M = 32.2), but did not differ from Blending, which at M = 53.1
+            was numerically higher than driving the robot directly. On hardware all three arbitrators fell below
+            teleoperation (M = 53.8), at 36.2 for Takeover, 38.5 for Blending and 41.2 for Cosine.
           </p>
 
-          <h3>The result we did not predict</h3>
+          <h3>A reversal between benchmarks</h3>
 
           <p>
-            Then we looked at what people actually preferred, and the two benchmarks disagreed with each other.
+            Preference, measured by the end-of-block forced ranking, did not agree across the two benchmarks.
           </p>
 
           <figure class="paper-figure">
@@ -327,29 +330,28 @@
           </figure>
 
           <p>
-            In simulation, <strong>Blending was ranked first by nobody</strong> &mdash; zero of 14 &mdash; and
-            10 of 14 operators put it <em>below</em> raw teleoperation. Cosine took 7 first-place votes and
-            Takeover 6. On the physical robot the same arbitrator took <strong>31% of first-place
-            votes</strong>, and it was teleoperation that collected none and finished with the worst median
-            rank. The three arbitrators became statistically indistinguishable from one another on hardware
-            (all pairwise <em>p</em><sub>Holm</sub> &ge; .65); the whole omnibus effect was carried by
+            In simulation no operator ranked Blending first, and 10 of 14 placed it below raw teleoperation.
+            Cosine took 7 first-place votes and Takeover 6. On the physical robot the same arbitrator took 31%
+            of first-place votes, and teleoperation was the method that received none and finished with the
+            worst median rank. The three arbitrators became statistically indistinguishable from one another on
+            hardware (all pairwise <em>p</em><sub>Holm</sub> &ge; .65), with the omnibus effect carried by
             teleoperation sitting below Takeover.
           </p>
 
           <p>
-            Our reading is that 50/50 blending is a bad deal exactly when you cannot see. In simulation the
-            operator is already fighting depth ambiguity through a camera feed; halving their authority means
-            every correction has to be made twice as large and still arrives diluted by a policy that is
-            confidently heading somewhere else. The controller feels like it is arguing with you. Standing in
-            front of the real arm, with real depth perception and a policy whose low-level behaviour is
-            genuinely useful, the same 50/50 mix reads as smoothing rather than resistance &mdash; and the
-            workload numbers back that up, with Blending falling from 53.1 in simulation to 38.5 on hardware.
+            Our interpretation is that a fixed 50/50 mix is costly precisely when the operator cannot see well.
+            In simulation the operator is already resolving depth ambiguity through a camera feed, and halving
+            their authority means each correction must be made twice as large while still arriving diluted by a
+            policy that is confidently heading elsewhere. In front of the physical arm, with direct depth
+            perception and a policy whose low-level behaviour is genuinely useful, the same 50/50 mix reads as
+            smoothing rather than resistance. The workload figures are consistent with this, with Blending
+            falling from 53.1 in simulation to 38.5 on hardware.
           </p>
 
           <p>
-            The practical lesson is that the arbitrator is not a detail you tune once. Takeover was the only
-            method that people liked in both settings, and Cosine was the strongest on task metrics almost
-            everywhere &mdash; but which one an operator wants depends on how well they can see what the robot
+            We take from this that the arbitrator is not a parameter to be fixed once. Takeover was the only
+            method operators favoured in both settings, and Cosine was strongest on task metrics almost
+            everywhere, but which one an operator prefers depends on how well they can observe what the robot
             is doing.
           </p>
 
@@ -358,65 +360,66 @@
           <p>
             Separately from the 14-operator pool, one expert robot-arm user with quadriplegia, who uses an
             adaptive controller daily, completed the study. They are reported as a case study rather than
-            pooled in, on a stated population criterion rather than anything about their results: they saw
-            improved success rates and reduced task times. It is one person and we treat it as such, but
-            assistive teleoperation is the setting where "the policy does the manipulation, the operator
-            supplies the intent" has the most obvious value, and we wanted at least one data point from it.
+            pooled, on a stated population criterion rather than anything about their results: they saw
+            improved success rates and reduced task times. It is a single participant and we treat it as such.
+            Assistive teleoperation is nonetheless the setting in which the policy supplying the manipulation
+            and the operator supplying the intent has the clearest value, and we wanted at least one
+            observation from it.
           </p>
 
-          <h2 id="limits" class="section-anchor">Where this breaks</h2>
+          <h2 id="limits" class="section-anchor">Limitations</h2>
 
           <p>
-            SAPS needs a human at test time. That is the whole design, but it means performance rides on
-            operator timing, skill and the interface &mdash; everything here used a gamepad, and a different
-            input device could plausibly reorder the arbitrators.
-          </p>
-
-          <p>
-            The deeper limitation is that SAPS blends against the policy's action and nothing else. It has no
-            model of task progress, operator intent, policy uncertainty, contact or safety. When the policy is
-            confidently wrong and the human has not noticed yet, nothing in the arbitrator catches it. Cosine
-            and Takeover soften this &mdash; both hand authority over as soon as the operator pushes a
-            different direction &mdash; but neither anticipates.
+            SAPS requires a human at test time. That is the design, but it means performance depends on
+            operator timing, skill and the interface. Every result here used a gamepad, and a different input
+            device could plausibly reorder the arbitrators.
           </p>
 
           <p>
-            And the evaluation is finite: a fixed set of simulated and real tasks, two experienced operators
-            for the benchmark numbers, one embodiment, two policy backbones. Broader LIBERO coverage, more
-            operators driving the quantitative results, more embodiments and more real-world tasks would all
-            sharpen the picture.
-          </p>
-
-          <h2 id="takeaway" class="section-anchor">Why we think this is worth the space</h2>
-
-          <p>
-            The result we would defend hardest is the CALVIN one, because it is the cleanest. A convex
-            combination with a cosine-similarity weight &mdash; no training, no auxiliary model, no sampler
-            hooks, roughly ten lines wrapped around a policy you already have &mdash; beats two methods that
-            each require substantially more machinery, at matched human intervention. That is not a statement
-            about how much a human helps. It is a statement about how much of the difficulty in policy
-            steering is in the arbitration, and how little of it needs to be learned.
+            The more substantial limitation is that SAPS blends against the policy's action and nothing else.
+            It carries no model of task progress, operator intent, policy uncertainty, contact or safety. Where
+            the policy is confidently wrong and the operator has not yet noticed, nothing in the arbitrator
+            intervenes. Cosine and Takeover mitigate this, since both transfer authority as soon as the operator
+            pushes in a different direction, but neither anticipates.
           </p>
 
           <p>
-            The counterweight is the preference reversal. The same arbitrator went from last place to second
-            depending on whether the operator could see the workspace, and no task metric would have told us
-            that. If shared autonomy is going to be deployed with people in the loop &mdash; in assistive
-            teleoperation especially &mdash; the arbitrator has to be evaluated as an interface, not only as a
+            The evaluation is also finite: a fixed set of simulated and real tasks, two experienced operators
+            behind the benchmark numbers, one embodiment and two policy backbones. Broader LIBERO coverage,
+            more operators contributing to the quantitative results, additional embodiments and further
+            real-world tasks would each sharpen the picture.
+          </p>
+
+          <h2 id="takeaway" class="section-anchor">Discussion</h2>
+
+          <p>
+            The result we would defend most confidently is the CALVIN comparison, because it is the cleanest. A
+            convex combination weighted by cosine similarity, requiring no training, no auxiliary model and no
+            sampler modification, outperforms two methods that each require substantially more machinery, at
+            matched human intervention. This is not a claim about how much a human contributes. It is a claim
+            about where the difficulty in policy steering resides, and about how much of the arbitration needs
+            to be learned.
+          </p>
+
+          <p>
+            Set against that is the preference reversal. The same arbitrator moved from last place to second
+            depending on whether the operator could see the workspace, and no task metric would have revealed
+            it. If shared autonomy is to be deployed with people in the loop, and assistive teleoperation is
+            the case we have most in mind, the arbitrator has to be evaluated as an interface and not only as a
             controller.
           </p>
 
           <div class="post-nextsteps">
             <h3>Read further</h3>
             <ul>
-              <li><a href="./appendix.html#method">Method</a> &mdash; full arbitration definitions and the
-                policy setup</li>
+              <li><a href="./appendix.html#method">Method</a>: full arbitration definitions and the policy
+                setup</li>
               <li><a href="./appendix.html#libero">LIBERO</a> and
-                <a href="./appendix.html#libero-pro">LIBERO-PRO</a> &mdash; perturbation design, per-task
-                success, completion time and intervention tables</li>
-              <li><a href="./appendix.html#calvin">CALVIN</a> &mdash; comparison against DynaGuide and ITPS,
-                with qualitative rollouts</li>
-              <li><a href="./appendix.html#real-world">Real robot</a> &mdash; hardware tasks, success and
+                <a href="./appendix.html#libero-pro">LIBERO-PRO</a>: perturbation design, per-task success,
+                completion time and intervention tables</li>
+              <li><a href="./appendix.html#calvin">CALVIN</a>: comparison against DynaGuide and ITPS, with
+                qualitative rollouts</li>
+              <li><a href="./appendix.html#real-world">Real robot</a>: hardware tasks, success and
                 intervention</li>
             </ul>
           </div>
