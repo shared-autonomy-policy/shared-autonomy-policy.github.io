@@ -122,22 +122,25 @@
           <h2 id="failure" class="section-anchor">Brittleness under perturbation</h2>
 
           <p class="lede">
-            Given the instruction to place the cream cheese on the plate in LIBERO, &pi;<sub>0.5</sub> performs
-            the task reliably. Displacing the cream cheese by 20&nbsp;cm, with the instruction and the rest of
-            the scene unchanged, reduces success to 22.9%.
+            A pretrained policy can execute a task reliably and fail on a version of it that differs only in
+            where an object sits. Moving a single target object, with the instruction and the rest of the scene
+            unchanged, is enough: across displacements of 15&nbsp;cm or more in LIBERO, &pi;<sub>0.5</sub>
+            averages 22.9% success.
           </p>
 
           <p>
-            The policy has not lost the underlying skill. In the rollouts it reaches confidently for the
-            location the object occupied during training, and across eight perturbed configurations success
-            declines with displacement (Pearson <em>r</em> = &minus;0.800, <em>p</em> = 0.005). What degrades is
-            the grounding of the instruction in the current scene, not the manipulation itself.
+            The degradation is graded rather than abrupt. Across eight perturbed configurations, success
+            declines with displacement (Pearson <em>r</em> = &minus;0.800, <em>p</em> = 0.005), and the policy
+            continues to reach confidently for the location the object occupied in the demonstrations. The
+            low-level manipulation survives the perturbation; what degrades is the grounding of the instruction
+            in the scene in front of it. Under the same displacements, Blending and Cosine arbitration hold
+            success at 87.9% and 90.0%.
           </p>
 
           <p>
             LIBERO-PRO isolates this more directly, since it perturbs the task specification rather than the
-            geometry: swapping which mug belongs on which plate, or substituting soup for cream cheese in the
-            instruction. Autonomous &pi;<sub>0.5</sub> averages 15.0% across ten such tasks. Three real-world
+            geometry, exchanging which of two objects belongs at which target or naming a different object in
+            the instruction. Autonomous &pi;<sub>0.5</sub> averages 15.0% across ten such tasks. Three real-world
             tasks with a DROID-finetuned checkpoint show the same pattern, at 50% on pick-and-place, 25% on
             closing a drawer, and 5% on opening a cabinet.
           </p>
