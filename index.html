@@ -65,10 +65,15 @@
           teleoperation command with the policy's own action, at each control step and with no other machinery,
           recovers most of what the perturbation removes.
         </p>
-        <p class="post-byline">
-          Anonymous Authors &middot; Full method, per-task tables and every figure are in the
-          <a href="./appendix.html">appendix</a>.
-        </p>
+        <p class="post-byline">Anonymous Authors</p>
+
+        <div class="appendix-cta">
+          <p>
+            This is the short version. The appendix carries the full method, every per-task table, and all 22
+            figures across LIBERO, LIBERO-PRO, CALVIN, the real robot and the user study.
+          </p>
+          <a class="appendix-cta-link" href="./appendix.html">Read the appendix &nbsp;&rarr;</a>
+        </div>
       </div>
     </div>
   </div>
@@ -184,8 +189,8 @@
             <dd>Hard switching. Any detected operator input sets \(\alpha = 0\) and gives the operator the arm
               outright; releasing the stick returns control to the policy.</dd>
             <dt>Blending</dt>
-            <dd>A fixed 50/50 mix whenever the operator is active. The simplest continuous arbitrator, and the
-              one we expected operators to prefer.</dd>
+            <dd>A fixed 50/50 mix whenever the operator is active, and the simplest continuous
+              arbitrator.</dd>
             <dt>Cosine</dt>
             <dd>The two actions determine the weight. We measure the cosine similarity between the operator's
               commanded direction and the policy's, pass it through a logistic
