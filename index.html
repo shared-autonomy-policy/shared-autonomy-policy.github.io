@@ -152,22 +152,6 @@
           </p>
 
           <p>
-            The degradation is graded rather than abrupt. Across eight perturbed configurations, success
-            declines as the displacement grows, and the policy continues to reach confidently for the location
-            the object occupied in the demonstrations. The low-level manipulation survives the perturbation;
-            what degrades is the grounding of the instruction in the scene in front of it. Under the same
-            displacements, Blending and Cosine arbitration hold success at 94.4% and 93.3%.
-          </p>
-
-          <p>
-            LIBERO-PRO isolates this more directly, since it perturbs the task specification rather than the
-            geometry, exchanging which of two objects belongs at which target or naming a different object in
-            the instruction. Autonomous &pi;<sub>0.5</sub> averages 15.0% across ten such tasks. Three real-world
-            tasks with a DROID-finetuned checkpoint show the same pattern, at 50% on pick-and-place, 25% on
-            closing a drawer, and 5% on opening a cabinet.
-          </p>
-
-          <p>
             Returning the robot to manual control resolves the failure. A practiced operator on a gamepad
             completes very nearly every episode. It also discards the policy and places the full manipulation
             sequence on the operator, which is slow in simulation, where depth must be judged from camera
@@ -222,14 +206,6 @@
             against the policy, that opposition is itself evidence that the policy is wrong, and the weight
             adjusts accordingly. The formulation also leaves room for substitution, since any other confidence
             measure could replace \(\cos\theta\).
-          </p>
-
-          <p>
-            The alternatives require more. ITPS injects a human-specified position-target gradient into every
-            denoising step of the diffusion sampler. DynaGuide trains a separate dynamics model together with a
-            classifier to bias sampling toward desired futures. SAPS sits entirely outside the policy and reads
-            only its output, which is also why it runs unchanged over both a &pi;<sub>0.5</sub> VLA and a
-            diffusion policy.
           </p>
 
           <h2 id="benchmarks" class="section-anchor">Benchmark results</h2>
@@ -511,59 +487,93 @@
           </p>
 
           <p>
-            Across the study, SAPS reached 8.1&times; the success rate of fully autonomous execution and
-            1.8&times; that of full teleoperation, with active human control on 45% of timesteps, 16% faster
-            completion than teleoperation, and workload reduced by 20.8% in simulation and 28.2% on hardware.
+            Across the study, SAPS reached up to 77.4% success on the real robot, against 34.5% for
+            teleoperation and 8.3% for the policy running alone, with active human control on roughly 45% of
+            timesteps and workload reduced by 20.8% in simulation and 28.2% on hardware.
           </p>
 
           <figure class="paper-figure">
-            <svg viewBox="0 0 720 262" width="100%" role="img" aria-labelledby="usT usD" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans',system-ui,sans-serif">
-            <title id="usT">SAPS relative to teleoperation across the 14-operator study</title>
-            <desc id="usD">Relative to full teleoperation, SAPS reached 1.8 times the task success, 0.84 times the completion time and 0.45 times the human input.</desc>
-            <line x1="190.0" y1="52" x2="190.0" y2="200" stroke="#ececec" stroke-width="1"/>
-            <text x="190.0" y="217" font-size="11" text-anchor="middle" fill="#6a6a6a">0&#215;</text>
-            <line x1="292.5" y1="52" x2="292.5" y2="200" stroke="#ececec" stroke-width="1"/>
-            <text x="292.5" y="217" font-size="11" text-anchor="middle" fill="#6a6a6a">0.5&#215;</text>
-            <line x1="395.0" y1="52" x2="395.0" y2="200" stroke="#ececec" stroke-width="1"/>
-            <text x="395.0" y="217" font-size="11" text-anchor="middle" fill="#6a6a6a">1&#215;</text>
-            <line x1="497.5" y1="52" x2="497.5" y2="200" stroke="#ececec" stroke-width="1"/>
-            <text x="497.5" y="217" font-size="11" text-anchor="middle" fill="#6a6a6a">1.5&#215;</text>
-            <line x1="600.0" y1="52" x2="600.0" y2="200" stroke="#ececec" stroke-width="1"/>
-            <text x="600.0" y="217" font-size="11" text-anchor="middle" fill="#6a6a6a">2&#215;</text>
-            <line x1="395.0" y1="52" x2="395.0" y2="200" stroke="#7a2288" stroke-width="1.6" stroke-dasharray="4 3"/>
-            <text x="395.0" y="44" font-size="12" text-anchor="middle" fill="#7a2288" font-weight="600">teleoperation</text>
-            <line x1="190" y1="200" x2="600" y2="200" stroke="#cfcfcf" stroke-width="1.1"/>
-            <text x="178" y="86" font-size="13" text-anchor="end" fill="#363636">Task success</text>
-            <text x="178" y="101" font-size="10.5" text-anchor="end" fill="#6a6a6a">higher is better</text>
-            <path d="M190,70 L555.0,70 Q559.0,70 559.0,74 L559.0,88 Q559.0,92 555.0,92 L190,92 Z" fill="#f8765c"><title>Task success: 1.8 times teleoperation</title></path>
-            <text x="568.0" y="86" font-size="13.5" font-weight="600" fill="#363636" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">1.8&#215;</text>
-            <text x="178" y="130" font-size="13" text-anchor="end" fill="#363636">Completion time</text>
-            <text x="178" y="145" font-size="10.5" text-anchor="end" fill="#6a6a6a">lower is better</text>
-            <path d="M190,114 L358.2,114 Q362.2,114 362.2,118 L362.2,132 Q362.2,136 358.2,136 L190,136 Z" fill="#f8765c"><title>Completion time: 0.84 times teleoperation</title></path>
-            <text x="371.2" y="130" font-size="13.5" font-weight="600" fill="#363636" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">0.84&#215;</text>
-            <text x="178" y="174" font-size="13" text-anchor="end" fill="#363636">Human input</text>
-            <text x="178" y="189" font-size="10.5" text-anchor="end" fill="#6a6a6a">lower is better</text>
-            <path d="M190,158 L278.2,158 Q282.2,158 282.2,162 L282.2,176 Q282.2,180 278.2,180 L190,180 Z" fill="#f8765c"><title>Human input: 0.45 times teleoperation</title></path>
-            <text x="291.2" y="174" font-size="13.5" font-weight="600" fill="#363636" paint-order="stroke" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round">0.45&#215;</text>
-            <text x="395" y="238" font-size="12" text-anchor="middle" fill="#6a6a6a">SAPS relative to full teleoperation</text>
+            <svg viewBox="0 0 720 318" width="100%" role="img" aria-labelledby="usT usD" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans',system-ui,sans-serif">
+            <title id="usT">User-study task success by method</title>
+            <desc id="usD">In simulation, full autonomy succeeds on 8.3% of trials, teleoperation 44.0%, Blending 44.0%, Cosine 75.0% and Takeover 65.5%. On hardware, full autonomy 8.3%, teleoperation 34.5%, Blending 64.3%, Cosine 67.2% and Takeover 77.4%.</desc>
+            <g font-size="12.5" fill="#363636">
+            <rect x="190" y="10" width="11" height="11" rx="2" fill="#1f7ab5"/><text x="207" y="20">Full autonomy</text>
+            <rect x="320" y="10" width="11" height="11" rx="2" fill="#7a2288"/><text x="337" y="20">Teleoperation</text>
+            <rect x="462" y="10" width="11" height="11" rx="2" fill="#f8765c"/><text x="479" y="20">SAPS</text>
+            </g>
+            <line x1="172" y1="236.0" x2="648" y2="236.0" stroke="#ececec" stroke-width="1"/>
+            <text x="162" y="240.0" font-size="11" text-anchor="end" fill="#6a6a6a">0</text>
+            <line x1="172" y1="192.0" x2="648" y2="192.0" stroke="#ececec" stroke-width="1"/>
+            <text x="162" y="196.0" font-size="11" text-anchor="end" fill="#6a6a6a">25</text>
+            <line x1="172" y1="148.0" x2="648" y2="148.0" stroke="#ececec" stroke-width="1"/>
+            <text x="162" y="152.0" font-size="11" text-anchor="end" fill="#6a6a6a">50</text>
+            <line x1="172" y1="104.0" x2="648" y2="104.0" stroke="#ececec" stroke-width="1"/>
+            <text x="162" y="108.0" font-size="11" text-anchor="end" fill="#6a6a6a">75</text>
+            <line x1="172" y1="60.0" x2="648" y2="60.0" stroke="#ececec" stroke-width="1"/>
+            <text x="162" y="64.0" font-size="11" text-anchor="end" fill="#6a6a6a">100</text>
+            <text transform="translate(132,148) rotate(-90)" font-size="12" text-anchor="middle" fill="#6a6a6a">Task success (%)</text>
+            <path d="M188.0,236 L188.0,225.4 Q188.0,221.4 192.0,221.4 L222.0,221.4 Q226.0,221.4 226.0,225.4 L226.0,236 Z" fill="#1f7ab5"><title>Full autonomy, Simulation: 8.3%</title></path>
+            <text x="207.0" y="214.4" font-size="12" font-weight="600" text-anchor="middle" fill="#363636">8.3</text>
+            <text x="207.0" y="250" font-size="9.5" text-anchor="middle" fill="#6a6a6a">Full</text>
+            <text x="207.0" y="261" font-size="9.5" text-anchor="middle" fill="#6a6a6a">autonomy</text>
+            <path d="M230.0,236 L230.0,162.6 Q230.0,158.6 234.0,158.6 L264.0,158.6 Q268.0,158.6 268.0,162.6 L268.0,236 Z" fill="#7a2288"><title>Teleop., Simulation: 44.0%</title></path>
+            <text x="249.0" y="151.6" font-size="12" font-weight="600" text-anchor="middle" fill="#363636">44.0</text>
+            <text x="249.0" y="250" font-size="9.5" text-anchor="middle" fill="#6a6a6a">Teleop.</text>
+            <path d="M272.0,236 L272.0,162.6 Q272.0,158.6 276.0,158.6 L306.0,158.6 Q310.0,158.6 310.0,162.6 L310.0,236 Z" fill="#f8765c"><title>Blending, Simulation: 44.0%</title></path>
+            <text x="291.0" y="151.6" font-size="12" font-weight="600" text-anchor="middle" fill="#363636">44.0</text>
+            <text x="291.0" y="250" font-size="9.5" text-anchor="middle" fill="#6a6a6a">Blending</text>
+            <path d="M314.0,236 L314.0,108.0 Q314.0,104.0 318.0,104.0 L348.0,104.0 Q352.0,104.0 352.0,108.0 L352.0,236 Z" fill="#f8765c"><title>Cosine, Simulation: 75.0%</title></path>
+            <text x="333.0" y="97.0" font-size="12" font-weight="600" text-anchor="middle" fill="#363636">75.0</text>
+            <text x="333.0" y="250" font-size="9.5" text-anchor="middle" fill="#6a6a6a">Cosine</text>
+            <path d="M356.0,236 L356.0,124.7 Q356.0,120.7 360.0,120.7 L390.0,120.7 Q394.0,120.7 394.0,124.7 L394.0,236 Z" fill="#f8765c"><title>Takeover, Simulation: 65.5%</title></path>
+            <text x="375.0" y="113.7" font-size="12" font-weight="600" text-anchor="middle" fill="#363636">65.5</text>
+            <text x="375.0" y="250" font-size="9.5" text-anchor="middle" fill="#6a6a6a">Takeover</text>
+            <text x="291.0" y="286" font-size="13" font-weight="600" text-anchor="middle" fill="#363636">Simulation</text>
+            <text x="291.0" y="302" font-size="11" text-anchor="middle" fill="#6a6a6a">n = 14</text>
+            <path d="M426.0,236 L426.0,225.4 Q426.0,221.4 430.0,221.4 L460.0,221.4 Q464.0,221.4 464.0,225.4 L464.0,236 Z" fill="#1f7ab5"><title>Full autonomy, Real robot: 8.3%</title></path>
+            <text x="445.0" y="214.4" font-size="12" font-weight="600" text-anchor="middle" fill="#363636">8.3</text>
+            <text x="445.0" y="250" font-size="9.5" text-anchor="middle" fill="#6a6a6a">Full</text>
+            <text x="445.0" y="261" font-size="9.5" text-anchor="middle" fill="#6a6a6a">autonomy</text>
+            <path d="M468.0,236 L468.0,179.3 Q468.0,175.3 472.0,175.3 L502.0,175.3 Q506.0,175.3 506.0,179.3 L506.0,236 Z" fill="#7a2288"><title>Teleop., Real robot: 34.5%</title></path>
+            <text x="487.0" y="168.3" font-size="12" font-weight="600" text-anchor="middle" fill="#363636">34.5</text>
+            <text x="487.0" y="250" font-size="9.5" text-anchor="middle" fill="#6a6a6a">Teleop.</text>
+            <path d="M510.0,236 L510.0,126.8 Q510.0,122.8 514.0,122.8 L544.0,122.8 Q548.0,122.8 548.0,126.8 L548.0,236 Z" fill="#f8765c"><title>Blending, Real robot: 64.3%</title></path>
+            <text x="529.0" y="115.8" font-size="12" font-weight="600" text-anchor="middle" fill="#363636">64.3</text>
+            <text x="529.0" y="250" font-size="9.5" text-anchor="middle" fill="#6a6a6a">Blending</text>
+            <path d="M552.0,236 L552.0,121.7 Q552.0,117.7 556.0,117.7 L586.0,117.7 Q590.0,117.7 590.0,121.7 L590.0,236 Z" fill="#f8765c"><title>Cosine, Real robot: 67.2%</title></path>
+            <text x="571.0" y="110.7" font-size="12" font-weight="600" text-anchor="middle" fill="#363636">67.2</text>
+            <text x="571.0" y="250" font-size="9.5" text-anchor="middle" fill="#6a6a6a">Cosine</text>
+            <path d="M594.0,236 L594.0,103.8 Q594.0,99.8 598.0,99.8 L628.0,99.8 Q632.0,99.8 632.0,103.8 L632.0,236 Z" fill="#f8765c"><title>Takeover, Real robot: 77.4%</title></path>
+            <text x="613.0" y="92.8" font-size="12" font-weight="600" text-anchor="middle" fill="#363636">77.4</text>
+            <text x="613.0" y="250" font-size="9.5" text-anchor="middle" fill="#6a6a6a">Takeover</text>
+            <text x="529.0" y="286" font-size="13" font-weight="600" text-anchor="middle" fill="#363636">Real robot</text>
+            <text x="529.0" y="302" font-size="11" text-anchor="middle" fill="#6a6a6a">n = 13</text>
+            <line x1="172" y1="236" x2="648" y2="236" stroke="#cfcfcf" stroke-width="1.2"/>
             </svg>
             <figcaption>
-              <span class="fignum">Figure 4.</span> SAPS relative to full teleoperation across the study.
-              Against fully autonomous execution rather than teleoperation, success is 8.1&times; higher.
-              These are study-level ratios; per-condition success and completion times are reported in the
-              paper.
+              <span class="fignum">Figure 4.</span> Task success in the user study, by method and benchmark,
+              across 14 operators spanning a range of prior robot-control experience. Teleoperation reaches
+              44.0% in simulation and 34.5% on the real robot, below every arbitrator on hardware.
             </figcaption>
           </figure>
 
           <table class="table is-narrow is-size-7 is-sr-only">
-            <caption>SAPS relative to full teleoperation</caption>
-            <thead><tr><th>Measure</th><th>SAPS relative to teleoperation</th></tr></thead>
+            <caption>User-study task success rate, percent</caption>
+            <thead><tr><th>Method</th><th>Simulation (n = 14)</th><th>Real robot (n = 13)</th></tr></thead>
             <tbody>
-              <tr><td>Task success</td><td>1.8 times higher</td></tr>
-              <tr><td>Completion time</td><td>0.84 times, 16% faster</td></tr>
-              <tr><td>Human input</td><td>0.45 times, 45% of timesteps against 100%</td></tr>
+              <tr><td>Full autonomy</td><td>8.3</td><td>8.3</td></tr>
+              <tr><td>Teleoperation</td><td>44.0</td><td>34.5</td></tr>
+              <tr><td>Blending</td><td>44.0</td><td>64.3</td></tr>
+              <tr><td>Cosine</td><td>75.0</td><td>67.2</td></tr>
+              <tr><td>Takeover</td><td>65.5</td><td>77.4</td></tr>
             </tbody>
           </table>
+
+          <p>
+            Completion time moves the same way. On the real robot the arbitrators finish in 34.4 to
+            37.8&nbsp;s against 42.4&nbsp;s for teleoperation, and in simulation 17.8 to 21.4&nbsp;s against
+            23.2&nbsp;s, while drawing human input on 32 to 47% of control timesteps rather than 100%.
+          </p>
 
           <figure class="paper-figure">
             <svg viewBox="0 0 720 330" width="100%" role="img" aria-labelledby="tlxT tlxD" xmlns="http://www.w3.org/2000/svg" font-family="'Noto Sans',system-ui,sans-serif">
