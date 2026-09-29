@@ -320,8 +320,7 @@
             CALVIN changes both the base policy and the comparison. Here the arbitrator steers a diffusion
             policy rather than a VLA, against two methods built for the same job: ITPS, which injects a
             human-specified gradient into the sampler, and DynaGuide, which trains a dynamics model and a
-            classifier to bias it. Across 11 subtasks Cosine arbitration averages 93% success, against 80% for
-            DynaGuide, 66% for ITPS and 45% for the unguided policy, and it is the only method that stays high
+            classifier to bias it. Across 11 subtasks Cosine arbitration is the only method that stays high
             throughout, reaching 100% on all eight articulated subtasks and 70&ndash;90% on the three harder
             block-lift subtasks.
           </p>
@@ -367,8 +366,7 @@
             </svg>
             <figcaption>
               <span class="fignum">Figure 2.</span> Mean success across 11 CALVIN subtasks, with the share
-              of control timesteps carrying human input. ITPS and Cosine draw operator input at comparable
-              rates; DP and DynaGuide run without an operator.
+              of control timesteps carrying human input. DP and DynaGuide run without an operator.
             </figcaption>
           </figure>
 
@@ -384,12 +382,9 @@
           </table>
 
           <p>
-            One reading of that result is simply that methods with a human in the loop outperform those
-            without. The intervention rates do not support it. ITPS places a human in the loop at a comparable
-            rate, 75.5% of timesteps against Cosine's 79.8%, a difference of 4.3 percentage points. With
-            comparable operator effort and an identical base policy, 27 points of success separate the two
-            methods, which locates the difference in the arbitration mechanism rather than in the presence of
-            an operator.
+            ITPS and Cosine draw operator input at nearly the same rate on the same base policy, so the 27
+            points of success between them are attributable to the arbitration rule rather than to the
+            presence of an operator.
           </p>
 
           <p>
