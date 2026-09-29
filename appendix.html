@@ -297,12 +297,12 @@
           <p>Shared autonomy addresses these failure modes by using sparse human input as an online correction signal,
           allowing the system to recover from perturbed object placements without retraining the policy or modifying its
           inference procedure. As shown in Figure 2, <span class="pi">&pi;<sub>0.5</sub></span> success is strongly tied
-          to perturbation distance, decreasing as distance increases (Pearson: <em>r</em> = &minus;0.800; two-tailed:
-          <em>p</em> = 0.005). This trend is most visible at larger perturbations: for distances greater than or equal to
-          0.15, <span class="pi">&pi;<sub>0.5</sub></span> drops to 22.9% success, while Blending and Cosine remain at
-          87.9% and 90.0%, respectively. Overall, Blending and Cosine significantly outperform
-          <span class="pi">&pi;<sub>0.5</sub></span> (Pearson: <em>p</em> = 0.004; two-tailed: <em>p</em> = 0.003),
-          showing that shared autonomy recovers from spatial generalization failures more efficiently.</p>
+          to perturbation distance, decreasing as distance increases. This trend is most visible at larger
+          perturbations: for distances greater than or equal to 0.15 m, <span class="pi">&pi;<sub>0.5</sub></span>
+          drops to 22.9% success, while Blending and Cosine remain at 94.4% and 93.3%, respectively. Blending
+          and Cosine maintain high success across perturbation distances, showing that action-level shared
+          autonomy recovers from many spatial generalization failures as the autonomous policy becomes less
+          reliable.</p>
 
           <figure class="paper-figure fig-narrow">
             <img src="./figures/perturb-success.webp" width="1000" height="800" loading="lazy"
@@ -376,9 +376,7 @@
           <span class="pi">&pi;<sub>0.5</sub></span> achieves only 15.0% mean success, indicating that the policy is
           highly sensitive to out-of-distribution changes in object layout and task specification. In contrast, all
           shared-autonomy methods recover high performance: Blending reaches 92.6%, Takeover reaches 93.2%, and Cosine
-          reaches 97.4%, approaching Teleoperation at 98.8%. All shared-autonomy methods significantly improve success
-          over <span class="pi">&pi;<sub>0.5</sub></span> using a one-sided Wilcoxon signed-rank test, with
-          <em>p</em> = 9.77 &times; 10<sup>&minus;4</sup> for each method. These results suggest that
+          reaches 97.4%, approaching Teleoperation at 98.8%. These results suggest that
           <span class="pi">&pi;<sub>0.5</sub></span> maintains useful low-level manipulation behavior, but corrective
           human guidance is needed to maintain correct task behavior under perturbations.</p>
 
@@ -420,9 +418,7 @@
           <div class="table-block">
             <p class="table-caption"><span class="tabnum">Table 3:</span> LIBERO-PRO task success rates (%)
             (<em>n</em> = 25). Cosine arbitration achieves the highest shared-autonomy mean success rate across the 10
-            out-of-distribution tasks. Across the 10 tasks, all shared-autonomy methods significantly improved success
-            rate over <span class="pi">&pi;<sub>0.5</sub></span> using a one-sided Wilcoxon signed-rank test:
-            <em>p</em> = 9.77 &times; 10<sup>&minus;4</sup>.</p>
+            out-of-distribution tasks.</p>
             <div class="table-scroll">
               <table class="paper-table">
                 <thead>
@@ -471,8 +467,9 @@
           continues supplying low-level manipulation behavior. Across the 10 tasks, Blending, Cosine, and Takeover
           reduce mean completion time to 11.1 s, 13.0 s, and 13.2 s, respectively, compared to 30.7 s for
           <span class="pi">&pi;<sub>0.5</sub></span> and 46.0 s for Teleoperation. All three shared-autonomy methods are
-          significantly faster than both baselines using a one-sided paired Wilcoxon signed-rank test, with
-          <em>p</em> &lt; 0.001 for each comparison.</p>
+          significantly faster than Teleoperation (<em>p</em> &lt; 0.006, two-sided Wilcoxon paired by task,
+          Holm-corrected). The comparison with <span class="pi">&pi;<sub>0.5</sub></span> is not run for
+          completion time, since it completed none of three of the ten tasks and so cannot be paired.</p>
 
           <figure class="paper-figure">
             <img src="./figures/completion_time.webp" width="2000" height="719" loading="lazy"
@@ -487,9 +484,7 @@
           <h3 class="title is-5">Human intervention</h3>
           <p>Intervention rates show that SAPS improves performance without reverting to continuous manual control.
           Across LIBERO-PRO tasks, Blending, Takeover, and Cosine only require low intervention rates (10.8%, 11.7%, and
-          30.0% mean), which remain far below Teleoperation (100%, <em>p</em> &lt; 0.0001). Intervention rates show no
-          significant correlation with task order (<em>p</em> &gt; 0.09), suggesting that SAPS relies on targeted
-          corrections rather than continuous operator control.</p>
+          30.0% mean), which remain far below Teleoperation (100%, <em>p</em> &lt; 0.0001).</p>
 
           <div class="table-block">
             <p class="table-caption"><span class="tabnum">Table 4:</span> Human intervention rate across LIBERO-PRO

@@ -153,11 +153,10 @@
 
           <p>
             The degradation is graded rather than abrupt. Across eight perturbed configurations, success
-            declines with displacement (Pearson <em>r</em> = &minus;0.800, <em>p</em> = 0.005), and the policy
-            continues to reach confidently for the location the object occupied in the demonstrations. The
-            low-level manipulation survives the perturbation; what degrades is the grounding of the instruction
-            in the scene in front of it. Under the same displacements, Blending and Cosine arbitration hold
-            success at 87.9% and 90.0%.
+            declines as the displacement grows, and the policy continues to reach confidently for the location
+            the object occupied in the demonstrations. The low-level manipulation survives the perturbation;
+            what degrades is the grounding of the instruction in the scene in front of it. Under the same
+            displacements, Blending and Cosine arbitration hold success at 94.4% and 93.3%.
           </p>
 
           <p>
@@ -326,18 +325,17 @@
           </table>
 
           <p>
-            Each arbitrator improves on the policy alone at <em>p</em> = 9.77&times;10<sup>&minus;4</sup>
-            (one-sided Wilcoxon signed-rank), and all three complete faster than both baselines at
-            <em>p</em> &lt; 0.001. The policy alone is slow because it spends time in unsuccessful recovery
-            attempts; teleoperation is slow because the operator flies the entire trajectory through a camera
-            feed.
+            All three arbitrators complete faster than teleoperation (<em>p</em> &lt; 0.006, two-sided
+            Wilcoxon paired by task, Holm-corrected). The comparison against the policy alone is not run for
+            completion time: it succeeded on none of three of the ten tasks, so the trials cannot be paired.
+            The policy alone is slow because it spends time in unsuccessful recovery attempts; teleoperation
+            is slow because the operator flies the entire trajectory through a camera feed.
           </p>
 
           <p>
             The quantity of more interest is how much operator input this required. Blending and Takeover drew
             input on 10.8% and 11.7% of control timesteps, Cosine on 30.0%, against 100% for teleoperation by
-            construction. Intervention rate did not correlate with task order (<em>p</em> &gt; 0.09), which is
-            consistent with targeted correction rather than an operator progressively assuming control.
+            construction.
           </p>
 
           <h3>CALVIN: comparison with learned steering methods</h3>
