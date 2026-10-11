@@ -200,12 +200,9 @@
           </dl>
 
           <p>
-            Cosine arbitration is worth examining, because the behaviour it produces requires no additional
-            information. It does not need to know the task, the operator's intent, or the policy's confidence.
-            Disagreement between the two action vectors serves as the signal: if the operator is pushing
-            against the policy, that opposition is itself evidence that the policy is wrong, and the weight
-            adjusts accordingly. The formulation also leaves room for substitution, since any other confidence
-            measure could replace \(\cos\theta\).
+            Cosine needs no model of the task, the operator's intent, or the policy's confidence. The
+            disagreement between the two actions is the whole signal, and any other confidence measure could
+            take the place of \(\cos\theta\).
           </p>
 
           <h2 id="benchmarks" class="section-anchor">Benchmark results</h2>
